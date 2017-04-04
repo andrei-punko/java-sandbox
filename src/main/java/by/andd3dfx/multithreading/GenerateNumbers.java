@@ -5,33 +5,32 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-
-import static java.lang.Math.random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Generate 1 million random numbers using multiple threads
  */
 public class GenerateNumbers {
 
-    private static ExecutorService pool;
+    private ExecutorService pool;
 
     public GenerateNumbers() {
         pool = Executors.newFixedThreadPool(4);
     }
 
-    public static class RandomGenerator implements Runnable {
+    public class RandomGeneratorTask implements Runnable {
         @Override
         public void run() {
             for (int i = 0; i < 250; i++) {     //Should be 250_000 here
-                System.out.println(random());
+                System.out.println(ThreadLocalRandom.current().nextFloat());
             }
         }
     }
 
-    public static void main(String[] args) {
+    public void generate() {
         List<Future<?>> futures = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            RandomGenerator randomGenerator = new RandomGenerator();
+            RandomGeneratorTask randomGenerator = new RandomGeneratorTask();
             futures.add(pool.submit(randomGenerator));
         }
 
@@ -39,7 +38,7 @@ public class GenerateNumbers {
         System.out.println("Bunch of numbers generated!");
     }
 
-    private static boolean areTasksFinished(List<Future<?>> futures) {
+    private boolean areTasksFinished(List<Future<?>> futures) {
         for (Future<?> future : futures) {
             if (!future.isDone()) return false;
         }
