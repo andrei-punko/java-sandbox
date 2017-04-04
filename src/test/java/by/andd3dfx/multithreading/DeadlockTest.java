@@ -11,6 +11,6 @@ public class DeadlockTest {
     @Ignore
     @Test
     public void main() throws Exception {
-        Deadlock.main(new String[]{});
+        new Deadlock().makeDeadlock();
     }
 }

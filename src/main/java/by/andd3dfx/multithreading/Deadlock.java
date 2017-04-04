@@ -4,7 +4,8 @@ package by.andd3dfx.multithreading;
  * Example from JDK: http://docs.oracle.com/javase/tutorial/essential/concurrency/deadlock.html
  */
 public class Deadlock {
-    static class Friend {
+
+    class Friend {
         private final String name;
 
         public Friend(String name) {
@@ -29,7 +30,7 @@ public class Deadlock {
         }
     }
 
-    public static void main(String[] args) {
+    public void makeDeadlock() {
         final Friend alphonse =
                 new Friend("Alphonse");
         final Friend gaston =
