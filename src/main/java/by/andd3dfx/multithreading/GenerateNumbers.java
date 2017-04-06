@@ -29,7 +29,9 @@ public class GenerateNumbers {
 
     public void generate() {
         List<Future<?>> futures = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
+        int processorsCount = Runtime.getRuntime().availableProcessors();
+        System.out.println("Processors available: " + processorsCount);
+        for (int i = 0; i < processorsCount; i++) {
             RandomGeneratorTask randomGenerator = new RandomGeneratorTask();
             futures.add(pool.submit(randomGenerator));
         }
