@@ -17,7 +17,7 @@ public class JobSearchUtil {
         try {
             Elements elements = Jsoup
                     .connect(searchUrl.replace("{}", keyword))
-                    .userAgent(userAgent).get().select(".resumesearch__result-count");
+                    .userAgent(userAgent).get().select(".search-result-counter");
             if (elements.isEmpty()) {
                 return 0;
             }
