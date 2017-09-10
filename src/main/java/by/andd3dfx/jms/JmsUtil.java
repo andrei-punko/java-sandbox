@@ -12,6 +12,12 @@ import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 import java.io.IOException;
 
+/**
+ * To make JMX available for ActiveMQ it should be configured in config activemq.xml:
+ * <managementContext>
+ *   <managementContext createConnector="true"/>
+ * </managementContext>
+ */
 public class JmsUtil {
 
     public static Long getQueueSize(String activeMqUrl, String queueName) throws IOException, MalformedObjectNameException {
