@@ -21,7 +21,7 @@ public class GenerateNumbers {
     public class RandomGeneratorTask implements Runnable {
         @Override
         public void run() {
-            for (int i = 0; i < 250; i++) {     //Should be 250_000 here
+            for (int i = 0; i < 5; i++) {     //Should be 250_000 here
                 System.out.println(ThreadLocalRandom.current().nextFloat());
             }
         }
