@@ -10,8 +10,9 @@ public class PriceSearchUtil {
     public Double getLowestFirstCatalogPriceByUrl(String firstCatalogUrl) throws IOException {
         String text = Jsoup
                 .connect(firstCatalogUrl)
-                .userAgent(USER_AGENT).get().select("[class=pr-price_cash c-green]").text();
-        String priceValue = text.replaceAll("\u2014.*", "").replaceAll(" ", "");
-        return Double.parseDouble(priceValue.replaceAll(",", "."));
+                .userAgent(USER_AGENT).get().select("[class=pr-price_cash]").text();
+        String priceValue = text.replaceAll("\u2014.*", "").replaceAll(" ", "").replaceAll(",", ".");
+        priceValue = priceValue.substring(0, priceValue.indexOf("–"));
+        return Double.parseDouble(priceValue);
     }
 }
