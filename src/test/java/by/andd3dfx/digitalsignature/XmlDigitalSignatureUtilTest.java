@@ -17,8 +17,8 @@ public class XmlDigitalSignatureUtilTest {
 
     @Test
     public void signXmlFileAndValidateSignature() throws Exception {
-        xmlDigitalSignatureUtil.signXmlFile("src/test/resources/file-to-sign.xml", "target/signed-file.xml");
+        xmlDigitalSignatureUtil.signXmlFile("src/test/resources/file-to-sign.xml", "build/signed-file.xml");
 
-        assertThat("Validation should passed", xmlDigitalSignatureUtil.validateXmlSignature("target/signed-file.xml"), is(true));
+        assertThat("Validation should passed", xmlDigitalSignatureUtil.validateXmlSignature("build/signed-file.xml"), is(true));
     }
 }
