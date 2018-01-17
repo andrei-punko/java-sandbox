@@ -12,7 +12,7 @@ public class PriceSearchUtil {
                 .connect(firstCatalogUrl)
                 .userAgent(USER_AGENT).get().select("[class=pr-price_cash]").text();
         String priceValue = text.replaceAll("\u2014.*", "").replaceAll(" ", "").replaceAll(",", ".");
-        priceValue = priceValue.substring(0, priceValue.indexOf("–"));
+        priceValue = priceValue.substring(0, priceValue.indexOf("."));
         return Double.parseDouble(priceValue);
     }
 }
