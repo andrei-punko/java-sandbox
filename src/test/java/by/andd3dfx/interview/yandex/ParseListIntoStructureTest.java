@@ -1,16 +1,15 @@
-package by.andd3dfx.ya.interview;
+package by.andd3dfx.interview.yandex;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
+import by.andd3dfx.interview.yandex.ParseListIntoStructure.Properties;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import by.andd3dfx.ya.interview.ParseListIntoStructure.Properties;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.nullValue;
+import static org.junit.Assert.assertThat;
 
 public class ParseListIntoStructureTest
 {

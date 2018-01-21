@@ -1,4 +1,4 @@
-package by.andd3dfx.pyramid;
+package by.andd3dfx.interview.nitka;
 
 import java.util.HashMap;
 import java.util.Map;
