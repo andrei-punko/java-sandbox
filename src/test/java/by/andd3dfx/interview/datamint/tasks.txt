@@ -1,0 +1,16 @@
+
+TODO:
+Design application architecture that should send 1 million emails
+
+TODO:
+Design REST service related with Pet Clinic, where pets have name and age.
+Add operation with pets batch update (for example add new field - owner)
+
+GET     clinic\{id}
+DELETE  clinic\{id}
+POST    clinic
+            params: { name: ..., age : ... }
+PUT     clinic\{id}
+            params: { age: ... }
+PATCH   clinic
+            params: { ids: ..., owner: ... }
