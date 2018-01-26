@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 
 public class PriceSearchUtilTest {
     String FIRST_CATALOG_SEARCH_URL = "https://komp.1k.by/utility-graphicscards/msi/" +
-            "MSI_GeForce_GTX_1080_1632Mhz_PCI_E_30_8192Mb_10010Mhz_256_bit_DVI_HDMI_HDCP_GAMING-2575073.html";
+            "MSI_GeForce_GTX_1050_Ti_1379Mhz_PCI_E_30_4096Mb_7108Mhz_128_bit_DVI_HDMI_HDCP_GAMING_X-2709799.html";
 
     PriceSearchUtil priceSearchUtil;
 
