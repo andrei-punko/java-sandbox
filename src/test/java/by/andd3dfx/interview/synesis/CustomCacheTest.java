@@ -19,14 +19,16 @@ public class CustomCacheTest {
             while (true) {
                 delay();
                 int index = (int) (COUNT * random());
-                System.out.println("Read thread 1, A[" + index + "] -> " + customCache.read(index));
+                Object value = customCache.read(index);
+                System.out.println("Read thread 1, A[" + index + "] -> " + value);
             }
         });
         Thread readingThread2 = new Thread(() -> {
             while (true) {
                 delay();
                 int index = (int) (COUNT * random());
-                System.out.println("Read thread 2, A[" + index + "] -> " + customCache.read(index));
+                Object value = customCache.read(index);
+                System.out.println("Read thread 2, A[" + index + "] -> " + value);
             }
         });
         Thread writingThread = new Thread(() -> {
@@ -43,7 +45,7 @@ public class CustomCacheTest {
         readingThread2.start();
         writingThread.start();
 
-        sleep(200);
+        sleep(20);
     }
 
     private void delay() {
