@@ -28,6 +28,6 @@ dependencies {
 test {
     //we want display the following test events
     testLogging {
-        events "PASSED", "FAILED", "SKIPPED"
+        events "FAILED", "SKIPPED"
     }
 }
