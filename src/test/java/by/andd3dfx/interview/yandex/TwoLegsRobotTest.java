@@ -1,34 +1,55 @@
 package by.andd3dfx.interview.yandex;
 
-import org.junit.Ignore;
-import org.junit.Rule;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.contrib.java.lang.system.SystemOutRule;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-// TODO: replace tracking console output with some another mechanism
-@Ignore
 public class TwoLegsRobotTest {
 
-    @Rule
-    public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
+    private final String LEFT = "left";
+    private final String RIGHT = "right";
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
+
+    @Before
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+        System.setErr(new PrintStream(errContent));
+    }
+
+    @After
+    public void restoreStreams() {
+        System.setOut(System.out);
+        System.setErr(System.err);
+    }
 
     @Test
     public void main() throws InterruptedException {
         TwoLegsRobot.main(new String[]{});
 
-        checkLogs(systemOutRule.getLog());
+        checkLogs(outContent.toString());
     }
 
     private void checkLogs(String log) {
         String[] lines = log.split("\r\n");
 
-        boolean leftExpected = lines[0].startsWith("left");
+        Boolean leftExpected = null;
         for (String line : lines) {
-            String expectedString = leftExpected ? "left" : "right";
-            assertThat("Wrong string ordering", line.startsWith(expectedString), is(true));
+            if (!line.startsWith(LEFT) && !line.startsWith(RIGHT)) {
+                continue;
+            }
+            if (leftExpected == null) {
+                leftExpected = line.startsWith(RIGHT);
+                continue;
+            }
+            String expectedString = leftExpected ? LEFT : RIGHT;
+            assertThat("Expected " + expectedString + ", but actual is " + line, line.startsWith(expectedString), is(true));
             leftExpected = !leftExpected;
         }
     }
