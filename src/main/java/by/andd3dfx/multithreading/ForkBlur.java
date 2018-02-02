@@ -31,9 +31,7 @@ package by.andd3dfx.multithreading;
 * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 
@@ -98,23 +96,6 @@ public class ForkBlur extends RecursiveAction {
         invokeAll(new ForkBlur(mSource, mStart, split, mDestination),
                 new ForkBlur(mSource, mStart + split, mLength - split,
                         mDestination));
-    }
-
-    // Plumbing follows.
-    public static void main(String[] args) throws Exception {
-        String srcName = "build/resources/main/red-tulips.jpg";
-        File srcFile = new File(srcName);
-        BufferedImage image = ImageIO.read(srcFile);
-
-        System.out.println("Source image: " + srcName);
-
-        BufferedImage blurredImage = blur(image);
-
-        String dstName = "build/resources/main/blurred-tulips.jpg";
-        File dstFile = new File(dstName);
-        ImageIO.write(blurredImage, "jpg", dstFile);
-
-        System.out.println("Output image: " + dstName);
     }
 
     public static BufferedImage blur(BufferedImage srcImage) {

@@ -39,7 +39,7 @@ public class DigitalSignatureUtilTest {
         PrivateKey privateKey = keyPair.getPrivate();
         PublicKey publicKey = keyPair.getPublic();
 
-        String nameOfFileToSign = "src/test/resources/file-to-sign.xml";
+        String nameOfFileToSign = "target/test-classes/file-to-sign.xml";
         byte[] signature = digitalSignatureUtil.signFile("SHA256withECDSA", privateKey, nameOfFileToSign);
         boolean result = digitalSignatureUtil.verifyFileSignature("SHA256withECDSA", publicKey, nameOfFileToSign, signature);
 

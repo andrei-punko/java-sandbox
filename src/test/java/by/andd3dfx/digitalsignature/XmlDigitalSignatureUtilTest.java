@@ -8,7 +8,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class XmlDigitalSignatureUtilTest {
 
-    XmlDigitalSignatureUtil xmlDigitalSignatureUtil;
+    private XmlDigitalSignatureUtil xmlDigitalSignatureUtil;
 
     @Before
     public void setup() {
@@ -17,8 +17,8 @@ public class XmlDigitalSignatureUtilTest {
 
     @Test
     public void signXmlFileAndValidateSignature() throws Exception {
-        xmlDigitalSignatureUtil.signXmlFile("src/test/resources/file-to-sign.xml", "build/signed-file.xml");
+        xmlDigitalSignatureUtil.signXmlFile("target/test-classes/file-to-sign.xml", "target/signed-file.xml");
 
-        assertThat("Validation should passed", xmlDigitalSignatureUtil.validateXmlSignature("build/signed-file.xml"), is(true));
+        assertThat("Validation should passed", xmlDigitalSignatureUtil.validateXmlSignature("target/signed-file.xml"), is(true));
     }
 }
