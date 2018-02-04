@@ -1,2 +1,0 @@
-
-TODO: Write custom aspect with different pointcuts and weaving type
