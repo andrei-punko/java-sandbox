@@ -5,7 +5,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
-public class JobSearchUtil {
+public class TutByJobSearchUtil {
     private static final String userAgent = "Firefox";
     private static final String searchUrl = "http://jobs.tut.by/search/vacancy?area=1002&text={}";
 

@@ -6,13 +6,13 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
-public class JobSearchUtilTest {
+public class TutByJobSearchUtilTest {
 
-    JobSearchUtil util;
+    TutByJobSearchUtil util;
 
     @Before
     public void setup() {
-        util = new JobSearchUtil();
+        util = new TutByJobSearchUtil();
     }
 
     @Test
