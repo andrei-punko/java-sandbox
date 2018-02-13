@@ -48,6 +48,6 @@ public class Deadlock {
         thread1.start();
         thread2.start();
 
-        while (thread1.isAlive() || thread2.isAlive());
+        while (thread1.isAlive() || thread2.isAlive()) ;
     }
 }

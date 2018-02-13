@@ -1,7 +1,5 @@
 package by.andd3dfx.queue;
 
-import by.andd3dfx.queue.Item;
-import by.andd3dfx.queue.Queue;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;

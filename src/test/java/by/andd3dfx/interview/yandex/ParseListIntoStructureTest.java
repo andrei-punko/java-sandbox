@@ -11,19 +11,16 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-public class ParseListIntoStructureTest
-{
+public class ParseListIntoStructureTest {
     private ParseListIntoStructure task;
 
     @Before
-    public void setup()
-    {
+    public void setup() {
         task = new ParseListIntoStructure();
     }
 
     @Test
-    public void parseOneRowSimpleStructure()
-    {
+    public void parseOneRowSimpleStructure() {
         List<String> values = Arrays.asList(
                 "key=14"
         );
@@ -38,8 +35,7 @@ public class ParseListIntoStructureTest
     }
 
     @Test
-    public void parseOneRowComplexStructure()
-    {
+    public void parseOneRowComplexStructure() {
         List<String> values = Arrays.asList(
                 "key.subkey=10"
         );
@@ -57,8 +53,7 @@ public class ParseListIntoStructureTest
     }
 
     @Test
-    public void testParseMultipleRowsSimpleStructure()
-    {
+    public void testParseMultipleRowsSimpleStructure() {
         List<String> values = Arrays.asList(
                 "key=2",
                 "key2=3"
@@ -78,8 +73,7 @@ public class ParseListIntoStructureTest
     }
 
     @Test
-    public void testParseMultipleRowsComplexStructure()
-    {
+    public void testParseMultipleRowsComplexStructure() {
         List<String> values = Arrays.asList(
                 "key.subkey.subkey2=1",
                 "key.subkey=2",

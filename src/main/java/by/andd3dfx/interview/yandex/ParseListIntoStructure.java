@@ -43,19 +43,15 @@ import java.util.Map;
    }
 ]
 */
-public class ParseListIntoStructure
-{
-    public static class Properties
-    {
+public class ParseListIntoStructure {
+    public static class Properties {
         public Integer value;
         public Map<String, Properties> inner = new HashMap<>();
     }
 
-    public Properties parse(List<String> strings)
-    {
+    public Properties parse(List<String> strings) {
         Properties result = new Properties();
-        for (String string : strings)
-        {
+        for (String string : strings) {
             String[] pair = string.split("=");
             String key = pair[0];
             int value = Integer.parseInt(pair[1]);
@@ -66,17 +62,14 @@ public class ParseListIntoStructure
         return result;
     }
 
-    private void populateContainer(int value, String[] items, int position, Properties container)
-    {
-        if (items.length == position)
-        {
+    private void populateContainer(int value, String[] items, int position, Properties container) {
+        if (items.length == position) {
             container.value = value;
             return;
         }
 
         Properties newContainer = container.inner.get(items[position]);
-        if (newContainer == null)
-        {
+        if (newContainer == null) {
             newContainer = new Properties();
             container.inner.put(items[position], newContainer);
         }
