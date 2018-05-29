@@ -1,4 +1,4 @@
-package by.andd3dfx.interview.datamint;
+package by.andd3dfx.numeric;
 
 import java.util.HashMap;
 import java.util.Map;
