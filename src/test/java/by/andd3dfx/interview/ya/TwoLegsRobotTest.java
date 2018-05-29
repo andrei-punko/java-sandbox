@@ -1,4 +1,4 @@
-package by.andd3dfx.interview.yandex;
+package by.andd3dfx.interview.ya;
 
 import org.junit.After;
 import org.junit.Before;

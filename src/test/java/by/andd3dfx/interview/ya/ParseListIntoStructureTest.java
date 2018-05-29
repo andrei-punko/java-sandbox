@@ -1,6 +1,6 @@
-package by.andd3dfx.interview.yandex;
+package by.andd3dfx.interview.ya;
 
-import by.andd3dfx.interview.yandex.ParseListIntoStructure.Properties;
+import by.andd3dfx.interview.ya.ParseListIntoStructure.Properties;
 import org.junit.Before;
 import org.junit.Test;
 

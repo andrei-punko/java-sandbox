@@ -1,9 +1,9 @@
-package by.andd3dfx.interview.yandex;
+package by.andd3dfx.interview.ya;
 
 import org.junit.Test;
 
-import static by.andd3dfx.interview.yandex.WeekDaysEnum.MONDAY;
-import static by.andd3dfx.interview.yandex.WeekDaysEnum.SUNDAY;
+import static by.andd3dfx.interview.ya.WeekDaysEnum.MONDAY;
+import static by.andd3dfx.interview.ya.WeekDaysEnum.SUNDAY;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 

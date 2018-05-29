@@ -1,4 +1,4 @@
-package by.andd3dfx.interview.yandex;
+package by.andd3dfx.interview.ya;
 
 import java.util.ArrayList;
 import java.util.List;
