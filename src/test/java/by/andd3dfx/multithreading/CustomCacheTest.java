@@ -1,6 +1,6 @@
-package by.andd3dfx.common;
+package by.andd3dfx.multithreading;
 
-import by.andd3dfx.common.CustomCache;
+import by.andd3dfx.multithreading.CustomCache;
 import org.junit.Test;
 
 import static java.lang.Math.random;

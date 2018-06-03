@@ -1,9 +1,9 @@
-package by.andd3dfx.common;
+package by.andd3dfx.recursion;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class BrickPyramidUtil {
+public class BrickPyramid {
 
     private static final Map<Position, Double> positionToPressureMap = new HashMap<>();
 

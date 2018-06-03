@@ -1,4 +1,4 @@
-package by.andd3dfx.interview.wf.easy;
+package by.andd3dfx.tree;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

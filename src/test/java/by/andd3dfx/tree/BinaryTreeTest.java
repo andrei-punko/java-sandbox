@@ -1,6 +1,6 @@
-package by.andd3dfx.common;
+package by.andd3dfx.tree;
 
-import by.andd3dfx.common.BinaryTree;
+import by.andd3dfx.tree.BinaryTree;
 import org.junit.Before;
 import org.junit.Test;
 

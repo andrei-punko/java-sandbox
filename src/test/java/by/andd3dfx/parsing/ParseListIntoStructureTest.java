@@ -1,4 +1,4 @@
-package by.andd3dfx.common;
+package by.andd3dfx.parsing;
 
 import by.andd3dfx.parsing.ParseListIntoStructure;
 import by.andd3dfx.parsing.ParseListIntoStructure.Properties;
