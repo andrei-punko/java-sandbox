@@ -1,4 +1,4 @@
-package by.andd3dfx.interview.wf.easy;
+package by.andd3dfx.interview.wf;
 
 import java.util.ArrayList;
 import java.util.HashMap;

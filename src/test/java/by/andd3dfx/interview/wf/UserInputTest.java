@@ -1,17 +1,15 @@
-package by.andd3dfx.interview.wf.easy;
+package by.andd3dfx.interview.wf;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import by.andd3dfx.interview.wf.easy.UserInput.NumericInput;
-import by.andd3dfx.interview.wf.easy.UserInput.TextInput;
 import org.junit.Test;
 
 public class UserInputTest {
 
   @Test
   public void test() {
-    TextInput input = new NumericInput();
+    UserInput.TextInput input = new UserInput.NumericInput();
     input.add('1');
     input.add('a');
     input.add('0');

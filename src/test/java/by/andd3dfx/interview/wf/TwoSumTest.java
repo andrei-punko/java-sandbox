@@ -1,4 +1,4 @@
-package by.andd3dfx.interview.wf.easy;
+package by.andd3dfx.interview.wf;
 
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.CoreMatchers.equalTo;

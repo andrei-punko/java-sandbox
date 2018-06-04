@@ -1,4 +1,4 @@
-package by.andd3dfx.interview.wf.easy;
+package by.andd3dfx.interview.wf;
 
 /*
 User interface contains two types of user input controls: TextInput, which accepts all characters and NumericInput,

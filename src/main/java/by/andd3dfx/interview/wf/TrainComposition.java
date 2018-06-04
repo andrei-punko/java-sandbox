@@ -1,4 +1,4 @@
-package by.andd3dfx.interview.wf.hard;
+package by.andd3dfx.interview.wf;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

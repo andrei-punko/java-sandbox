@@ -1,4 +1,4 @@
-package by.andd3dfx.interview.wf.hard;
+package by.andd3dfx.interview.wf;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
