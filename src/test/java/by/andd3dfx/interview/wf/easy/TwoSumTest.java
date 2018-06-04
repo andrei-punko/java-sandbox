@@ -34,6 +34,6 @@ public class TwoSumTest {
   public void findTwoSumForAbsentSolution() {
     int[] result = TwoSum.findTwoSum(new int[]{1, 1, 6, 3, 1}, 12);
 
-    assertThat("Any of these results expected", result, nullValue());
+    assertThat("Solution should not be found", result, nullValue());
   }
 }
