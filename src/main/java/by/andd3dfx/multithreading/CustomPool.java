@@ -14,15 +14,15 @@ public interface IPool {
 	void setEventHandler(EventHandler eventHandler);
 }
 
-Write IPool implementation
-
-Sample of pool usage:
+Example of pool usage:
   IPool pool = new CustomPool();
   pool.setEventHandler(someEventHandler);
   pool.start();
   pool.submit(event);   - multiple times
   ...
   pool.stop();
+
+TODO: Write IPool implementation
  */
 public class CustomPool {
 

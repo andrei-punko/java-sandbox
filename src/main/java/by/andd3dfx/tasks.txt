@@ -1,8 +1,5 @@
 
-* Task 1
-TODO: Design architecture application architecture that should send 1 million emails
-
-* Task 2
+TODO: Pet Clinic REST API design
 Design REST service related with Pet Clinic, where pets have name and age.
 Add operation with pets batch update (for example add new field - owner)
 
