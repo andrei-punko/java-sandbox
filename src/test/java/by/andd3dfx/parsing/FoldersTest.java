@@ -1,4 +1,4 @@
-package by.andd3dfx.interview.wf.hard;
+package by.andd3dfx.parsing;
 
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;

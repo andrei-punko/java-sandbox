@@ -1,4 +1,4 @@
-package by.andd3dfx.interview.wf.hard;
+package by.andd3dfx.parsing;
 
 import java.io.StringReader;
 import java.util.ArrayList;
