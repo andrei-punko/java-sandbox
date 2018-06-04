@@ -1,4 +1,4 @@
-package by.andd3dfx.interview.wf.hard;
+package by.andd3dfx.search;
 
 /*
 Implement function countNumbers that accepts a sorted array of integers and counts the number of array elements that

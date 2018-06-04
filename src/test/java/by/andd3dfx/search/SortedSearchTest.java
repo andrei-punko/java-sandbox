@@ -1,7 +1,7 @@
-package by.andd3dfx.interview.wf.hard;
+package by.andd3dfx.search;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 
