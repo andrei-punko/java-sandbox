@@ -8,19 +8,25 @@ public class BinarySearch {
   public static int perform(int[] array, int element) {
     int left = 0;
     int right = array.length;
+    int steps = 0;
 
-    do {
-      int middle = (left + right) / 2;
-      if (array[middle] == element) {
-        return middle;
-      }
-      if (array[middle] < element) {
-        left = middle;
-      } else {
-        right = middle;
-      }
-    } while (right - left > 1);
+    try {
+      do {
+        int middle = (left + right) / 2;
+        if (array[middle] == element) {
+          return middle;
+        }
+        if (array[middle] < element) {
+          left = middle;
+        } else {
+          right = middle;
+        }
+        steps++;
+      } while (right - left > 1);
 
-    return -1;
+      return -1;
+    } finally {
+      System.out.println("Binary search steps count: " + steps);
+    }
   }
 }
