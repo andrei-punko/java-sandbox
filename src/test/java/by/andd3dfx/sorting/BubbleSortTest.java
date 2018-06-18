@@ -4,6 +4,6 @@ public class BubbleSortTest extends AbstractSortTest {
 
     @Override
     protected AbstractSort createSorterClass() {
-        return new BubbleSort(10);
+        return new BubbleSort(ITEMS_COUNT);
     }
 }

@@ -4,6 +4,6 @@ public class ShellSortTest extends AbstractSortTest {
 
     @Override
     protected AbstractSort createSorterClass() {
-        return new ShellSort(10);
+        return new ShellSort(ITEMS_COUNT);
     }
 }

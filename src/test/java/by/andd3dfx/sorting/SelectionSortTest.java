@@ -4,6 +4,6 @@ public class SelectionSortTest extends AbstractSortTest {
 
     @Override
     protected AbstractSort createSorterClass() {
-        return new SelectionSort(10);
+        return new SelectionSort(ITEMS_COUNT);
     }
 }
