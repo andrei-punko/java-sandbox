@@ -1,19 +1,25 @@
 package by.andd3dfx.sorting;
 
 import java.util.Arrays;
+import java.util.List;
 
 public abstract class AbstractSort {
-    protected long items[];
+    protected Long[] items;
     protected int elementsCount;
 
     public AbstractSort(int maxSize) {
-        items = new long[maxSize];
+        items = new Long[maxSize];
         elementsCount = 0;
     }
 
     public void insert(long item) {
         items[elementsCount] = item;
         elementsCount++;
+    }
+
+    public void insert(List<Long> items) {
+        this.items = items.toArray(new Long[0]);
+        elementsCount = items.size();
     }
 
     public abstract void sort();
@@ -31,7 +37,7 @@ public abstract class AbstractSort {
         System.out.printf("");
     }
 
-    public long[] getItems() {
+    public Long[] getItems() {
         return Arrays.copyOf(items, elementsCount);
     }
 
