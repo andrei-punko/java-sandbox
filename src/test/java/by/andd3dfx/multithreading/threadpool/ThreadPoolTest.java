@@ -10,6 +10,7 @@ public class ThreadPoolTest {
     public void testThreadPool() throws InterruptedException {
         // Create queue with size 3
         ThreadPool threadPool = new ThreadPool(3, 2);
+        threadPool.start();
 
         // Created 15 Tasks and submit to pool
         for (int taskNumber = 1; taskNumber <= 5; taskNumber++) {
@@ -25,6 +26,6 @@ public class ThreadPoolTest {
             threadPool.submitTask(task);
         }
 
-        sleep(2000);
+        sleep(1000);
     }
 }

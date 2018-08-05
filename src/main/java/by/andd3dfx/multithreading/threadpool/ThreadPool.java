@@ -1,5 +1,8 @@
 package by.andd3dfx.multithreading.threadpool;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
     Write custom implementation of ThreadPoolExecutor that support next 2 methods: submit(Runnable) and shutdown()
 
@@ -13,7 +16,8 @@ package by.andd3dfx.multithreading.threadpool;
 public class ThreadPool {
 
     private BlockingQueue<Runnable> queue;
-    private volatile boolean shutdownState = false;
+    private List<Thread> threads = new ArrayList<>();
+    private volatile boolean isStarted = false;
 
     public ThreadPool(int queueSize, int threadsCount) {
         queue = new BlockingQueue<>(queueSize);
@@ -26,22 +30,28 @@ public class ThreadPool {
         }
     }
 
-    public void submitTask(Runnable task) throws InterruptedException {
-        if (!shutdownState) {
-            queue.enqueue(task);
+    public void submitTask(Runnable task) {
+        if (isStarted) {
+            try {
+                queue.enqueue(task);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         } else {
             System.out.println("Task rejected because of shutdown state");
         }
     }
 
+    public void start() {
+        isStarted = true;
+        for (Thread thread: threads) {
+            thread.start();
+        }
+    }
     /**
      * In shutdown state Thread Pool stops accepting new tasks
      */
     public void shutdown() {
-        shutdownState = true;
-    }
-
-    public boolean isShutdownState() {
-        return shutdownState;
+        isStarted = false;
     }
 }
