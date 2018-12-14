@@ -10,9 +10,10 @@ public class PriceSearchUtil {
     public Double getLowestFirstCatalogPriceByUrl(String firstCatalogUrl) throws IOException {
         String text = Jsoup
                 .connect(firstCatalogUrl)
-                .userAgent(USER_AGENT).get().select("[class=pr-price_cash]").text();
-        String priceValue = text.replaceAll("\u2014.*", "").replaceAll(" ", "").replaceAll(",", ".");
-        priceValue = priceValue.substring(0, priceValue.indexOf("."));
-        return Double.parseDouble(priceValue);
+                .userAgent(USER_AGENT).get().select("[class=priceValues]").get(0).text();
+        // text = Наличный расчет 486,00 – 515,10 б.р.
+        text = text.substring("Наличный расчет ".length());
+        text = text.substring(0, text.indexOf(","));
+        return Double.parseDouble(text);
     }
 }
