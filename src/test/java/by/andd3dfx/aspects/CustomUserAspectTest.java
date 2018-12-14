@@ -1,6 +1,5 @@
 package by.andd3dfx.aspects;
 
-import by.andd3dfx.aspects.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +34,7 @@ public class CustomUserAspectTest {
         user.setAge(37);
         user.printHello();
 
-        assertThat("Wrong output", outContent.toString(), is(EXPECTED_CONSOLE_LOG));
+        assertThat("Wrong output", outContent.toString(), is(EXPECTED_CONSOLE_LOG.replace("\r\n", System.lineSeparator())));
     }
 
     String EXPECTED_CONSOLE_LOG = "Action before setName() method call\r\n" +
