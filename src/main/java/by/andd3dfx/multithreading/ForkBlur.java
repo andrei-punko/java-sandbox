@@ -125,7 +125,7 @@ public class ForkBlur extends RecursiveAction {
                 " milliseconds.");
 
         BufferedImage dstImage =
-                new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+                new BufferedImage(w, h, BufferedImage.TYPE_3BYTE_BGR);
         dstImage.setRGB(0, 0, w, h, dst, 0, w);
 
         return dstImage;
