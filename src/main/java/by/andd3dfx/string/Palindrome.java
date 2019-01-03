@@ -22,6 +22,30 @@ public class Palindrome {
     return true;
   }
 
+  public static String removePalindromesFromString(String string) {
+    String[] words = string.split("\\s");
+    for (String word : words) {
+      if (isPalindrome(word)) {
+          string = string.replace(word, "");
+      }
+    }
+    return string;
+  }
+
+  public static String removeNthPalindrome(String string, int n) {
+      String[] words = string.split("\\s");
+      int counter = 0;
+      for (String word : words) {
+          if (isPalindrome(word)) {
+              counter++;
+              if (counter == n) {
+                  return string.replace(word, "");
+              }
+          }
+      }
+      return string;
+  }
+
   public static void main(String[] args) {
     System.out.println(Palindrome.isPalindrome("Deleveled"));
   }
