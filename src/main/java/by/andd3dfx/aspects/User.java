@@ -13,6 +13,6 @@ public class User {
     }
 
     public void printHello() {
-        System.out.println("Hello, " + name + "! You are " + age + " years old!");
+        CustomUserAspect.getWriter().append("Hello, " + name + "! You are " + age + " years old!");
     }
 }

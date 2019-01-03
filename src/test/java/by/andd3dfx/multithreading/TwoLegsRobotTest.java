@@ -14,6 +14,8 @@ public class TwoLegsRobotTest {
 
     private final String LEFT = "left";
     private final String RIGHT = "right";
+
+    // TODO: Avoid using this way of testing output content. See approach used in CustomUserAspectTest at least
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
 
