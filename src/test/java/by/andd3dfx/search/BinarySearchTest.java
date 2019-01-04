@@ -9,12 +9,12 @@ public class BinarySearchTest {
 
   @Test
   public void binarySearch() {
-    assertThat("3 expected", BinarySearch.perform(new int[]{1, 2, 3, 4, 5}, 4), is(3));
-    assertThat("4 expected", BinarySearch.perform(new int[]{1, 2, 3, 4, 5}, 5), is(4));
+    assertThat("3 expected", BinarySearch.search(new int[]{1, 2, 3, 4, 5}, 4), is(3));
+    assertThat("4 expected", BinarySearch.search(new int[]{1, 2, 3, 4, 5}, 5), is(4));
   }
 
   @Test
   public void binarySearchWhenNothingFound() {
-    assertThat("Wrong result", BinarySearch.perform(new int[]{1, 2, 3, 4, 5}, 89), is(-1));
+    assertThat("Wrong result", BinarySearch.search(new int[]{1, 2, 3, 4, 5}, 89), is(-1));
   }
 }
