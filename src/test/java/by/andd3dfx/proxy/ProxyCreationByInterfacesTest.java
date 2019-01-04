@@ -6,8 +6,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.lang.reflect.Proxy;
 import org.junit.Test;
 
-/*
-  Based on http://www.baeldung.com/java-dynamic-proxies
+/**
+ * Dynamic proxy usage example
+ * Based on http://www.baeldung.com/java-dynamic-proxies
  */
 public class ProxyCreationByInterfacesTest {
 
