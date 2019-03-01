@@ -1,23 +1,30 @@
 package by.andd3dfx.core;
 
+import java.io.StringWriter;
+
 public class AClass {
 
+    protected static final StringWriter writer = new StringWriter();
     private int value = 100;
 
     {
-        System.out.println("Usual block of class A, " + value);
+        writer.write("Usual block of class A, " + value);
     }
 
     static {
-        System.out.println("Static block of class A");
+        writer.write("Static block of class A");
     }
 
     public AClass() {
-        System.out.println("Class A constructor, " + value);
+        writer.write("Class A constructor, " + value);
         showValue();
     }
 
     public void showValue() {
-        System.out.println("Call of class A method, " + value);
+        writer.write("Call of class A method, " + value);
+    }
+
+    public static StringWriter getWriter() {
+        return writer;
     }
 }

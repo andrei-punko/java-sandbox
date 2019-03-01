@@ -1,8 +1,9 @@
 package by.andd3dfx.multithreading;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import static java.lang.Thread.sleep;
+
+import java.io.StringWriter;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /*
 Дан класс:
@@ -38,6 +39,9 @@ public class MainClass {
 Сделать так, чтобы не потреблялись ресурсы CPU, пока ожидаем передвижения очередной ноги.
 */
 public class TwoLegsRobot {
+
+    private static final StringWriter writer = new StringWriter();
+
     static class Foot implements Runnable {
         private String name;
         private volatile static AtomicInteger counter = new AtomicInteger(1);
@@ -56,13 +60,13 @@ public class TwoLegsRobot {
             synchronized (counter) {
                 if (counter.get() == 1 && "left".equals(name)) {
                     counter.set(-1);
-                    System.out.println(name + " steps!");
+                    writer.write(name + " steps!");
                     return;
                 }
 
                 if (counter.get() == -1 && "right".equals(name)) {
                     counter.set(1);
-                    System.out.println(name + " steps!");
+                    writer.write(name + " steps!");
                     return;
                 }
             }
@@ -74,5 +78,9 @@ public class TwoLegsRobot {
         new Thread(new Foot("right")).start();
 
         sleep(1);
+    }
+
+    public static StringWriter getWriter() {
+        return writer;
     }
 }

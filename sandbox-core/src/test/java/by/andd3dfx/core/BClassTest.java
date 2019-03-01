@@ -11,37 +11,21 @@ import org.junit.Test;
 
 public class BClassTest {
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final PrintStream originalErr = System.err;
-
-    @Before
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-    }
-
-    @After
-    public void restoreStreams() {
-        System.setOut(originalOut);
-        System.setErr(originalErr);
-    }
-
     @Test
     public void checkCallOrder() {
         BClass bClass = new BClass();
         bClass.showValue();
 
-        assertThat("Wrong console output", outContent.toString().replaceAll("\r\n", "\n"), is(""
-            + "Static block of class A\n"
-            + "Static block of class B\n"
-            + "Usual block of class A, 100\n"
-            + "Class A constructor, 100\n"
-            + "Call of class B method, 0\n"
-            + "Usual block of class B, 1000\n"
-            + "Class B constructor, 1000\n"
-            + "Call of class B method, 1000\n"
-            + "Call of class B method, 1000\n"));
+        String outContent = BClass.getWriter().toString();
+        assertThat("Wrong console output", outContent, is(""
+            + "Static block of class A"
+            + "Static block of class B"
+            + "Usual block of class A, 100"
+            + "Class A constructor, 100"
+            + "Call of class B method, 0"
+            + "Usual block of class B, 1000"
+            + "Class B constructor, 1000"
+            + "Call of class B method, 1000"
+            + "Call of class B method, 1000"));
     }
 }

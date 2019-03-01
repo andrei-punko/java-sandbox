@@ -8,20 +8,20 @@ public class BClass extends AClass {
     private int value = 1000;
 
     {
-        System.out.println("Usual block of class B, " + value);
+        writer.write("Usual block of class B, " + value);
     }
 
     static {
-        System.out.println("Static block of class B");
+        writer.write("Static block of class B");
     }
 
     public BClass() {
-        System.out.println("Class B constructor, " + value);
+        writer.write("Class B constructor, " + value);
         showValue();
     }
 
     @Override
     public void showValue() {
-        System.out.println("Call of class B method, " + value);
+        writer.write("Call of class B method, " + value);
     }
 }
