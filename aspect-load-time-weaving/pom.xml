@@ -11,10 +11,6 @@
 
   <artifactId>aspect-load-time-weaving</artifactId>
 
-  <properties>
-    <aspectj.version>1.8.13</aspectj.version>
-  </properties>
-
   <build>
     <plugins>
       <plugin>

@@ -49,7 +49,7 @@
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjrt</artifactId>
-      <version>1.8.13</version>
+      <version>${aspectj.version}</version>
     </dependency>
     <dependency>
       <groupId>by.andd3dfx</groupId>
