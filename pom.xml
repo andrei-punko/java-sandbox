@@ -14,6 +14,7 @@
     <module>aspect-compile-time-weaving</module>
     <module>aspect-post-compile-time-weaving</module>
     <module>aspect-stub-sources-for-post-compile-weaving</module>
+    <module>aspect-load-time-weaving</module>
   </modules>
 
   <properties>

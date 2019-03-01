@@ -1,0 +1,8 @@
+<aspectj>
+  <aspects>
+    <aspect name="by.andd3dfx.aspects.CustomUserAspect"/>
+    <weaver options="-verbose -showWeaveInfo">
+      <include within="by.andd3dfx.aspects.*"/>
+    </weaver>
+  </aspects>
+</aspectj>
