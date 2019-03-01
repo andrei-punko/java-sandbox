@@ -9,7 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>aspect-compile-time-weaving</artifactId>
+  <artifactId>aspect-post-compile-time-weaving</artifactId>
 
   <build>
     <plugins>
@@ -25,13 +25,19 @@
           <!-- Add detailed output -->
           <verbose>true</verbose>
           <showWeaveInfo>true</showWeaveInfo>
+
+          <weaveDependencies>
+            <weaveDependency>
+              <groupId>by.andd3dfx</groupId>
+              <artifactId>aspect-stub-sources-for-post-compile-weaving</artifactId>
+            </weaveDependency>
+          </weaveDependencies>
         </configuration>
 
         <executions>
           <execution>
             <goals>
               <goal>compile</goal>
-              <goal>test-compile</goal>
             </goals>
           </execution>
         </executions>
@@ -44,6 +50,11 @@
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjrt</artifactId>
       <version>1.8.13</version>
+    </dependency>
+    <dependency>
+      <groupId>by.andd3dfx</groupId>
+      <artifactId>aspect-stub-sources-for-post-compile-weaving</artifactId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 
