@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>sandbox-root</artifactId>
+    <groupId>by.andd3dfx</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>elasticsearch</artifactId>
+
+  <properties>
+    <elasticsearch.version>6.6.1</elasticsearch.version>
+    <fastjson.version>1.2.56</fastjson.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>0.28.0</version>
+        <configuration>
+          <showLogs>true</showLogs>
+          <images>
+            <image>
+              <name>docker.elastic.co/elasticsearch/elasticsearch:${elasticsearch.version}</name>
+              <run>
+                <ports>
+                  <port>9200:9200</port>
+                  <port>9300:9300</port>
+                </ports>
+                <env>
+                  <discovery.type>single-node</discovery.type>
+                </env>
+                <wait>
+                  <log>license</log>
+                  <time>20000</time>
+                </wait>
+              </run>
+            </image>
+          </images>
+        </configuration>
+
+        <!-- Connect start/stop to pre- and post- integration-test phase respectively
+        if you want to start your docker containers during integration tests -->
+        <executions>
+          <execution>
+            <id>start</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>stop</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- This plugin used for running integration tests in integration-test build phase -->
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>2.22.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.elasticsearch</groupId>
+      <artifactId>elasticsearch</artifactId>
+      <version>${elasticsearch.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.elasticsearch.client</groupId>
+      <artifactId>transport</artifactId>
+      <version>${elasticsearch.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>${fastjson.version}</version>
+    </dependency>
+  </dependencies>
+
+</project>
