@@ -11,8 +11,7 @@ public class PriceSearchUtil {
         String text = Jsoup
                 .connect(firstCatalogUrl)
                 .userAgent(USER_AGENT).get().select("[class=priceValues]").get(0).text();
-        // text = Наличный расчет 486,00 – 515,10 б.р.
-        text = text.substring("Наличный расчет ".length());
+        // text = 486,00 – 515,10 б.р.
         text = text.substring(0, text.indexOf(","));
         return Double.parseDouble(text);
     }
