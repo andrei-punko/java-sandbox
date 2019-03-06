@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>sandbox-root</artifactId>
+    <groupId>by.andd3dfx</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>hibernate-mappings</artifactId>
+
+  <properties>
+    <mysql.version>8.0.15</mysql.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>0.28.0</version>
+        <configuration>
+          <showLogs>true</showLogs>
+          <images>
+            <image>
+              <name>mysql:${mysql.version}</name>
+              <run>
+                <ports>
+                  <port>3306:3306</port>
+                </ports>
+                <env>
+                  <MYSQL_DATABASE>db</MYSQL_DATABASE>
+                  <MYSQL_ROOT_PASSWORD>some_password</MYSQL_ROOT_PASSWORD>
+                  <MYSQL_USER>user</MYSQL_USER>
+                  <MYSQL_PASSWORD>password</MYSQL_PASSWORD>
+                </env>
+                <wait>
+                  <log>port: 3306  MySQL Community Server - GPL</log>
+                  <time>20000</time>
+                </wait>
+              </run>
+            </image>
+          </images>
+        </configuration>
+
+        <!-- Connect start/stop to pre- and post- integration-test phase respectively
+        if you want to start your docker containers during integration tests -->
+        <executions>
+          <execution>
+            <id>start</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>stop</goal>
+              <goal>start</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>stop</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>4.2.0</version>
+
+        <configuration>
+          <url>jdbc:mysql://127.0.0.1:3306/db</url>
+          <user>root</user>
+          <password>some_password</password>
+          <locations>
+            <location>db_migration</location>
+          </locations>
+        </configuration>
+
+        <executions>
+          <execution>
+            <id>execution</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>clean</goal>
+              <goal>migrate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+       <!--This plugin used for running integration tests in integration-test build phase-->
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>2.22.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.4.1.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.version}</version>
+    </dependency>
+  </dependencies>
+</project>
