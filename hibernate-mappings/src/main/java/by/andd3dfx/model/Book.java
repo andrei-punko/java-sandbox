@@ -8,8 +8,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OrderBy;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "BOOK")
 public class Book {
 
     @Id
@@ -18,10 +21,11 @@ public class Book {
     private String title;
 
     @ManyToMany
-    @JoinTable(name = "Book_Author",
+    @JoinTable(name = "BOOK_AUTHOR",
         joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
         inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id")
     )
+    @OrderBy("name")
     private Set<Author> authors;
 
     @ManyToOne(optional = false)

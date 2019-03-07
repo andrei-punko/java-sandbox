@@ -1,11 +1,11 @@
-create table Author
+create table AUTHOR
 (
   id   int          not null auto_increment,
   name varchar(100) not null,
   primary key (id)
 );
 
-create table Address
+create table ADDRESS
 (
   id                int          not null auto_increment,
   country           varchar(50)  not null,
@@ -14,28 +14,28 @@ create table Address
   primary key (id)
 );
 
-create table Publisher
+create table PUBLISHER
 (
   id         int          not null auto_increment,
   name       varchar(100) not null,
   address_id int          not null,
   primary key (id),
-  foreign key (address_id) references Address(id)
+  foreign key (address_id) references ADDRESS(id)
 );
 
-create table Book
+create table BOOK
 (
   id    int          not null auto_increment,
   title varchar(100) not null,
   publisher_id int   not null,
   primary key (id),
-  foreign key (publisher_id) references Publisher(id)
+  foreign key (publisher_id) references PUBLISHER(id)
 );
 
-create table db.Book_Author
+create table BOOK_AUTHOR
 (
   book_id     INT NOT NULL,
   author_id   INT NOT NULL,
-  FOREIGN KEY (book_id) REFERENCES Book(id),
-  FOREIGN KEY (author_id) REFERENCES Author(id)
+  FOREIGN KEY (book_id) REFERENCES BOOK(id),
+  FOREIGN KEY (author_id) REFERENCES AUTHOR(id)
 );
