@@ -1,4 +1,4 @@
-package by.andd3dfx.model;
+package by.andd3dfx.model.library;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
