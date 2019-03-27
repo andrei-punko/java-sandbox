@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class StorageMain {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         List<Truck> trucks = Arrays.asList(
             new Truck(1.5, 30),
             new Truck(3.4, 45),

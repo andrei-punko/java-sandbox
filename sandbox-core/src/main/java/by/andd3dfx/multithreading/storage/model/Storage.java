@@ -23,8 +23,8 @@ public class Storage {
             capacity = capacity - loadCapacity;
             return loadCapacity;
         }
-        loadCapacity = capacity;
+        double result = capacity;
         capacity = 0;
-        return loadCapacity;
+        return result;
     }
 }

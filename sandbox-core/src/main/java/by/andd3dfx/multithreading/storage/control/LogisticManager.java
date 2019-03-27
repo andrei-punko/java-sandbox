@@ -1,82 +1,46 @@
 package by.andd3dfx.multithreading.storage.control;
 
+import static by.andd3dfx.multithreading.storage.util.CustomUtil.sleep;
+
 import by.andd3dfx.multithreading.storage.model.Storage;
 import by.andd3dfx.multithreading.storage.model.Truck;
 import by.andd3dfx.multithreading.storage.tasks.LoadTruckTask;
-import by.andd3dfx.multithreading.storage.tasks.RoadToFirmTask;
-import by.andd3dfx.multithreading.storage.tasks.RoadToStorageTask;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class LogisticManager {
 
-    private ExecutorService loadThreadPoolExecutor;
-    private ExecutorService roadThreadPoolExecutor;
-    private LinkedBlockingQueue<Truck> loadQueue = new LinkedBlockingQueue<>();
-    private LinkedBlockingQueue<Truck> roadToFirmQueue = new LinkedBlockingQueue<>();
-    private LinkedBlockingQueue<Truck> roadToStorageQueue = new LinkedBlockingQueue<>();
+    private ThreadPoolExecutor loadExecutor;
+    private ThreadPoolExecutor roadExecutor;
+    private List<Truck> trucks;
     private Storage storage;
-    private volatile boolean processStarted = true;
 
     public LogisticManager(double storageCapacity, int gatesCount, double timeSpendingForOneTonLoad,
         List<Truck> trucks) {
-        loadThreadPoolExecutor = Executors.newFixedThreadPool(gatesCount);
-        roadThreadPoolExecutor = Executors.newFixedThreadPool(trucks.size());
-
-        loadQueue.addAll(trucks);
-
         storage = new Storage(storageCapacity, timeSpendingForOneTonLoad);
+        this.trucks = trucks;
+
+        loadExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(gatesCount);
+        roadExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(trucks.size());
     }
 
-    public void start() throws InterruptedException {
-        Function<Boolean, Void> stopProcessFunction = aBool -> {
-            processStarted = aBool;
-            return null;
-        };
-
-        Thread loadTruckThread = new Thread(() -> {
-            while (processStarted) {
-                Truck truck = loadQueue.poll();
-                if (truck != null) {
-                    loadThreadPoolExecutor.execute(new LoadTruckTask(storage, truck, roadToFirmQueue));
-                }
-            }
-        });
-
-        Thread sendToStorageThread = new Thread(() -> {
-            while (processStarted) {
-                Truck truck = roadToStorageQueue.poll();
-                if (truck != null) {
-                    roadThreadPoolExecutor.execute(new RoadToStorageTask(storage, truck, loadQueue));
-                }
-            }
-        });
-
-        Thread sendToFirmThread = new Thread(() -> {
-            while (processStarted) {
-                Truck truck = roadToFirmQueue.poll();
-                if (truck != null) {
-                    roadThreadPoolExecutor
-                        .execute(new RoadToFirmTask(storage, truck, roadToStorageQueue, stopProcessFunction));
-                }
-            }
-        });
-
-        loadTruckThread.start();
-        sendToStorageThread.start();
-        sendToFirmThread.start();
-
-        while (processStarted || !roadToFirmQueue.isEmpty()) {
+    public void start() {
+        for (Truck truck : trucks) {
+            loadExecutor.execute(new LoadTruckTask(storage, truck, roadExecutor, loadExecutor));
         }
 
-        loadThreadPoolExecutor.shutdown();
-        roadThreadPoolExecutor.shutdown();
-        boolean done = loadThreadPoolExecutor.awaitTermination(10, TimeUnit.SECONDS)
-            && roadThreadPoolExecutor.awaitTermination(10, TimeUnit.SECONDS);
-        System.out.println("Status of executors shutdown: " + done);
+        while (hasRunningTasks(loadExecutor) || hasRunningTasks(roadExecutor)) {
+            sleep(10);
+        }
+        loadExecutor.shutdown();
+        roadExecutor.shutdown();
+    }
+
+    private boolean hasRunningTasks(ThreadPoolExecutor executor) {
+        long submitted = executor.getTaskCount();
+        long completed = executor.getCompletedTaskCount();
+        long notCompleted = submitted - completed;
+        return notCompleted > 0;
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CustomUtil {
 
-    private static final double SCALE_FACTOR = 10;
+    private static final double TIME_SCALE_FACTOR = 10;
 
     public static void sleep(long millis) {
         try {
@@ -16,7 +16,7 @@ public class CustomUtil {
     }
 
     public static long convertToMillisScaled(double value) {
-        return (long) (value * SCALE_FACTOR);
+        return (long) (value * TIME_SCALE_FACTOR);
     }
 
     public static double extractMaxTruckTime(List<Truck> trucks) {
