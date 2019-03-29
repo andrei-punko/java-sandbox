@@ -1,7 +1,6 @@
 package by.andd3dfx.multithreading.storage.tasks;
 
-import static by.andd3dfx.multithreading.storage.util.CustomUtil.convertToMillisScaled;
-import static by.andd3dfx.multithreading.storage.util.CustomUtil.sleep;
+import static by.andd3dfx.multithreading.storage.util.CustomUtil.customSleep;
 
 import by.andd3dfx.multithreading.storage.model.Storage;
 import by.andd3dfx.multithreading.storage.model.Truck;
@@ -21,7 +20,7 @@ public class RoadToStorageTask extends BaseTask {
         }
 
         System.out.println(truck + " going to storage...");
-        sleep(convertToMillisScaled(truck.getTimeInRoad()));
+        customSleep(truck.getTimeInRoad());
         truck.incrementTripsCount();
         truck.incrementTimeSpent(truck.getTimeInRoad());
         System.out.println(truck + " arrived to storage");

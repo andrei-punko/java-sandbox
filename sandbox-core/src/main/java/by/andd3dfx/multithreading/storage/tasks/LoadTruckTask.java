@@ -1,7 +1,6 @@
 package by.andd3dfx.multithreading.storage.tasks;
 
-import static by.andd3dfx.multithreading.storage.util.CustomUtil.convertToMillisScaled;
-import static by.andd3dfx.multithreading.storage.util.CustomUtil.sleep;
+import static by.andd3dfx.multithreading.storage.util.CustomUtil.customSleep;
 
 import by.andd3dfx.multithreading.storage.model.Storage;
 import by.andd3dfx.multithreading.storage.model.Truck;
@@ -22,12 +21,12 @@ public class LoadTruckTask extends BaseTask {
         }
 
         double actualLoadedWeight = storage.needToLoadTruck(truck.getLoadCapacity());
-        double deltaInMinutes = actualLoadedWeight * storage.getTimeSpendingForOneTonLoad();
+        double delay = actualLoadedWeight * storage.getTimeSpendingForOneTonLoad();
 
-        System.out.println(truck + " load of " + actualLoadedWeight + ": waiting for " + deltaInMinutes);
-        sleep(convertToMillisScaled(deltaInMinutes));
+        System.out.println(truck + " load of " + actualLoadedWeight + ": waiting for " + delay);
+        customSleep(delay);
         System.out.println(truck + " loaded with " + actualLoadedWeight);
-        truck.incrementTimeSpent(deltaInMinutes);
+        truck.incrementTimeSpent(delay);
 
         roadExecutor.execute(new RoadToFirmTask(storage, truck, roadExecutor, loadExecutor));
     }

@@ -1,7 +1,5 @@
 package by.andd3dfx.multithreading.storage.control;
 
-import static by.andd3dfx.multithreading.storage.util.CustomUtil.sleep;
-
 import by.andd3dfx.multithreading.storage.model.Storage;
 import by.andd3dfx.multithreading.storage.model.Truck;
 import by.andd3dfx.multithreading.storage.tasks.LoadTruckTask;
@@ -31,7 +29,6 @@ public class LogisticManager {
         }
 
         while (hasRunningTasks(loadExecutor) || hasRunningTasks(roadExecutor)) {
-            sleep(10);
         }
         loadExecutor.shutdown();
         roadExecutor.shutdown();

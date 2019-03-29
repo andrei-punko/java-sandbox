@@ -7,16 +7,13 @@ public class CustomUtil {
 
     private static final double TIME_SCALE_FACTOR = 10;
 
-    public static void sleep(long millis) {
+    public static void customSleep(double delayInMinutes) {
         try {
+            long millis = (long) (delayInMinutes * TIME_SCALE_FACTOR);
             Thread.sleep(millis);
         } catch (InterruptedException e) {
-            throw new RuntimeException("Something going wrong in sleep()", e);
+            throw new RuntimeException("Something going wrong in customSleep()", e);
         }
-    }
-
-    public static long convertToMillisScaled(double value) {
-        return (long) (value * TIME_SCALE_FACTOR);
     }
 
     public static double extractMaxTruckTime(List<Truck> trucks) {
