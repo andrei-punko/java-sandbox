@@ -33,8 +33,19 @@ public class PravTorRuSearchUtilTest {
             result.stream()
                 .filter(item -> item.getDownloadedCount() != null)
                 .sorted((o1, o2) -> o2.getDownloadedCount() - o1.getDownloadedCount())
-                .map(String::valueOf)
+                .map(this::convertTorrentDataToCsvLine)
                 .collect(Collectors.toList()),
-            Charset.defaultCharset());
+            Charset.forName("UTF-8"));
+    }
+
+    private String convertTorrentDataToCsvLine(TorrentData data) {
+        return String.join("; ", new String[]{
+            data.getLabel(),
+            String.valueOf(data.getSeedsCount()),
+            String.valueOf(data.getPeersCount()),
+            String.valueOf(data.getDownloadedCount()),
+            data.getSize(),
+            data.getRelativeLink()
+        });
     }
 }
