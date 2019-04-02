@@ -37,7 +37,7 @@
                 </env>
                 <wait>
                   <log>license</log>
-                  <time>20000</time>
+                  <time>25000</time>
                 </wait>
               </run>
             </image>
