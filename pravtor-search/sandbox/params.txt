@@ -1,0 +1,11 @@
+audio-Sviaschennoe-Pisanie	https://pravtor.ru/viewforum.php?f=20
+audio-sviatootecheskie-teksty	https://pravtor.ru/viewforum.php?f=22
+audio-zhizneopisanija	https://pravtor.ru/viewforum.php?f=26
+audio-audioknigi-na-pravoslavnye-materialy	https://pravtor.ru/viewforum.php?f=26
+txt-Sviaschennoe-Pisanie	https://pravtor.ru/viewforum.php?f=27
+txt-sviatootecheskie-teksty-i-zhitija-sviatyh	https://pravtor.ru/viewforum.php?f=28
+txt-bogosluzhebnye-teksty	https://pravtor.ru/viewforum.php?f=153
+txt-molitvy	https://pravtor.ru/viewforum.php?f=184
+txt-kanony	https://pravtor.ru/viewforum.php?f=183
+txt-akafisty	https://pravtor.ru/viewforum.php?f=182
+txt-pravoslavnaja-literatura	https://pravtor.ru/viewforum.php?f=129

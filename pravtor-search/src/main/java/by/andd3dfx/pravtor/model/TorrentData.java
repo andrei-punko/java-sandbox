@@ -1,4 +1,4 @@
-package by.andd3dfx.pravtor;
+package by.andd3dfx.pravtor.model;
 
 public class TorrentData {
 

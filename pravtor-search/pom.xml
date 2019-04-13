@@ -11,6 +11,10 @@
 
   <artifactId>pravtor-search</artifactId>
 
+  <properties>
+    <apache-poi.version>4.1.0</apache-poi.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.jsoup</groupId>
@@ -21,6 +25,22 @@
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>3.8.1</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+      <version>2.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi</artifactId>
+      <version>${apache-poi.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.poi</groupId>
+      <artifactId>poi-ooxml</artifactId>
+      <version>${apache-poi.version}</version>
     </dependency>
   </dependencies>
 
@@ -37,7 +57,7 @@
           </descriptorRefs>
           <archive>
             <manifest>
-              <mainClass>by.andd3dfx.pravtor.PravTorRuSearchUtil</mainClass>
+              <mainClass>by.andd3dfx.pravtor.util.SearchUtil</mainClass>
             </manifest>
           </archive>
         </configuration>
