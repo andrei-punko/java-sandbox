@@ -1,9 +1,9 @@
-package by.andd3dfx.search.pravtor;
+package by.andd3dfx.pravtor;
 
 public class TorrentData {
 
     private String label;
-    private String relativeLink;
+    private String linkUrl;
     private Integer seedsCount;
     private Integer peersCount;
     private Integer downloadedCount;
@@ -17,12 +17,12 @@ public class TorrentData {
         this.label = label;
     }
 
-    public String getRelativeLink() {
-        return relativeLink;
+    public String getLinkUrl() {
+        return linkUrl;
     }
 
-    public void setRelativeLink(String relativeLink) {
-        this.relativeLink = relativeLink;
+    public void setLinkUrl(String linkUrl) {
+        this.linkUrl = linkUrl;
     }
 
     public Integer getSeedsCount() {
@@ -61,7 +61,7 @@ public class TorrentData {
     public String toString() {
         return "TorrentData{" +
             "label='" + label + '\'' +
-            ", relativeLink='" + relativeLink + '\'' +
+            ", linkUrl='" + linkUrl + '\'' +
             ", seedsCount=" + seedsCount +
             ", peersCount=" + peersCount +
             ", downloadedCount=" + downloadedCount +

@@ -19,6 +19,7 @@
     <module>hibernate-mappings</module>
     <module>two-factor-authentification</module>
     <module>gatling-load-test</module>
+    <module>pravtor-search</module>
   </modules>
 
   <properties>
