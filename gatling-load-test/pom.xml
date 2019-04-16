@@ -70,22 +70,13 @@
         <artifactId>gatling-maven-plugin</artifactId>
         <version>${gatling-plugin.version}</version>
         <configuration>
-          <simulationClass>by.andd3dfx.BasicSimulation</simulationClass>
-<!--          <jvmArgs>-->
-<!--            <jvmArg>-Denv=${env}</jvmArg>-->
-<!--            <jvmArg>-Dusers=${users}</jvmArg>-->
-<!--            <jvmArg>-Drampup=${rampup}</jvmArg>-->
-<!--            <jvmArg>-Dduration=${duration}</jvmArg>-->
-<!--            <jvmArg>-Dthroughput=${throughput}</jvmArg>-->
-<!--          </jvmArgs>-->
-<!--          <propagateSystemProperties>true</propagateSystemProperties>-->
+          <simulationClass>by.andd3dfx.advanced.AdvancedSimulationStep01</simulationClass>
         </configuration>
         <executions>
           <execution>
             <goals>
               <goal>test</goal>
             </goals>
-<!--            <phase>test</phase>-->
           </execution>
         </executions>
       </plugin>
