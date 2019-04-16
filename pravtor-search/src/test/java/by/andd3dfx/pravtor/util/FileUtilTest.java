@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class FileUtilTest {
@@ -38,6 +39,7 @@ public class FileUtilTest {
         assertThat("Wrong url of second item", criteriaItems.get(1).getUrl(), is("https://pravtor.ru/viewforum.php?f=183"));
     }
 
+    @Ignore
     @Test
     public void writeIntoExcel() throws IOException {
 
