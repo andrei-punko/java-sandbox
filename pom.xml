@@ -20,11 +20,13 @@
     <module>two-factor-authentification</module>
     <module>gatling-load-test</module>
     <module>pravtor-search</module>
-	<module>swing-app-search-test-task</module>
+	  <module>swing-app-search-test-task</module>
+    <module>unit-tests-debugging</module>
   </modules>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
