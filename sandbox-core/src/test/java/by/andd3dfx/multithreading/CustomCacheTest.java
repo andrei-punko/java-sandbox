@@ -1,6 +1,6 @@
 package by.andd3dfx.multithreading;
 
-import by.andd3dfx.multithreading.CustomCache;
+import java.io.StringWriter;
 import org.junit.Test;
 
 import static java.lang.Math.random;
@@ -8,6 +8,7 @@ import static java.lang.Thread.sleep;
 
 public class CustomCacheTest {
     private final int COUNT = 100;
+    private static final StringWriter writer = new StringWriter();
 
     @Test
     public void testCache() throws InterruptedException {
@@ -21,7 +22,7 @@ public class CustomCacheTest {
                 delay();
                 int index = (int) (COUNT * random());
                 Object value = customCache.read(index);
-                System.out.println("Read thread 1, A[" + index + "] -> " + value);
+                writer.write("Read thread 1, A[" + index + "] -> " + value);
             }
         });
         Thread readingThread2 = new Thread(() -> {
@@ -29,7 +30,7 @@ public class CustomCacheTest {
                 delay();
                 int index = (int) (COUNT * random());
                 Object value = customCache.read(index);
-                System.out.println("Read thread 2, A[" + index + "] -> " + value);
+                writer.write("Read thread 2, A[" + index + "] -> " + value);
             }
         });
         Thread writingThread = new Thread(() -> {
@@ -38,7 +39,7 @@ public class CustomCacheTest {
                 int index = (int) (COUNT * random());
                 int value = func(index);
                 customCache.write(index, value);
-                System.out.println("Write thread, A[" + index + "] <- " + value);
+                writer.write("Write thread, A[" + index + "] <- " + value);
             }
         });
 
