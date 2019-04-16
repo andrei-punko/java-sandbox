@@ -1,0 +1,1 @@
+java -jar ./target/swing-app-search-test-task-1.0-SNAPSHOT-jar-with-dependencies.jar
