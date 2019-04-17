@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import org.junit.Test;
 
 public class RecursiveIteratorTest {
@@ -39,5 +40,17 @@ public class RecursiveIteratorTest {
         }
 
         assertThat("Wrong result", result.toString(), is("[1, 3, 9, 4, 23, 31, 88, 22, 5, 37, 11]"));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void callNextAfterEndOfIterator() {
+        List<String> list = Arrays.asList("1", "3", "5", "7", "90");
+        RecursiveIterator iterator = new RecursiveIterator(list.iterator());
+
+        while (iterator.hasNext()) {
+            iterator.next();
+        }
+
+        iterator.next();
     }
 }

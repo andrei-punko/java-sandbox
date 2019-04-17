@@ -1,6 +1,7 @@
 package by.andd3dfx.iterators;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Stack;
 
 /*
@@ -41,6 +42,9 @@ public class RecursiveIterator<Object> implements Iterator<Object> {
     }
 
     private Object determineNext() {
+        if (stack.empty()) {
+            throw new NoSuchElementException();
+        }
         Iterator<Object> currentIterator = stack.peek();
 
         if (!currentIterator.hasNext()) {

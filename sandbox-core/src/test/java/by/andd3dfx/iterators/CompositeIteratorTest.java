@@ -6,6 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.TreeSet;
 import org.junit.Test;
@@ -55,5 +56,18 @@ public class CompositeIteratorTest {
         assertThat("Wrong list", list.toString(), is("[boat, house, sheep, car]"));
         assertThat("Wrong set1", set1.toString(), is("[boat, sheep]"));
         assertThat("Wrong set2", set2.toString(), is("[cat, dog]"));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void callNextAfterEndOfIterator() {
+        List<Integer> list1 = Arrays.asList(12, 52);
+        List<Integer> list2 = Arrays.asList(34, 98, 2);
+        CompositeIterator<Integer> compositeIterator = new CompositeIterator(list1.iterator(), list2.iterator());
+
+        while (compositeIterator.hasNext()) {
+            compositeIterator.next();
+        }
+
+        compositeIterator.next();
     }
 }
