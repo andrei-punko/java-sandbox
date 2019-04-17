@@ -23,6 +23,7 @@
     <module>swing-app-search-test-task</module>
     <module>unit-tests-debugging</module>
     <module>akka-project</module>
+    <module>db-versioning</module>
   </modules>
 
   <properties>

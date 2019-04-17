@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>by.andd3dfx</groupId>
+    <artifactId>db-versioning</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+
+  <groupId>by.andd3dfx</groupId>
+  <artifactId>flyway-db</artifactId>
+  <packaging>jar</packaging>
+
+  <name>DB versioning : Flyway</name>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>4.2.0</version>
+
+        <configuration>
+          <url>jdbc:h2:file:${project.build.directory}/flywaydb</url>
+          <user>${jdbc.username}</user>
+          <password>${jdbc.password}</password>
+          <locations>
+            <location>some_folder/db/migration</location>
+          </locations>
+        </configuration>
+
+        <executions>
+          <execution>
+            <id>first-execution</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+          </execution>
+
+          <execution>
+            <id>second-execution</id>
+            <phase>process-test-resources</phase>
+            <goals>
+              <goal>migrate</goal>
+            </goals>
+          </execution>
+        </executions>
+
+        <dependencies>
+          <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.db.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
