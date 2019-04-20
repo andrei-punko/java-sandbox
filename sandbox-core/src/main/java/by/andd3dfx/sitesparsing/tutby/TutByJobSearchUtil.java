@@ -1,15 +1,16 @@
 package by.andd3dfx.sitesparsing.tutby;
 
-import static java.lang.Thread.sleep;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+
+// TODO: introduce configurable multithreading support
 
 public class TutByJobSearchUtil {
 
@@ -40,10 +41,10 @@ public class TutByJobSearchUtil {
                 .select("div[class=resume-search-item__name]");
 
             List<VacancyData> vacancyDataList = new ArrayList<>();
-            for (Element element : elements) {
+            elements.parallelStream().forEach(element -> {
                 String vacancyDetailsUrl = element.select("a").attr("href");
                 vacancyDataList.add(retrieveVacancyDetails(vacancyDetailsUrl));
-            }
+            });
 
             final Elements nextPageItem = document.select("a[data-qa=pager-next]");
             String nextPageUrl = nextPageItem.isEmpty() ? null : URL_PREFIX + nextPageItem.attr("href");
@@ -53,11 +54,16 @@ public class TutByJobSearchUtil {
         }
     }
 
-    private VacancyData retrieveVacancyDetails(String searchUrl) throws IOException {
+    private VacancyData retrieveVacancyDetails(String searchUrl) {
         System.out.println("Retrieve vacancy details for " + searchUrl);
-        Document document = Jsoup
-            .connect(searchUrl)
-            .userAgent(USER_AGENT).get();
+        Document document;
+        try {
+            document = Jsoup
+                .connect(searchUrl)
+                .userAgent(USER_AGENT).get();
+        } catch (IOException e) {
+            throw new RuntimeException("Retrieve details failed", e);
+        }
 
         VacancyData vacancyData = new VacancyData();
         vacancyData.setUrl(document.baseUri());
@@ -74,5 +80,25 @@ public class TutByJobSearchUtil {
 
     String buildSearchUrl(String searchString) {
         return String.format(searchUrlFormat, searchString, 0);
+    }
+
+    public static void main(String[] args) {
+        final TutByJobSearchUtil searchUtil = new TutByJobSearchUtil();
+
+        LinkedHashMap<String, Integer> statisticsSortedMap = searchUtil.collectStatistics("java");
+        System.out.println(statisticsSortedMap);
+    }
+
+    public LinkedHashMap<String, Integer> collectStatistics(List<VacancyData> result) {
+        final Statistics statistics = new Statistics();
+        result.stream().forEach(vacancyData -> {
+            vacancyData.getKeywords().stream().forEach(statistics::putKeyword);
+        });
+        return statistics.buildSortedMap();
+    }
+
+    public LinkedHashMap<String, Integer> collectStatistics(String searchString) {
+        final List<VacancyData> result = batchSearch(searchString);
+        return collectStatistics(result);
     }
 }

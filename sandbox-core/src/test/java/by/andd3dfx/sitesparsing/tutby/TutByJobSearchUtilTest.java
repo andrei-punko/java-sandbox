@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
+import java.util.LinkedHashMap;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,5 +29,8 @@ public class TutByJobSearchUtilTest {
                 + "&enable_snippets=true"
                 + "&text=java&page=1"));
         assertThat("Wrong expected size", result.getDataItems(), hasSize(20));
+
+        LinkedHashMap<String, Integer> statisticsSortedMap = util.collectStatistics(result.getDataItems());
+        System.out.println(statisticsSortedMap);
     }
 }
