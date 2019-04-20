@@ -1,4 +1,4 @@
-package by.andd3dfx.search;
+package by.andd3dfx.sitesparsing.firstcatalog;
 
 import static org.junit.Assert.assertThat;
 
