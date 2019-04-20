@@ -1,4 +1,4 @@
-package by.andd3dfx.parsing;
+package by.andd3dfx.string.parsing;
 
 import java.util.HashMap;
 import java.util.List;

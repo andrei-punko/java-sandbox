@@ -1,4 +1,4 @@
-package by.andd3dfx.parsing;
+package by.andd3dfx.string.parsing;
 
 import java.io.StringReader;
 import java.util.ArrayList;

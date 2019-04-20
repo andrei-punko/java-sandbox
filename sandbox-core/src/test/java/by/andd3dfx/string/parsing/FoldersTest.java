@@ -1,9 +1,10 @@
-package by.andd3dfx.parsing;
+package by.andd3dfx.string.parsing;
 
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import by.andd3dfx.string.parsing.Folders;
 import java.util.Collection;
 import org.junit.Test;
 
