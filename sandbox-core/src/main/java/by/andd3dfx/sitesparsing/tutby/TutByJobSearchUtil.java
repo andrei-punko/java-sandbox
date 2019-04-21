@@ -2,6 +2,7 @@ package by.andd3dfx.sitesparsing.tutby;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -72,6 +73,8 @@ public class TutByJobSearchUtil {
         vacancyData.setKeywords(document.select("span[data-qa=skills-element]")
             .stream()
             .map(Element::text)
+            .flatMap(keyword -> Arrays.asList(keyword.split(", ")).stream())
+            .flatMap(keyword -> Arrays.asList(keyword.split(" & ")).stream())
             .collect(Collectors.toSet())
         );
         vacancyData.setAddressString(document.select("div[class^=vacancy-address-text]").text());
