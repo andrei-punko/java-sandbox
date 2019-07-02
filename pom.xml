@@ -24,6 +24,7 @@
     <module>akka-project</module>
     <module>db-versioning</module>
     <module>design-patterns</module>
+    <module>iot-rest-service-sample</module>
   </modules>
 
   <properties>
