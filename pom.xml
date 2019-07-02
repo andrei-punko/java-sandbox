@@ -23,6 +23,7 @@
     <module>unit-tests-debugging</module>
     <module>akka-project</module>
     <module>db-versioning</module>
+    <module>design-patterns</module>
   </modules>
 
   <properties>
