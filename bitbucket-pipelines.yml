@@ -8,6 +8,7 @@ image: maven:3.3.9
 pipelines:
   default:
     - step:
+        size: 2x
         caches:
           - maven
         script: # Modify the commands below to build your repository.
@@ -18,3 +19,6 @@ definitions:
   services:
     docker:
       memory: 2048
+    maven:
+      image: maven:3.3.9
+      memory: 4096
