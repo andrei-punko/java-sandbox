@@ -9,7 +9,7 @@ import org.junit.Test;
 public class PriceSearchUtilTest {
 
     private String FIRST_CATALOG_SEARCH_URL = "https://komp.1k.by/utility-graphicscards/msi/" +
-        "MSI_GeForce_GTX_1050_Ti_1379Mhz_PCI_E_30_4096Mb_7108Mhz_128_bit_DVI_HDMI_HDCP_GAMING_X-2709799.html";
+        "MSI_GeForce_GTX_1660_Ti_Gaming_X_1500MHz_PCI_E_30_6144MB_3000MHz_192_bit_HDMI_HDCP_3xDP-3556609.html";
 
     private PriceSearchUtil priceSearchUtil;
 

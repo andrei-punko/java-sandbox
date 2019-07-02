@@ -23,7 +23,7 @@ public class TutByJobSearchUtilTest {
 
         assertThat("Next url should be present", result.getNextPageUrl(), is(
             "http://jobs.tut.by/search/vacancy"
-                + "?area=1002"
+                + "?L_is_autosearch=false&area=1002"
                 + "&clusters=true"
                 + "&currency_code=BYR"
                 + "&enable_snippets=true"
