@@ -51,6 +51,8 @@ public class RestClientUtil {
                 .create()
                 .setSSLSocketFactory(sslConnectionSocketFactory)
                 .setDefaultCredentialsProvider(credentialsProvider)
+                .setMaxConnTotal(200)
+                .setMaxConnPerRoute(40)
                 .build();
         } catch (Exception e) {
             throw new RuntimeException("Problems with https connection", e);
