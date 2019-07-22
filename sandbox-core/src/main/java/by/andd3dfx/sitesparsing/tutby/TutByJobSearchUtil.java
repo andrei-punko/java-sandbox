@@ -11,8 +11,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-// TODO: introduce configurable multithreading support
-
 public class TutByJobSearchUtil {
 
     private final String URL_PREFIX = "http://jobs.tut.by";
