@@ -1,6 +1,9 @@
 package by.andd3dfx.sitesparsing.tutby;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -83,11 +86,16 @@ public class TutByJobSearchUtil {
         return String.format(searchUrlFormat, searchString, 0);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        if (args.length != 1) {
+            throw new IllegalArgumentException("Path to output file should be populated!");
+        }
         final TutByJobSearchUtil searchUtil = new TutByJobSearchUtil();
 
         LinkedHashMap<String, Integer> statisticsSortedMap = searchUtil.collectStatistics("java");
-        System.out.println(statisticsSortedMap);
+        Path path = Paths.get(args[0]);
+        byte[] strToBytes = statisticsSortedMap.toString().getBytes();
+        Files.write(path, strToBytes);
     }
 
     public LinkedHashMap<String, Integer> collectStatistics(List<VacancyData> result) {
