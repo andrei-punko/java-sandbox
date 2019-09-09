@@ -1,6 +1,5 @@
 package by.andd3dfx.search;
 
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,7 @@ public class SearchHelper {
 
     private final String SEARCH_URL = "https://www.google.com/search?q=%s&start=%d";
     private final String CHARSET = "UTF-8";
-    private final String USER_AGENT = "Mozilla";
+    private final String USER_AGENT = "User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchHelper.class);
 
@@ -22,7 +21,7 @@ public class SearchHelper {
      * For search implementation next link was useful: http://stackoverflow.com/questions/3727662/how-can-you-search-google-programmatically-java-api
      */
     public List<SearchResultItem> search(String searchString, int maxResults) {
-        List<SearchResultItem> result = new ArrayList<SearchResultItem>();
+        List<SearchResultItem> result = new ArrayList<>();
         try {
             int offset = 0;
             while (result.size() < maxResults) {
@@ -45,7 +44,7 @@ public class SearchHelper {
     }
 
     List<SearchResultItem> batchSearch(Elements elements) throws Exception {
-        List<SearchResultItem> result = new ArrayList<SearchResultItem>();
+        List<SearchResultItem> result = new ArrayList<>();
         for (Element link : elements) {
             SearchResultItem searchResultItem = extractSearchResultItemFromLink(link);
             if (searchResultItem != null) {
@@ -56,23 +55,22 @@ public class SearchHelper {
     }
 
     Elements searchLinks(String searchString, int offset) throws Exception {
+        String keyword = URLEncoder.encode(searchString, CHARSET);
+        String url = String.format(SEARCH_URL, keyword, offset);
         return Jsoup
-            .connect(String.format(SEARCH_URL, URLEncoder.encode(searchString, CHARSET), offset))
+            .connect(url)
             .userAgent(USER_AGENT)
-            .get().select(".g>.r>a");
+            .get().select(".r>a");
     }
 
     SearchResultItem extractSearchResultItemFromLink(Element link) throws Exception {
         String title = link.text();
 
-        String absoluteUrl = link
-            .absUrl("href");   // Google returns URLs in format "http://www.google.com/url?q=<url>&sa=U&ei=<someKey>".
-        String url = URLDecoder
-            .decode(absoluteUrl.substring(absoluteUrl.indexOf('=') + 1, absoluteUrl.indexOf('&')), CHARSET);
-        if (!url.startsWith("http")) {
-            return null;   // Ads/news/etc.
+        String absoluteUrl = link.absUrl("href");
+        if (absoluteUrl.startsWith("https://translate.google.com")) {
+            return null;
         }
 
-        return new SearchResultItem(url, title);
+        return new SearchResultItem(absoluteUrl, title);
     }
 }
