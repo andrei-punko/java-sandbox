@@ -9,16 +9,19 @@ import java.util.Queue;
     3.BlockingQueue contains couple of synchronized methods
         - enqueue : It enqueue (push) Task to the queue
         - dequeue : This method takes (pop) the task from the queue.
+
+    This queue implementation based on synchronized methods
  */
-public class BlockingQueue<Type> {
+public class SynchronizedBlocksBasedBlockingQueue<Type> implements CustomBlockingQueue<Type> {
 
     private final int MAX_QUEUE_SIZE;
     private Queue<Type> queue = new LinkedList<>();
 
-    public BlockingQueue(int size) {
+    public SynchronizedBlocksBasedBlockingQueue(int size) {
         this.MAX_QUEUE_SIZE = size;
     }
 
+    @Override
     public synchronized void enqueue(Type task) throws InterruptedException {
         while (queue.size() == MAX_QUEUE_SIZE) {
             wait();
@@ -29,6 +32,7 @@ public class BlockingQueue<Type> {
         queue.offer(task);
     }
 
+    @Override
     public synchronized Type dequeue() throws InterruptedException {
         while (queue.isEmpty()) {
             wait();

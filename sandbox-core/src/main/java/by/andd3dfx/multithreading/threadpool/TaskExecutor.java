@@ -7,9 +7,9 @@ package by.andd3dfx.multithreading.threadpool;
  */
 public class TaskExecutor implements Runnable {
 
-    private BlockingQueue<Runnable> queue;
+    private CustomBlockingQueue<Runnable> queue;
 
-    public TaskExecutor(BlockingQueue<Runnable> queue) {
+    public TaskExecutor(CustomBlockingQueue<Runnable> queue) {
         this.queue = queue;
     }
 

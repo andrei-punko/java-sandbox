@@ -15,12 +15,12 @@ import java.util.List;
  */
 public class ThreadPool {
 
-    private BlockingQueue<Runnable> queue;
+    private CustomBlockingQueue<Runnable> queue;
     private List<Thread> threads = new ArrayList<>();
     private volatile boolean isStarted = false;
 
     public ThreadPool(int queueSize, int threadsCount) {
-        queue = new BlockingQueue<>(queueSize);
+        queue = new SynchronizedBlocksBasedBlockingQueue<>(queueSize);
 
         for (int threadNumber = 0; threadNumber < threadsCount; threadNumber++) {
             String threadName = "Thread-" + threadNumber;
