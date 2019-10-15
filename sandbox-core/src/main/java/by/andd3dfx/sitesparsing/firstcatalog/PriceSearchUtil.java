@@ -10,7 +10,7 @@ public class PriceSearchUtil {
     public Double getLowestFirstCatalogPriceByUrl(String firstCatalogUrl) throws IOException {
         String text = Jsoup
                 .connect(firstCatalogUrl)
-                .userAgent(USER_AGENT).get().select("[class=priceValues]").get(0).text();
+                .userAgent(USER_AGENT).get().select("[class=spec-about__price]").get(0).text();
         // text = 486,00 – 515,10 б.р.
         text = text.substring(0, text.indexOf(","));
         return Double.parseDouble(text);
