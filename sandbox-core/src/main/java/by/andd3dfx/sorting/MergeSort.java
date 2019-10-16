@@ -4,49 +4,54 @@ public class MergeSort extends AbstractSort {
 
     @Override
     public void sort() {
-        mergeSort(items, items.length);
+        mergeSort(items);
     }
 
-    public void mergeSort(Long[] items, int n) {
+    public void mergeSort(Long[] items) {
+        int n = items.length;
         if (n < 2) {
             return;
         }
         int mid = n / 2;
-        Long[] l = new Long[mid];
-        Long[] r = new Long[n - mid];
+        Long[] left = new Long[mid];
+        Long[] right = new Long[n - mid];
 
         for (int i = 0; i < mid; i++) {
-            l[i] = items[i];
+            left[i] = items[i];
         }
         for (int i = mid; i < n; i++) {
-            r[i - mid] = items[i];
+            right[i - mid] = items[i];
         }
-        mergeSort(l, mid);
-        mergeSort(r, n - mid);
+        mergeSort(left);
+        mergeSort(right);
 
-        merge(items, l, r, mid, n - mid);
+        merge(items, left, right);
     }
 
-    public void merge(Long[] items, Long[] l, Long[] r, int left, int right) {
+    public void merge(Long[] items, Long[] left, Long[] right) {
+        int leftLength = left.length;
+        int rightLength = right.length;
         int i = 0, j = 0, k = 0;
-        while (i < left && j < right) {
-            if (l[i] <= r[j]) {
-                items[k] = l[i];
+
+        while (i < leftLength && j < rightLength) {
+            if (left[i] <= right[j]) {
+                items[k] = left[i];
                 k++;
                 i++;
             } else {
-                items[k] = r[j];
+                items[k] = right[j];
                 k++;
                 j++;
             }
         }
-        while (i < left) {
-            items[k] = l[i];
+
+        while (i < leftLength) {
+            items[k] = left[i];
             k++;
             i++;
         }
-        while (j < right) {
-            items[k] = r[j];
+        while (j < rightLength) {
+            items[k] = right[j];
             k++;
             j++;
         }
