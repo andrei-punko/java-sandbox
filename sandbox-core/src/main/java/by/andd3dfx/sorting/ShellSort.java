@@ -2,20 +2,16 @@ package by.andd3dfx.sorting;
 
 public class ShellSort extends AbstractSort {
 
-    public ShellSort(int maxSize) {
-        super(maxSize);
-    }
-
     @Override
     public void sort() {
         int h = 1; // Вычисление исходного значения h
-        while (h <= elementsCount / 3)
+        while (h <= items.length / 3)
             h = h * 3 + 1; // (1, 4, 13, 40, 121, ...)
 
         while (h > 0) // Последовательное уменьшение h до 1
         {
             // h-сортировка файла
-            for (int outer = h; outer < elementsCount; outer++) {
+            for (int outer = h; outer < items.length; outer++) {
                 long temp = items[outer];
                 int inner = outer;
 

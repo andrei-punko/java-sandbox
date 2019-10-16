@@ -4,6 +4,6 @@ public class InsertionSortTest extends AbstractSortTest {
 
     @Override
     protected AbstractSort createSorterClass() {
-        return new InsertionSort(ITEMS_COUNT);
+        return new InsertionSort();
     }
 }

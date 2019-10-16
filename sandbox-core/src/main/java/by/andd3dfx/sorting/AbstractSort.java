@@ -4,22 +4,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class AbstractSort {
+
     protected Long[] items;
-    protected int elementsCount;
 
-    public AbstractSort(int maxSize) {
-        items = new Long[maxSize];
-        elementsCount = 0;
+    public void insert(Long[] items) {
+        this.items = items;
     }
 
-    public void insert(long item) {
-        items[elementsCount] = item;
-        elementsCount++;
-    }
-
-    public void insert(List<Long> items) {
-        this.items = items.toArray(new Long[0]);
-        elementsCount = items.size();
+    protected void insert(List<Long> bucket) {
+        this.items = bucket.toArray(new Long[0]);
     }
 
     public abstract void sort();
@@ -31,17 +24,13 @@ public abstract class AbstractSort {
     }
 
     public void display() {
-        for (int i = 0; i < elementsCount; i++) {
+        for (int i = 0; i < items.length; i++) {
             System.out.println(items[i]);
         }
         System.out.printf("");
     }
 
     public Long[] getItems() {
-        return Arrays.copyOf(items, elementsCount);
-    }
-
-    public int getElementsCount() {
-        return elementsCount;
+        return Arrays.copyOf(items, items.length);
     }
 }

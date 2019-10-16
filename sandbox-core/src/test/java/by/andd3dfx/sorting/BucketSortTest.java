@@ -4,6 +4,6 @@ public class BucketSortTest extends AbstractSortTest {
 
   @Override
   protected AbstractSort createSorterClass() {
-    return new BucketSort(ITEMS_COUNT);
+    return new BucketSort();
   }
 }

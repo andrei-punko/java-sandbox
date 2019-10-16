@@ -7,10 +7,6 @@ public class BucketSort extends AbstractSort {
 
   private final int BUCKETS_COUNT = 10;
 
-  public BucketSort(int maxSize) {
-    super(maxSize);
-  }
-
   @Override
   public void sort() {
     // Prepare empty buckets
@@ -20,7 +16,7 @@ public class BucketSort extends AbstractSort {
     }
 
     // Fill in buckets
-    for (int i = 0; i < elementsCount; i++) {
+    for (int i = 0; i < items.length; i++) {
       buckets.get(determineBucketIndex(items[i], BUCKETS_COUNT)).add(items[i]);
     }
 
@@ -29,7 +25,7 @@ public class BucketSort extends AbstractSort {
       List<Long> bucket = buckets.get(bucketIndex);
 
       // Sort elements in each bucket
-      InsertionSort insertionSort = new InsertionSort(bucket.size());
+      InsertionSort insertionSort = new InsertionSort();
       insertionSort.insert(bucket);
       insertionSort.sort();
 
