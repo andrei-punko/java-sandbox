@@ -23,13 +23,6 @@ public abstract class AbstractSort {
         items[out_index] = temp;
     }
 
-    public void display() {
-        for (int i = 0; i < items.length; i++) {
-            System.out.println(items[i]);
-        }
-        System.out.printf("");
-    }
-
     public Long[] getItems() {
         return Arrays.copyOf(items, items.length);
     }
