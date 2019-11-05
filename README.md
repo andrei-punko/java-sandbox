@@ -39,3 +39,9 @@ Example of two-factor authentification application with usage of Google authenti
 
 * `unit-tests-debugging`  
 Example of different cases of tests debugging
+
+
+### Build notes
+To allow `io.fabric8:docker-maven-plugin` manipulate with Docker images need to add 
+`DOCKER_HOST=tcp://127.0.0.1:2375` to environment variables on Windows machine and switch on 
+Docker option `Expose daemon on tcp://localhost:2375 without TLS`
