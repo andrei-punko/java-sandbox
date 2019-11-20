@@ -71,7 +71,7 @@ public class TutByJobSearchUtil {
         vacancyData.setUrl(document.baseUri());
         vacancyData.setCompanyName(document.select("a[class=vacancy-company-name]").text());
         vacancyData.setTextContent(document.select("div[data-qa=vacancy-description]").text());
-        vacancyData.setKeywords(document.select("span[data-qa=skills-element]")
+        vacancyData.setKeywords(document.select("span[data-qa=bloko-tag__text]")
             .stream()
             .map(Element::text)
             .flatMap(keyword -> Arrays.asList(keyword.split(", ")).stream())
