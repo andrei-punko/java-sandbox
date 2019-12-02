@@ -20,7 +20,7 @@
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
-        <version>4.2.0</version>
+        <version>6.1.0</version>
 
         <configuration>
           <url>jdbc:h2:file:${project.build.directory}/flywaydb</url>

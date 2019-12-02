@@ -12,7 +12,7 @@
   <artifactId>hibernate-mappings</artifactId>
 
   <properties>
-    <mysql.version>8.0.15</mysql.version>
+    <mysql.version>8.0.18</mysql.version>
     <lombok.version>1.18.10</lombok.version>
   </properties>
 
@@ -21,7 +21,7 @@
       <plugin>
         <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>0.28.0</version>
+        <version>0.31.0</version>
         <configuration>
           <showLogs>true</showLogs>
           <images>
@@ -70,7 +70,7 @@
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
-        <version>4.2.0</version>
+        <version>6.1.0</version>
 
         <configuration>
           <url>jdbc:mysql://127.0.0.1:3306/db</url>
