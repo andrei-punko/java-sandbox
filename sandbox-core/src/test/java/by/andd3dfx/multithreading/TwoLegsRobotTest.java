@@ -11,7 +11,7 @@ public class TwoLegsRobotTest {
     private final String RIGHT = "right";
 
     @Test
-    public void main() throws InterruptedException {
+    public void testMain() throws InterruptedException {
         TwoLegsRobot.main(new String[]{});
 
         String outContent = TwoLegsRobot.getWriter().toString();

@@ -3,7 +3,7 @@ package by.andd3dfx.multithreading;
 import static java.lang.Thread.sleep;
 
 import java.io.StringWriter;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /*
 Дан класс:
@@ -43,8 +43,9 @@ public class TwoLegsRobot {
     private static final StringWriter writer = new StringWriter();
 
     static class Foot implements Runnable {
+
         private String name;
-        private volatile static AtomicInteger counter = new AtomicInteger(1);
+        private volatile static AtomicBoolean monitor = new AtomicBoolean(false);
 
         public Foot(String name) {
             this.name = name;
@@ -57,19 +58,14 @@ public class TwoLegsRobot {
         }
 
         private void step() {
-            synchronized (counter) {
-                if (counter.get() == 1 && "left".equals(name)) {
-                    counter.set(-1);
-                    writer.write(name + " steps!");
-                    return;
-                }
-
-                if (counter.get() == -1 && "right".equals(name)) {
-                    counter.set(1);
-                    writer.write(name + " steps!");
-                    return;
-                }
+            synchronized (monitor) {
+                monitor.set(!monitor.get());
+                log();
             }
+        }
+
+        private void log() {
+            writer.write(name + " steps!");
         }
     }
 
