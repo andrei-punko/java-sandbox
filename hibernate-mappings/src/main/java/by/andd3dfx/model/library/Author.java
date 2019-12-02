@@ -6,7 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import lombok.Data;
+import lombok.ToString;
 
+@Data
 @Entity
 @Table(name = "AUTHOR")
 public class Author {
@@ -16,38 +19,7 @@ public class Author {
     private long id;
     private String name;
 
+    @ToString.Exclude
     @ManyToMany(mappedBy = "authors")
     private Collection<Book> books;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Collection<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Collection<Book> books) {
-        this.books = books;
-    }
-
-    @Override
-    public String toString() {
-        return "Author{" +
-            "id=" + id +
-            ", name='" + name + '\'' +
-            '}';
-    }
 }

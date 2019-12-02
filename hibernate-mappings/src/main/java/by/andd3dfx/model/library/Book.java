@@ -10,7 +10,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "BOOK")
 public class Book {
@@ -31,46 +33,4 @@ public class Book {
     @ManyToOne(optional = false)
     @JoinColumn(name = "publisher_id", nullable = false)
     private Publisher publisher;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Set<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(Set<Author> authors) {
-        this.authors = authors;
-    }
-
-    public Publisher getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-            "id=" + id +
-            ", title='" + title + '\'' +
-            ", authors='" + authors + '\'' +
-            ", publisher=" + publisher +
-            '}';
-    }
 }

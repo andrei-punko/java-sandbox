@@ -13,6 +13,7 @@
 
   <properties>
     <mysql.version>8.0.15</mysql.version>
+    <lombok.version>1.18.10</lombok.version>
   </properties>
 
   <build>
@@ -92,6 +93,23 @@
         </executions>
       </plugin>
 
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+
        <!--This plugin used for running integration tests in integration-test build phase-->
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
@@ -118,6 +136,12 @@
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>${mysql.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>
