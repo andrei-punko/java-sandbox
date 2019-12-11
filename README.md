@@ -19,6 +19,9 @@ Design patterns examples
 * `elasticsearch`  
 Example of Elasticsearch usage
 
+* `grpc-sample`  
+Example of gRPC service and its client
+
 * `hibernate-mappings`  
 Example of different cases of Hibernate mappings
 

@@ -1,0 +1,16 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package by.andd3dfx.grpc;
+
+message TemperatureRequest {
+  double newValue = 1;
+}
+
+message TemperatureResponse {
+  int32 itemsCount = 1;
+  double averageValue = 2;
+}
+
+service TemperatureService {
+  rpc add (TemperatureRequest) returns (TemperatureResponse);
+}

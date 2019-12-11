@@ -25,6 +25,7 @@
     <module>db-versioning</module>
     <module>design-patterns</module>
     <module>iot-rest-service-sample</module>
+    <module>grpc-sample</module>
   </modules>
 
   <properties>
