@@ -18,9 +18,9 @@
         <artifactId>aspectj-maven-plugin</artifactId>
         <version>1.11</version>
         <configuration>
-          <complianceLevel>1.8</complianceLevel>
-          <source>${maven.compiler.source}</source>
-          <target>${maven.compiler.target}</target>
+          <complianceLevel>${aspect.lang.version}</complianceLevel>
+          <source>${aspect.lang.version}</source>
+          <target>${aspect.lang.version}</target>
 
           <!-- Add detailed output -->
           <verbose>true</verbose>
