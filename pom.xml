@@ -37,6 +37,7 @@
 
     <aspect.lang.version>1.8</aspect.lang.version>
     <aspectj.version>1.8.13</aspectj.version>
+    <lombok.version>1.18.10</lombok.version>
   </properties>
 
   <dependencies>
@@ -59,4 +60,14 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
