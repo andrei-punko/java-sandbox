@@ -38,6 +38,7 @@
     <aspect.lang.version>1.8</aspect.lang.version>
     <aspectj.version>1.8.13</aspectj.version>
     <lombok.version>1.18.10</lombok.version>
+    <commons-lang.version>3.8.1</commons-lang.version>
   </properties>
 
   <dependencies>
@@ -67,6 +68,11 @@
         <groupId>org.projectlombok</groupId>
         <artifactId>lombok</artifactId>
         <version>${lombok.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
