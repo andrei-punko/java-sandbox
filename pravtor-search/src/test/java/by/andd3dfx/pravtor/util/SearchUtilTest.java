@@ -3,6 +3,7 @@ package by.andd3dfx.pravtor.util;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 import by.andd3dfx.pravtor.model.SingleSearchResult;
 import by.andd3dfx.pravtor.model.TorrentData;
@@ -39,5 +40,29 @@ public class SearchUtilTest {
     @Test
     public void testMain() throws IOException, InterruptedException {
         SearchUtil.main(new String[]{"src/test/resources/test-params.txt", "target/tmp-result.xls"});
+    }
+
+    @Test
+    public void testMainWithWrongParamsCount() throws IOException, InterruptedException {
+        try {
+            SearchUtil.main(new String[]{});
+            fail("Exception should be thrown");
+        } catch (IllegalArgumentException iae) {
+            assertThat(iae.getMessage(), is("Should be 2 parameters!"));
+        }
+
+        try {
+            SearchUtil.main(new String[]{"src/test/resources/test-params.txt"});
+            fail("Exception should be thrown");
+        } catch (IllegalArgumentException iae) {
+            assertThat(iae.getMessage(), is("Should be 2 parameters!"));
+        }
+
+        try {
+            SearchUtil.main(new String[]{"src/test/resources/test-params.txt", "target/tmp-result.xls", "one more"});
+            fail("Exception should be thrown");
+        } catch (IllegalArgumentException iae) {
+            assertThat(iae.getMessage(), is("Should be 2 parameters!"));
+        }
     }
 }

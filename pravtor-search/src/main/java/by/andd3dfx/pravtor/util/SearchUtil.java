@@ -96,7 +96,9 @@ public class SearchUtil {
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        assert args.length == 2;
+        if (args.length != 2) {
+            throw new IllegalArgumentException("Should be 2 parameters!");
+        }
         String paramsFileName = args[0];
         String excelFileName = args[1];
 
