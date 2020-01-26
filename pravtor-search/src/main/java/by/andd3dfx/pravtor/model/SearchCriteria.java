@@ -2,7 +2,6 @@ package by.andd3dfx.pravtor.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @RequiredArgsConstructor
