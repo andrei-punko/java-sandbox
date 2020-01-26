@@ -2,12 +2,12 @@ package by.andd3dfx.pravtor.util;
 
 import by.andd3dfx.pravtor.model.BatchSearchResult;
 import by.andd3dfx.pravtor.model.SearchCriteria;
+import by.andd3dfx.pravtor.model.TorrentData;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -17,8 +17,10 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 public class FileUtil {
 
+    private final String[] HEADER_LABELS = {"Название", "Seeds", "Peers", "Скачано", "Размер", "Ссылка"};
+
     /**
-     * Loads list of search criteria items
+     * Load list of search criteria items
      *
      * @param fileName name of params file
      * @return list of search criteria items
@@ -43,28 +45,44 @@ public class FileUtil {
         searchItems.forEach(searchItem -> {
             Sheet sheet = book.createSheet(searchItem.getTopic());
 
-            AtomicInteger rowsCount = new AtomicInteger();
-            searchItem.getDataItems().forEach(dataItem -> {
-
-                Row row = sheet.createRow(rowsCount.get());
-                row.createCell(0).setCellValue(dataItem.getLabel());
-                populateCellWithInteger(row.createCell(1), dataItem.getSeedsCount());
-                populateCellWithInteger(row.createCell(2), dataItem.getPeersCount());
-                populateCellWithInteger(row.createCell(3), dataItem.getDownloadedCount());
-                row.createCell(4).setCellValue(dataItem.getSize());
-                row.createCell(5).setCellValue(dataItem.getLinkUrl());
-
-                rowsCount.getAndIncrement();
-            });
-
-            sheet.setColumnWidth(0, 95*256);
-            for (int i = 1; i <= 5; i++) {
-                sheet.autoSizeColumn(i);
-            }
+            populateHeaderLabels(sheet);
+            populateContent(sheet, searchItem);
+            setColumnsWidth(sheet);
         });
 
         book.write(new FileOutputStream(fileName));
         book.close();
+    }
+
+    private void populateHeaderLabels(Sheet sheet) {
+        Row header = sheet.createRow(0);
+        int header_column_number = 0;
+        for (String label : HEADER_LABELS) {
+            header.createCell(header_column_number++).setCellValue(label);
+        }
+    }
+
+    private void populateContent(Sheet sheet, BatchSearchResult searchItem) {
+        int rowsCount = 1;
+        for (TorrentData dataItem : searchItem.getDataItems()) {
+            int column_number = 0;
+            Row row = sheet.createRow(rowsCount);
+            row.createCell(column_number++).setCellValue(dataItem.getLabel());
+            populateCellWithInteger(row.createCell(column_number++), dataItem.getSeedsCount());
+            populateCellWithInteger(row.createCell(column_number++), dataItem.getPeersCount());
+            populateCellWithInteger(row.createCell(column_number++), dataItem.getDownloadedCount());
+            row.createCell(column_number++).setCellValue(dataItem.getSize());
+            row.createCell(column_number++).setCellValue(dataItem.getLinkUrl());
+
+            rowsCount++;
+        }
+    }
+
+    private void setColumnsWidth(Sheet sheet) {
+        sheet.setColumnWidth(0, 95 * 256);
+        for (int i = 1; i <= 5; i++) {
+            sheet.autoSizeColumn(i);
+        }
     }
 
     private void populateCellWithInteger(Cell cell, Integer intValue) {

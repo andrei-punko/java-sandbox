@@ -3,14 +3,18 @@ package by.andd3dfx.pravtor.util;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import bad.robot.excel.matchers.WorkbookMatcher;
 import by.andd3dfx.pravtor.model.BatchSearchResult;
 import by.andd3dfx.pravtor.model.SearchCriteria;
 import by.andd3dfx.pravtor.model.TorrentData;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -39,7 +43,6 @@ public class FileUtilTest {
         assertThat("Wrong url of second item", criteriaItems.get(1).getUrl(), is("https://pravtor.ru/viewforum.php?f=183"));
     }
 
-    @Ignore
     @Test
     public void writeIntoExcel() throws IOException {
 
@@ -56,9 +59,9 @@ public class FileUtilTest {
 
         fileUtil.writeIntoExcel(GENERATED_XLS_FILE, searchItems);
 
-        File file1 = new File(GENERATED_XLS_FILE);
-        File file2 = new File(EXPECTED_XLS_FILE);
-        assertThat("Files are different", FileUtils.contentEquals(file1, file2), is(true));
+        HSSFWorkbook actual = new HSSFWorkbook(new FileInputStream(GENERATED_XLS_FILE));
+        HSSFWorkbook expected = new HSSFWorkbook(new FileInputStream(EXPECTED_XLS_FILE));
+        assertThat(actual, WorkbookMatcher.sameWorkbook(expected));
     }
 
     private TorrentData buildTorrentData(String label, int seedsCount, int peersCount, int downloadedCount,

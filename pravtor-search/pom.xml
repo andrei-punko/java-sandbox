@@ -46,7 +46,23 @@
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>bad.robot</groupId>
+      <artifactId>simple-excel</artifactId>
+      <version>1.2</version>
+      <scope>test</scope>
+    </dependency>
+
   </dependencies>
+
+  <repositories>
+    <repository>
+      <id>robot-tooling-repo</id>
+      <name>RobotTooling repository</name>
+      <url>http://robotooling.com/maven</url>
+    </repository>
+  </repositories>
 
   <build>
     <plugins>
