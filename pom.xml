@@ -26,6 +26,7 @@
     <module>design-patterns</module>
     <module>iot-rest-service-sample</module>
     <module>grpc-sample</module>
+    <module>messaging-stomp-websocket</module>
   </modules>
 
   <properties>
