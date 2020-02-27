@@ -70,7 +70,11 @@
         <artifactId>gatling-maven-plugin</artifactId>
         <version>${gatling-plugin.version}</version>
         <configuration>
-          <simulationClass>by.andd3dfx.advanced.AdvancedSimulationStep01</simulationClass>
+          <!-- Remove skipping if you need to run load tests -->
+          <skip>true</skip>
+          <includes>
+            <include>by.andd3dfx.simulations.*</include>
+          </includes>
         </configuration>
         <executions>
           <execution>

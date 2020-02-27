@@ -19,6 +19,9 @@ Design patterns examples
 * `elasticsearch`  
 Example of Elasticsearch usage
 
+* `gatling-load-test`  
+Example of `gatling-maven-plugin` usage
+
 * `grpc-sample`  
 Example of gRPC service and its client
 
@@ -41,7 +44,7 @@ Unordered staff with Java experiments. In addition contains tasks from interview
 Test task with desktop application with usage of Google search engine
 
 * `two-factor-authentification`  
-Example of two-factor authentification application with usage of Google authentificator
+Example of two-factor authentification application with usage of Google authenticator
 
 * `unit-tests-debugging`  
 Example of different cases of tests debugging
