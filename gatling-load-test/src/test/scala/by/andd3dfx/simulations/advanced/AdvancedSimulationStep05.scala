@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package by.andd3dfx.advanced
+package by.andd3dfx.simulations.advanced
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import scala.concurrent.duration._
+import java.util.concurrent.ThreadLocalRandom
 
-class AdvancedSimulationStep04 extends Simulation {
+class AdvancedSimulationStep05 extends Simulation {
 
   object Search {
 
@@ -52,18 +53,25 @@ class AdvancedSimulationStep04 extends Simulation {
 
   object Edit {
 
+    // Note we should be using a feeder here
+
     val headers_10 = Map("Content-Type" -> "application/x-www-form-urlencoded")
 
-    val edit = exec(http("Form")
-      .get("/computers/new"))
-      .pause(1)
-      .exec(http("Post")
-        .post("/computers")
-        .headers(headers_10)
-        .formParam("name", "Beautiful Computer")
-        .formParam("introduced", "2012-05-30")
-        .formParam("discontinued", "")
-        .formParam("company", "37"))
+    // let's demonstrate how we can retry: let's make the request fail randomly and retry a given number of times
+
+    val edit = tryMax(2) { // let's try at max 2 times
+      exec(http("Form")
+        .get("/computers/new"))
+        .pause(1)
+        .exec(http("Post")
+          .post("/computers")
+          .headers(headers_10)
+          .formParam("name", "Beautiful Computer")
+          .formParam("introduced", "2012-05-30")
+          .formParam("discontinued", "")
+          .formParam("company", "37").
+          check(status.is(session => 200 + ThreadLocalRandom.current.nextInt(2)))) // we do a check on a condition that's been customized with a lambda. It will be evaluated every time a user executes the request
+    }.exitHereIfFailed // if the chain didn't finally succeed, have the user exit the whole scenario
   }
 
   val httpProtocol = http

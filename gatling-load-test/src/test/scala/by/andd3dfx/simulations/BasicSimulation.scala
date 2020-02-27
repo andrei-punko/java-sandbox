@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package by.andd3dfx
+package by.andd3dfx.simulations
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._

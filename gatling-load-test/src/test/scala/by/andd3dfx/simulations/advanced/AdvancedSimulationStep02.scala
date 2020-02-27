@@ -14,64 +14,60 @@
  * limitations under the License.
  */
 
-package by.andd3dfx.advanced
+package by.andd3dfx.simulations.advanced
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import scala.concurrent.duration._
-import java.util.concurrent.ThreadLocalRandom
 
-class AdvancedSimulationStep05 extends Simulation {
+class AdvancedSimulationStep02 extends Simulation {
 
   object Search {
-
-    val feeder = csv("search.csv").random
 
     val search = exec(http("Home")
       .get("/"))
       .pause(1)
-      .feed(feeder)
       .exec(http("Search")
-        .get("/computers?f=${searchCriterion}")
-        .check(css("a:contains('${searchComputerName}')", "href").saveAs("computerURL")))
+        .get("/computers?f=macbook"))
       .pause(1)
       .exec(http("Select")
-        .get("${computerURL}")
-        .check(status.is(200)))
+        .get("/computers/6"))
       .pause(1)
   }
 
   object Browse {
 
-    // repeat is a loop resolved at RUNTIME
-    val browse = repeat(4, "i") { // Note how we force the counter name so we can reuse it
-      exec(http("Page ${i}")
-        .get("/computers?p=${i}"))
-        .pause(1)
-    }
+    val browse = exec(http("Home")
+      .get("/"))
+      .pause(2)
+      .exec(http("Page 1")
+        .get("/computers?p=1"))
+      .pause(670 milliseconds)
+      .exec(http("Page 2")
+        .get("/computers?p=2"))
+      .pause(629 milliseconds)
+      .exec(http("Page 3")
+        .get("/computers?p=3"))
+      .pause(734 milliseconds)
+      .exec(http("Page 4")
+        .get("/computers?p=4"))
+      .pause(5)
   }
 
   object Edit {
 
-    // Note we should be using a feeder here
-
     val headers_10 = Map("Content-Type" -> "application/x-www-form-urlencoded")
 
-    // let's demonstrate how we can retry: let's make the request fail randomly and retry a given number of times
-
-    val edit = tryMax(2) { // let's try at max 2 times
-      exec(http("Form")
-        .get("/computers/new"))
-        .pause(1)
-        .exec(http("Post")
-          .post("/computers")
-          .headers(headers_10)
-          .formParam("name", "Beautiful Computer")
-          .formParam("introduced", "2012-05-30")
-          .formParam("discontinued", "")
-          .formParam("company", "37").
-          check(status.is(session => 200 + ThreadLocalRandom.current.nextInt(2)))) // we do a check on a condition that's been customized with a lambda. It will be evaluated every time a user executes the request
-    }.exitHereIfFailed // if the chain didn't finally succeed, have the user exit the whole scenario
+    val edit = exec(http("Form")
+      .get("/computers/new"))
+      .pause(1)
+      .exec(http("Post")
+        .post("/computers")
+        .headers(headers_10)
+        .formParam("name", "Beautiful Computer")
+        .formParam("introduced", "2012-05-30")
+        .formParam("discontinued", "")
+        .formParam("company", "37"))
   }
 
   val httpProtocol = http
@@ -82,9 +78,11 @@ class AdvancedSimulationStep05 extends Simulation {
     .acceptEncodingHeader("gzip, deflate")
     .userAgentHeader("Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:16.0) Gecko/20100101 Firefox/16.0")
 
-  val users = scenario("Users").exec(Search.search, Browse.browse)
+  // Let's have multiple populations
+  val users = scenario("Users").exec(Search.search, Browse.browse) // regular users can't edit
   val admins = scenario("Admins").exec(Search.search, Browse.browse, Edit.edit)
 
+  // Let's have 10 regular users and 2 admins, and ramp them on 10 sec so we don't hammer the server
   setUp(
     users.inject(rampUsers(10) during (10 seconds)),
     admins.inject(rampUsers(2) during (10 seconds))
