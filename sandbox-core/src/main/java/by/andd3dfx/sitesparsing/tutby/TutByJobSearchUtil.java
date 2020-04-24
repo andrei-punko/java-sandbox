@@ -40,7 +40,7 @@ public class TutByJobSearchUtil {
                 .userAgent(USER_AGENT).get();
 
             Elements elements = document
-                .select("div[class=resume-search-item__name]");
+                .select("div[class=vacancy-serp-item]");
 
             List<VacancyData> vacancyDataList = new ArrayList<>();
             elements.parallelStream().forEach(element -> {
