@@ -4,12 +4,6 @@
 * `akka-project`  
 Example of Akka framework usage 
 
-* `aspect-compile-time-weaving`  
-* `aspect-post-compile-time-weaving`  
-* `aspect-stub-sources-for-post-compile-weaving`  
-* `aspect-load-time-weaving`  
-Different cases of aspects usage mostly taken from [here](https://www.baeldung.com/aspectj)
-
 * `db-versioning`  
 Example of DB versioning with usage of Liquibase and Flyway
 

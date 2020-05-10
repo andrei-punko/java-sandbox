@@ -11,10 +11,6 @@
 
   <modules>
     <module>sandbox-core</module>
-    <module>aspect-compile-time-weaving</module>
-    <module>aspect-post-compile-time-weaving</module>
-    <module>aspect-stub-sources-for-post-compile-weaving</module>
-    <module>aspect-load-time-weaving</module>
     <module>elasticsearch</module>
     <module>hibernate-mappings</module>
     <module>two-factor-authentification</module>
