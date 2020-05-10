@@ -22,9 +22,6 @@ Example of gRPC service and its client
 * `hibernate-mappings`  
 Example of different cases of Hibernate mappings
 
-* `iot-rest-service-sample`  
-Example of microservice with IoT purposes based on spring-boot related stack
-
 * `messaging-stomp-websocket`
 Example of STOMP messaging over WebSockets for building interactive web application
 
