@@ -14,7 +14,6 @@
     <module>elasticsearch</module>
     <module>hibernate-mappings</module>
     <module>two-factor-authentification</module>
-    <module>gatling-load-test</module>
     <module>pravtor-search</module>
     <module>swing-app-search-test-task</module>
     <module>unit-tests-debugging</module>
@@ -32,8 +31,6 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 
-    <aspect.lang.version>1.8</aspect.lang.version>
-    <aspectj.version>1.8.13</aspectj.version>
     <lombok.version>1.18.10</lombok.version>
     <commons-lang.version>3.8.1</commons-lang.version>
   </properties>

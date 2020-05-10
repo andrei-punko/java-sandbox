@@ -13,9 +13,6 @@ Design patterns examples
 * `elasticsearch`  
 Example of Elasticsearch usage
 
-* `gatling-load-test`  
-Example of `gatling-maven-plugin` usage
-
 * `grpc-sample`  
 Example of gRPC service and its client
 
