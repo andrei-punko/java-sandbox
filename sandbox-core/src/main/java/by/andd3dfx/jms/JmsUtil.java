@@ -20,13 +20,14 @@ import java.io.IOException;
  */
 public class JmsUtil {
 
-    public static Long getQueueSize(String activeMqUrl, String queueName) throws IOException, MalformedObjectNameException {
+    public static Long getQueueSize(String activeMqUrl, String queueName) throws Exception {
         JMXConnector connector = JMXConnectorFactory.connect(new JMXServiceURL(activeMqUrl));
         MBeanServerConnection connection = connector.getMBeanServerConnection();
 
-        ObjectName objectName = new ObjectName("org.apache.activemq:BrokerName=localhost,Type=Broker");
+        ObjectName objectName = new ObjectName("org.apache.activemq:type=Broker,brokerName=localhost");
         BrokerViewMBean brokerViewMBean;
         brokerViewMBean = MBeanServerInvocationHandler.newProxyInstance(connection, objectName, BrokerViewMBean.class, true);
+        brokerViewMBean.addQueue(queueName);
 
         for (ObjectName name : brokerViewMBean.getQueues()) {
             QueueViewMBean queueViewMBean = MBeanServerInvocationHandler.newProxyInstance(connection, name, QueueViewMBean.class, true);
@@ -42,7 +43,7 @@ public class JmsUtil {
         JMXConnector connector = JMXConnectorFactory.connect(new JMXServiceURL(activeMqUrl));
         MBeanServerConnection connection = connector.getMBeanServerConnection();
 
-        ObjectName objectName = new ObjectName("org.apache.activemq:BrokerName=localhost,Type=Queue,Destination=" + queueName);
+        ObjectName objectName = new ObjectName("org.apache.activemq:type=Broker,brokerName=localhost,destinationType=Queue,destinationName=" + queueName);
         QueueViewMBean queueViewMBean = MBeanServerInvocationHandler.newProxyInstance(connection, objectName, QueueViewMBean.class, true);
 
         if (queueViewMBean != null) {

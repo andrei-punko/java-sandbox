@@ -9,7 +9,6 @@ import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 /*
     To perform check - start Active MQ broker with JMX enabled in configuration according to notes in JmsUtil
  */
-@Ignore
 public class JmsUtilTest {
     private final String ACTIVEMQ_URL = "service:jmx:rmi:///jndi/rmi://localhost:1099/jmxrmi";
     private final String QUEUE_NAME = "JMS/DGST.MIGRATE.IN";
