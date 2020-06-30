@@ -55,7 +55,7 @@ public class CpuItem {
             ", price=" + price +
             ", cores=" + coresAmount +
             ", frequency=" + frequency +
-            ", usefulness=" + usefulness +
+            ", revUsefulness=" + usefulness +
             '}';
     }
 }

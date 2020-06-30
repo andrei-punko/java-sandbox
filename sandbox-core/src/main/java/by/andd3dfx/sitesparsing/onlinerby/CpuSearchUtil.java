@@ -17,6 +17,8 @@ public class CpuSearchUtil {
 
     private static final String CPU_URL_TEMPLATE = "https://catalog.onliner.by/sdapi/catalog.api/search/cpu?page=%d";
     private static final ObjectMapper mapper = new ObjectMapper();
+    private static final Pattern CPU_CORES_PATTERN = Pattern.compile("\\d+ яд");
+    private static final Pattern CPU_FREQ_PATTERN = Pattern.compile("частота \\d+([.]\\d+){0,1}");
 
     public CpuSearchResult extractPage(int pageNumber) throws IOException {
         String urlSpec = String.format(CPU_URL_TEMPLATE, pageNumber);
@@ -72,9 +74,8 @@ public class CpuSearchUtil {
         return result;
     }
 
-    private int extractCoresAmount(String description) {
-        Pattern pattern = Pattern.compile("\\d+ яд");
-        Matcher matcher = pattern.matcher(description);
+    int extractCoresAmount(String description) {
+        Matcher matcher = CPU_CORES_PATTERN.matcher(description);
         if (matcher.find()) {
             final String group = matcher.group();
             return Integer.parseInt(group.replace(" яд", ""));
@@ -82,9 +83,8 @@ public class CpuSearchUtil {
         return 0;
     }
 
-    private double extractFrequency(String description) {
-        Pattern pattern = Pattern.compile("частота \\d+([.]\\d+){0,1}");
-        Matcher matcher = pattern.matcher(description);
+    double extractFrequency(String description) {
+        Matcher matcher = CPU_FREQ_PATTERN.matcher(description);
         if (matcher.find()) {
             String group = matcher.group();
             group = group.replace("частота ", "");
