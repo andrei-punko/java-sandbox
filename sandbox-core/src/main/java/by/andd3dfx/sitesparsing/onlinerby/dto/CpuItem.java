@@ -7,13 +7,16 @@ public class CpuItem {
     private double price;
 
     private int coresAmount;
-    private int threadsAmount;
     private double frequency;
 
-    public CpuItem(String name, String url, double price) {
+    private double usefulness;
+
+    public CpuItem(String name, String url, double price, int coresAmount, double frequency) {
         this.name = name;
         this.url = url;
         this.price = price;
+        this.coresAmount = coresAmount;
+        this.frequency = frequency;
     }
 
     public String getName() {
@@ -32,12 +35,16 @@ public class CpuItem {
         return coresAmount;
     }
 
-    public int getThreadsAmount() {
-        return threadsAmount;
-    }
-
     public double getFrequency() {
         return frequency;
+    }
+
+    public double getUsefulness() {
+        return usefulness;
+    }
+
+    public void setUsefulness(double usefulness) {
+        this.usefulness = usefulness;
     }
 
     @Override
@@ -46,9 +53,9 @@ public class CpuItem {
             "name='" + name + '\'' +
             ", url='" + url + '\'' +
             ", price=" + price +
-            ", coresAmount=" + coresAmount +
-            ", threadsAmount=" + threadsAmount +
+            ", cores=" + coresAmount +
             ", frequency=" + frequency +
+            ", usefulness=" + usefulness +
             '}';
     }
 }

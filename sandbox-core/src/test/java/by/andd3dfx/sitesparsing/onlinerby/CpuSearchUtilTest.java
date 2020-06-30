@@ -20,7 +20,7 @@ public class CpuSearchUtilTest {
 
     @Test
     public void getLowestFirstCatalogPriceByUrl() throws IOException {
-        CpuSearchResult cpuItems = cpuSearchUtil.extract(1);
+        CpuSearchResult cpuItems = cpuSearchUtil.extractPage(1);
         System.out.println(cpuItems);
 
         assertThat(cpuItems.getCpuItems().size(), is(30));
