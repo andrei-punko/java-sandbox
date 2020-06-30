@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 
 import java.util.LinkedHashMap;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class TutByJobSearchUtilTest {
@@ -17,6 +18,7 @@ public class TutByJobSearchUtilTest {
         util = new TutByJobSearchUtil();
     }
 
+    @Ignore
     @Test
     public void search() {
         final SingleSearchResult result = util.singleSearch(util.buildSearchUrl("java"));
