@@ -3,6 +3,9 @@ package by.andd3dfx.interview.ya;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * According to https://stackoverflow.com/questions/742013/how-do-i-create-a-url-shortener/742047
+ */
 public class UrlShortener {
 
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
