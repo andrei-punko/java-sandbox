@@ -1,70 +1,16 @@
 package by.andd3dfx.guice;
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
-import com.google.inject.AbstractModule;
+import by.andd3dfx.guice.util.Communicator;
+import by.andd3dfx.guice.util.Spawner;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Provides;
-import java.lang.annotation.Retention;
-import javax.inject.Inject;
-import javax.inject.Qualifier;
 
 /**
  * According to Guice "Getting Started" page: https://github.com/google/guice/wiki/GettingStarted
+ * <p>
+ * and Baeldung Guice manual: https://www.baeldung.com/guice
  */
 public class GuiceDemo {
-
-    @Qualifier
-    @Retention(RUNTIME)
-    @interface Message {
-
-    }
-
-    @Qualifier
-    @Retention(RUNTIME)
-    @interface Count {
-
-    }
-
-    /**
-     * Guice module that provides bindings for message and count used in {@link Greeter}.
-     */
-    static class DemoModule extends AbstractModule {
-
-        @Provides
-        @Count
-        static Integer provideCount() {
-            return 3;
-        }
-
-        @Provides
-        @Message
-        static String provideMessage() {
-            return "hello world";
-        }
-    }
-
-    static class Greeter {
-
-        private final String message;
-        private final int count;
-
-        // Greeter declares that it needs a string message and an integer
-        // representing the number of time the message to be printed.
-        // The @Inject annotation marks this constructor as eligible to be used by Guice.
-        @Inject
-        Greeter(@Message String message, @Count int count) {
-            this.message = message;
-            this.count = count;
-        }
-
-        void sayHello() {
-            for (int i = 0; i < count; i++) {
-                System.out.println(message);
-            }
-        }
-    }
 
     public static void main(String[] args) {
         /*
@@ -81,5 +27,15 @@ public class GuiceDemo {
 
         // Prints "hello world" 3 times to the console.
         greeter.sayHello();
+        greeter.communicate();
+        greeter.spawn();
+
+        // Make communication
+        Communicator communicator = injector.getInstance(Communicator.class);
+        communicator.communicate();
+
+        // Make some spawning
+        Spawner spawner = injector.getInstance(Spawner.class);
+        spawner.spawn();
     }
 }
