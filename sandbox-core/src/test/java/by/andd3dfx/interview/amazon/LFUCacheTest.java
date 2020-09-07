@@ -1,16 +1,15 @@
 package by.andd3dfx.interview.amazon;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class LFUCacheTest {
 
     @Test
     public void testCache() {
-        LFUCache cache = new LFUCache( 2 /* capacity */ );
+        LFUCache cache = new LFUCache(2 /* capacity */);
 
         cache.put(1, 1);
         cache.put(2, 2);
@@ -24,10 +23,9 @@ public class LFUCacheTest {
         assertThat("returns 4", cache.get(4), is(4));
     }
 
-    @Ignore
     @Test
     public void testCache2() {
-        LFUCache cache = new LFUCache( 2 /* capacity */ );
+        LFUCache cache = new LFUCache(2 /* capacity */);
 
         cache.put(2, 1);
         cache.put(3, 2);

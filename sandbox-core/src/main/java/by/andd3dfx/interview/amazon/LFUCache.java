@@ -1,5 +1,6 @@
 package by.andd3dfx.interview.amazon;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class LFUCache {
 
     private int capacity;
     private Map<Integer, Integer> map = new HashMap<>();
-    private Map<Integer, Integer> freqs = new HashMap<>();
+    private Map<Integer, Item> freqs = new HashMap<>();
 
     public LFUCache(int capacity) {
         this.capacity = capacity;
@@ -29,7 +30,8 @@ public class LFUCache {
 
     public int get(int key) {
         if (freqs.containsKey(key)) {
-            freqs.put(key, freqs.get(key) + 1);
+            Item item = freqs.get(key);
+            freqs.put(key, new Item(item.value, LocalDateTime.now(), item.hitsCount + 1));
             return map.get(key);
         }
         return -1;
@@ -37,19 +39,63 @@ public class LFUCache {
 
     public void put(int key, int value) {
         if (freqs.containsKey(key)) {
-            freqs.put(key, freqs.get(key) + 1);
+            Item item = freqs.get(key);
+            freqs.put(key, new Item(item.value, LocalDateTime.now(), item.hitsCount + 1));
         } else if (freqs.size() == capacity) {
-            List<Map.Entry<Integer, Integer>> entries = freqs.entrySet().stream()
-                .sorted(Map.Entry.comparingByValue()).collect(Collectors.toList());
+            List<Map.Entry<Integer, Item>> entries = freqs.entrySet().stream()
+                .sorted((o1, o2) -> {
+                    int delta = o1.getValue().getHitsCount() - o2.getValue().getHitsCount();
+                    if (delta != 0) {
+                        return delta;
+                    }
+                    return o1.getValue().lastTimeUsed.compareTo(o2.getValue().lastTimeUsed);
+                }).collect(Collectors.toList());
             Integer keyToDelete = entries.get(0).getKey();
 
             freqs.remove(keyToDelete);
             map.remove(keyToDelete);
-            freqs.put(key, 0);
+            freqs.put(key, new Item(value, LocalDateTime.now(), 0));
         } else {
-            freqs.put(key, 0);
+            freqs.put(key, new Item(value, LocalDateTime.now(), 0));
         }
 
         map.put(key, value);
+    }
+
+    public class Item {
+
+        private Integer value;
+        private LocalDateTime lastTimeUsed;
+        private int hitsCount = 0;
+
+        public Item(Integer value, LocalDateTime lastTimeUsed, int hitsCount) {
+            this.value = value;
+            this.lastTimeUsed = lastTimeUsed;
+            this.hitsCount = hitsCount;
+        }
+
+        public Integer getValue() {
+            return value;
+        }
+
+        public void setValue(Integer value) {
+            this.value = value;
+        }
+
+        public LocalDateTime getLastTimeUsed() {
+            return lastTimeUsed;
+        }
+
+        public void setLastTimeUsed(LocalDateTime lastTimeUsed) {
+            this.lastTimeUsed = lastTimeUsed;
+        }
+
+        public int getHitsCount() {
+            return hitsCount;
+        }
+
+        public void setHitsCount(int hitsCount) {
+            this.hitsCount = hitsCount;
+        }
     }
 }
