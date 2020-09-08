@@ -22,6 +22,7 @@
     <module>design-patterns</module>
     <module>grpc-sample</module>
     <module>messaging-stomp-websocket</module>
+    <module>dagger-sample</module>
   </modules>
 
   <properties>
