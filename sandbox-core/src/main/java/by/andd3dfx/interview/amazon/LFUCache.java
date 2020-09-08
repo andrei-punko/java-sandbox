@@ -43,6 +43,10 @@ public class LFUCache {
     }
 
     public void put(int key, int value) {
+        if (capacity == 0) {
+            return;
+        }
+
         if (freqs.containsKey(key)) {
             Item item = freqs.get(key);
             freqs.put(key, new Item(item.value, item.hitsCount + 1));

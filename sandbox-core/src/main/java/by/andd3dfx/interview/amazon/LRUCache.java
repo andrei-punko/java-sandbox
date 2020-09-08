@@ -35,6 +35,10 @@ public class LRUCache {
     }
 
     public void put(int key, int value) {
+        if (capacity == 0) {
+            return;
+        }
+
         if (set.contains(key)) {
             set.remove(key);
         } else if (set.size() == capacity) {
