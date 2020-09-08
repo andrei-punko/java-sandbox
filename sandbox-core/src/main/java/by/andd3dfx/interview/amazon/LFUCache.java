@@ -1,6 +1,5 @@
 package by.andd3dfx.interview.amazon;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -33,7 +32,7 @@ public class LFUCache {
     public int get(int key) {
         if (freqs.containsKey(key)) {
             Item item = freqs.get(key);
-            freqs.put(key, new Item(item.value, LocalDateTime.now(), item.hitsCount + 1));
+            freqs.put(key, new Item(item.value, item.hitsCount + 1));
             System.out.println("Added to freq map: " + freqs.get(key));
             keysSet.remove(key);
             keysSet.add(key);
@@ -46,7 +45,7 @@ public class LFUCache {
     public void put(int key, int value) {
         if (freqs.containsKey(key)) {
             Item item = freqs.get(key);
-            freqs.put(key, new Item(item.value, LocalDateTime.now(), item.hitsCount + 1));
+            freqs.put(key, new Item(item.value, item.hitsCount + 1));
         } else if (freqs.size() == capacity) {
             List<Map.Entry<Integer, Item>> entries = freqs.entrySet().stream()
                 .sorted((o1, o2) -> {
@@ -66,11 +65,11 @@ public class LFUCache {
 
             map.remove(keyToDelete);
 
-            freqs.put(key, new Item(value, LocalDateTime.now(), 0));
+            freqs.put(key, new Item(value, 0));
             keysSet.add(key);
             System.out.println("Added to freq map: " + freqs.get(key));
         } else {
-            freqs.put(key, new Item(value, LocalDateTime.now(), 0));
+            freqs.put(key, new Item(value, 0));
             keysSet.add(key);
             System.out.println("Added to freq map: " + freqs.get(key));
         }
@@ -81,12 +80,10 @@ public class LFUCache {
     public class Item {
 
         private Integer value;
-        private LocalDateTime lastTimeUsed;
         private int hitsCount = 0;
 
-        public Item(Integer value, LocalDateTime lastTimeUsed, int hitsCount) {
+        public Item(Integer value, int hitsCount) {
             this.value = value;
-            this.lastTimeUsed = lastTimeUsed;
             this.hitsCount = hitsCount;
         }
 
@@ -96,14 +93,6 @@ public class LFUCache {
 
         public void setValue(Integer value) {
             this.value = value;
-        }
-
-        public LocalDateTime getLastTimeUsed() {
-            return lastTimeUsed;
-        }
-
-        public void setLastTimeUsed(LocalDateTime lastTimeUsed) {
-            this.lastTimeUsed = lastTimeUsed;
         }
 
         public int getHitsCount() {
@@ -118,7 +107,6 @@ public class LFUCache {
         public String toString() {
             return "Item{" +
                 "value=" + value +
-                ", lastTimeUsed=" + lastTimeUsed +
                 ", hitsCount=" + hitsCount +
                 '}';
         }
