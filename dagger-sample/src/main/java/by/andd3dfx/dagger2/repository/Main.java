@@ -1,11 +1,9 @@
 package by.andd3dfx.dagger2.repository;
 
 /**
- * Example of Dagger 2 usage according to pages:
+ * Example of Dagger 2 usage according to page:
  * <p>
  * https://developer.android.com/training/dependency-injection/dagger-basics
- * <p>
- * https://dagger.dev/dev-guide/
  */
 public class Main {
 
