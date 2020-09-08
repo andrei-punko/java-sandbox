@@ -2,6 +2,7 @@ package by.andd3dfx.interview.amazon;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,6 +24,7 @@ public class LFUCache {
     private int capacity;
     private Map<Integer, Integer> map = new HashMap<>();
     private Map<Integer, Item> freqs = new HashMap<>();
+    private LinkedHashSet<Integer> keysSet = new LinkedHashSet<>();
 
     public LFUCache(int capacity) {
         this.capacity = capacity;
@@ -32,6 +34,10 @@ public class LFUCache {
         if (freqs.containsKey(key)) {
             Item item = freqs.get(key);
             freqs.put(key, new Item(item.value, LocalDateTime.now(), item.hitsCount + 1));
+            System.out.println("Added to freq map: " + freqs.get(key));
+            keysSet.remove(key);
+            keysSet.add(key);
+
             return map.get(key);
         }
         return -1;
@@ -48,15 +54,25 @@ public class LFUCache {
                     if (delta != 0) {
                         return delta;
                     }
-                    return o1.getValue().lastTimeUsed.compareTo(o2.getValue().lastTimeUsed);
+
+                    List<Integer> integers = keysSet.stream().collect(Collectors.toList());
+                    return integers.indexOf(o1.getKey()) - integers.indexOf(o2.getKey());
                 }).collect(Collectors.toList());
             Integer keyToDelete = entries.get(0).getKey();
 
+            System.out.println("Removed from freq map: " + freqs.get(keyToDelete));
             freqs.remove(keyToDelete);
+            keysSet.remove(keyToDelete);
+
             map.remove(keyToDelete);
+
             freqs.put(key, new Item(value, LocalDateTime.now(), 0));
+            keysSet.add(key);
+            System.out.println("Added to freq map: " + freqs.get(key));
         } else {
             freqs.put(key, new Item(value, LocalDateTime.now(), 0));
+            keysSet.add(key);
+            System.out.println("Added to freq map: " + freqs.get(key));
         }
 
         map.put(key, value);
@@ -96,6 +112,15 @@ public class LFUCache {
 
         public void setHitsCount(int hitsCount) {
             this.hitsCount = hitsCount;
+        }
+
+        @Override
+        public String toString() {
+            return "Item{" +
+                "value=" + value +
+                ", lastTimeUsed=" + lastTimeUsed +
+                ", hitsCount=" + hitsCount +
+                '}';
         }
     }
 }
