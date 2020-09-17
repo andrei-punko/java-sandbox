@@ -1,5 +1,8 @@
 package creational.factorymethod;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import org.junit.Test;
 
 /**
@@ -21,9 +24,12 @@ public class FactoryMethodTest {
     @Test
     public void test() {
         Creator[] creators = {new ConcreteCreatorA(), new ConcreteCreatorB()};
+        Object[] expectedClasses = {ConcreteProductA.class, ConcreteProductB.class};
 
+        int index = 0;
         for (Creator creator : creators) {
             Product product = creator.factoryMethod();
+            assertThat("Wrong class", product.getClass(), is(expectedClasses[index++]));
             System.out.printf("Created {%s}\n", product.getClass());
         }
     }
