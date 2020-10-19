@@ -49,7 +49,7 @@ public class CpuSearchUtil {
         return Double.parseDouble(String.valueOf(price_min.get("amount")));
     }
 
-    public List<CpuItem> calculateUsefulness() throws IOException {
+    public List<CpuItem> calculateUsefulness(CpuSearchCriteria criteria) throws IOException {
         List<CpuItem> result = new ArrayList<>();
 
         for (int pageNumber = 1; ; pageNumber++) {
@@ -59,6 +59,9 @@ public class CpuSearchUtil {
             result.addAll(
                 searchResult.getCpuItems().stream()
                     .filter(item -> item.getPrice() > 0)
+                    .filter(item -> item.getPrice() <= criteria.getMaxPrice())
+                    .filter(item -> item.getCoresAmount() >= criteria.getMinCoresAmount())
+                    .filter(item -> item.getFrequency() >= criteria.getMinFrequency())
                     .map(item -> {
                         item.setUsefulness(item.getPrice() / (item.getCoresAmount() * item.getFrequency()));
                         return item;
@@ -70,7 +73,15 @@ public class CpuSearchUtil {
             }
         }
 
-        Collections.sort(result, (o1, o2) -> (int) (o1.getUsefulness() - o2.getUsefulness()));
+        Collections.sort(result, (o1, o2) -> {
+            if (o1.getUsefulness() < o2.getUsefulness()) {
+                return -1;
+            }
+            if (o1.getUsefulness() > o2.getUsefulness()) {
+                return 1;
+            }
+            return 0;
+        });
         return result;
     }
 
@@ -94,7 +105,14 @@ public class CpuSearchUtil {
     }
 
     public static void main(String[] args) throws IOException {
-        final List<CpuItem> cpuItems = new CpuSearchUtil().calculateUsefulness();
+        final CpuSearchCriteria criteria = new CpuSearchCriteria.Builder()
+            .setMaxPrice(1000.0)
+            .setMinCoresAmount(6)
+            .setMinFrequency(3.5d)
+            .build();
+
+        final List<CpuItem> cpuItems = new CpuSearchUtil().calculateUsefulness(criteria);
+
         System.out.println(cpuItems);
     }
 }
