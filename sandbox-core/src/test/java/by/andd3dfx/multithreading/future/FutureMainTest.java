@@ -50,7 +50,7 @@ public class FutureMainTest {
     public void testProcessingResultsOfAsyncComputations() throws ExecutionException, InterruptedException {
         Future<String> future = futureMain.processingResultsOfAsyncComputations();
 
-        assertEquals("Hello Async Additional action", future.get());
+        assertEquals("Hello Async Additional action Additional action 2", future.get());
     }
 
     @Test

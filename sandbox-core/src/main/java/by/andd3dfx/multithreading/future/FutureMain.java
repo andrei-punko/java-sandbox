@@ -62,7 +62,12 @@ public class FutureMain {
         CompletableFuture<String> future = completableFuture
             .thenApply(s -> s + " Additional action");
 
-        return future;
+        // This (thenApplyAsync method) allows us to parallelize our computation even more
+        // and use system resources more efficiently
+        CompletableFuture<String> future2 = future
+            .thenApplyAsync(s -> s + " Additional action 2");
+
+        return future2;
     }
 
     /**
