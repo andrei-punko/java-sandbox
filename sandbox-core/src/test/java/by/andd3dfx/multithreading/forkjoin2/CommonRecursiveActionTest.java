@@ -19,11 +19,52 @@ public class CommonRecursiveActionTest {
     }
 
     @Test
-    public void testCustomRecursiveAction() throws InterruptedException {
+    public void testCustomRecursiveActionViaSubmit() throws InterruptedException {
         MyCommonRecursiveAction myCommonRecursiveAction = new MyCommonRecursiveAction(
             new MyWorkContainer("Some very long and boring string", 4)
         );
+
+        forkJoinPool.submit(myCommonRecursiveAction);
+
+        while (!myCommonRecursiveAction.isDone()) {
+            sleep(500);
+        }
+    }
+
+    @Test
+    public void testCustomRecursiveActionViaExecute() throws InterruptedException {
+        MyCommonRecursiveAction myCommonRecursiveAction = new MyCommonRecursiveAction(
+            new MyWorkContainer("Some very long and boring string", 4)
+        );
+
         forkJoinPool.execute(myCommonRecursiveAction);
+
+        while (!myCommonRecursiveAction.isDone()) {
+            sleep(500);
+        }
+    }
+
+    @Test
+    public void testCustomRecursiveActionViaInvoke() throws InterruptedException {
+        MyCommonRecursiveAction myCommonRecursiveAction = new MyCommonRecursiveAction(
+            new MyWorkContainer("Some very long and boring string", 4)
+        );
+
+        forkJoinPool.invoke(myCommonRecursiveAction);
+
+        while (!myCommonRecursiveAction.isDone()) {
+            sleep(500);
+        }
+    }
+
+    @Test
+    public void testCustomRecursiveActionViaForkNJoin() throws InterruptedException {
+        MyCommonRecursiveAction myCommonRecursiveAction = new MyCommonRecursiveAction(
+            new MyWorkContainer("Some very long and boring string", 4)
+        );
+
+        myCommonRecursiveAction.fork();
+        myCommonRecursiveAction.join();
 
         while (!myCommonRecursiveAction.isDone()) {
             sleep(500);

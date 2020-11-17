@@ -16,9 +16,44 @@ public class CustomRecursiveActionTest {
     }
 
     @Test
-    public void testCustomRecursiveAction() throws InterruptedException {
+    public void testCustomRecursiveActionViaSubmit() throws InterruptedException {
         CustomRecursiveAction customRecursiveAction = new CustomRecursiveAction("Some very long and boring string");
+
+        forkJoinPool.submit(customRecursiveAction);
+
+        while (!customRecursiveAction.isDone()) {
+            sleep(500);
+        }
+    }
+
+    @Test
+    public void testCustomRecursiveActionViaExecute() throws InterruptedException {
+        CustomRecursiveAction customRecursiveAction = new CustomRecursiveAction("Some very long and boring string");
+
         forkJoinPool.execute(customRecursiveAction);
+
+        while (!customRecursiveAction.isDone()) {
+            sleep(500);
+        }
+    }
+
+    @Test
+    public void testCustomRecursiveActionViaInvoke() throws InterruptedException {
+        CustomRecursiveAction customRecursiveAction = new CustomRecursiveAction("Some very long and boring string");
+
+        forkJoinPool.invoke(customRecursiveAction);
+
+        while (!customRecursiveAction.isDone()) {
+            sleep(500);
+        }
+    }
+
+    @Test
+    public void testCustomRecursiveActionViaForkNJoin() throws InterruptedException {
+        CustomRecursiveAction customRecursiveAction = new CustomRecursiveAction("Some very long and boring string");
+
+        customRecursiveAction.fork();
+        customRecursiveAction.join();
 
         while (!customRecursiveAction.isDone()) {
             sleep(500);
