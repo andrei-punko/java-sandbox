@@ -5,7 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class AudioCapture extends JFrame {
 
@@ -66,6 +65,10 @@ public class AudioCapture extends JFrame {
             byte audioData[] = captureThread[0].getByteArrayOutputStream().toByteArray();
             InputStream byteArrayInputStream = new ByteArrayInputStream(audioData);
             AudioFormat audioFormat = getAudioFormat();
+
+            double frequency = FrequencyDetector.detectFrequency(audioData, (int) audioFormat.getSampleRate());
+            System.out.println("Freq=" + frequency);
+
             AudioInputStream audioInputStream = new AudioInputStream(
                     byteArrayInputStream, audioFormat, audioData.length / audioFormat.getFrameSize());
 
