@@ -1,4 +1,4 @@
-package by.andd3dfx.capturesound;
+package by.andd3dfx.capturesound.threads;
 
 import javax.sound.sampled.TargetDataLine;
 import java.io.ByteArrayOutputStream;

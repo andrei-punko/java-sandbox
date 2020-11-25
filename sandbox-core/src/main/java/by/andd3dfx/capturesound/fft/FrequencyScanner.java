@@ -1,9 +1,10 @@
-package by.andd3dfx.capturesound;
+package by.andd3dfx.capturesound.fft;
 
+import by.andd3dfx.capturesound.dto.FrequencyInfoContainer;
 import org.jtransforms.fft.DoubleFFT_1D;
-import org.knowm.xchart.QuickChart;
-import org.knowm.xchart.SwingWrapper;
-import org.knowm.xchart.XYChart;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 /**
  * Frequency extraction taken from this page:
@@ -12,10 +13,12 @@ import org.knowm.xchart.XYChart;
  */
 public class FrequencyScanner {
 
-    private double[] window;
+    private double[] windowFilter;
 
-    public FrequencyScanner() {
-        window = null;
+    public FrequencyInfoContainer detectFrequency(byte[] audioData, int sampleRate) {
+        short[] sampleData = new short[audioData.length / 2];
+        ByteBuffer.wrap(audioData).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(sampleData);
+        return extractFrequencyInfo(sampleData, sampleRate);
     }
 
     /**
@@ -25,7 +28,7 @@ public class FrequencyScanner {
      * @param sampleRate the sample rate (in HZ) of sampleData
      * @return an approximation of the dominant frequency in sampleData
      */
-    public double extractFrequency(short[] sampleData, int sampleRate) {
+    public FrequencyInfoContainer extractFrequencyInfo(short[] sampleData, int sampleRate) {
         /* sampleData + zero padding */
         DoubleFFT_1D fft = new DoubleFFT_1D(sampleData.length + 24 * sampleData.length);
         double[] a = new double[(sampleData.length + 24 * sampleData.length) * 2];
@@ -52,47 +55,24 @@ public class FrequencyScanner {
                 maxInd = i;
             }
         }
-        drawSpectrum(frequencies, magnitudes);
-
-        /* calculate the frequency */
-        return (double) sampleRate * maxInd / (a.length / 2);
-    }
-
-    private void drawSpectrum(double[] frequencies, double[] magnitudes) {
-        int N = 1000;
-        double[] xData = new double[N];
-        double[] yData = new double[N];
-        for (int bucketIndex = 0; bucketIndex < N; bucketIndex++) {
-            xData[bucketIndex] = frequencies[(int) ((bucketIndex + 0.5) * frequencies.length / N)];
-
-            for (int i = 0; i < magnitudes.length / N; i++) {
-                yData[bucketIndex] += magnitudes[bucketIndex * N + i];
-            }
-        }
-
-        Thread thread = new Thread(() -> {
-            // Create Chart
-            XYChart chart = QuickChart.getChart("Spectrum Chart", "Frequency", "Magnitude", "M(f)", xData, yData);
-            chart.getStyler().setXAxisLogarithmic(true);
-            // Show it
-            new SwingWrapper(chart).displayChart();
-        });
-        thread.start();
+        double maxFrequency = (double) sampleRate * maxInd / (a.length / 2);
+        return new FrequencyInfoContainer(frequencies, magnitudes, maxFrequency);
     }
 
     /**
      * build a Hamming window filter for samples of a given size
+     * <p>
      * See http://www.labbookpages.co.uk/audio/firWindowing.html#windows
      *
      * @param size the sample size for which the filter will be created
      */
     private void buildHammingWindow(int size) {
-        if (window != null && window.length == size) {
+        if (windowFilter != null && windowFilter.length == size) {
             return;
         }
-        window = new double[size];
+        windowFilter = new double[size];
         for (int i = 0; i < size; ++i) {
-            window[i] = .54 - .46 * Math.cos(2 * Math.PI * i / (size - 1.0));
+            windowFilter[i] = .54 - .46 * Math.cos(2 * Math.PI * i / (size - 1.0));
         }
     }
 
@@ -107,7 +87,7 @@ public class FrequencyScanner {
 
         buildHammingWindow(input.length);
         for (int i = 0; i < input.length; ++i) {
-            res[i] = (double) input[i] * window[i];
+            res[i] = (double) input[i] * windowFilter[i];
         }
         return res;
     }

@@ -1,20 +1,34 @@
 package by.andd3dfx.capturesound;
 
+import by.andd3dfx.capturesound.fft.FrequencyScanner;
+import by.andd3dfx.capturesound.threads.CaptureThread;
+import by.andd3dfx.capturesound.threads.PlayThread;
+
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-public class AudioCapture extends JFrame {
+/**
+ * Press [Start] button to start recording
+ * <p>
+ * Press [Stop] button to stop recording
+ * <p>
+ * Press [Playback] button to start play of recorded audio.
+ * Main frequency printed into console after that
+ */
+public class AudioCaptureApp extends JFrame {
 
     public static void main(String[] args) {
-        AudioCapture audioCapture = new AudioCapture();
-        audioCapture.setVisible(true);
-        audioCapture.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        AudioCaptureApp app = new AudioCaptureApp();
+        app.setVisible(true);
+        app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public AudioCapture() {
+    public AudioCaptureApp() {
+        FrequencyScanner frequencyScanner = new FrequencyScanner();
+
         setSize(400, 80);
         setLocation(100, 100);
         this.setLayout(new GridLayout(1, 3, 20, 20));
@@ -66,7 +80,9 @@ public class AudioCapture extends JFrame {
             InputStream byteArrayInputStream = new ByteArrayInputStream(audioData);
             AudioFormat audioFormat = getAudioFormat();
 
-            double frequency = FrequencyDetector.detectFrequency(audioData, (int) audioFormat.getSampleRate());
+
+            double frequency = frequencyScanner.detectFrequency(audioData, (int) audioFormat.getSampleRate())
+                    .getMaxFrequency();
             System.out.println("Freq=" + frequency);
 
             AudioInputStream audioInputStream = new AudioInputStream(
@@ -92,7 +108,7 @@ public class AudioCapture extends JFrame {
     }
 
     private AudioFormat getAudioFormat() {
-        return new AudioFormat(44100.0F, 16, 1, true, false);
+        return new AudioFormat(44_100.0F, 16, 1, true, false);
     }
 }
 
