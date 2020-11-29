@@ -3,6 +3,7 @@ package by.andd3dfx.search;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -18,7 +19,9 @@ public class SearchHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchHelper.class);
 
     /**
-     * For search implementation next link was useful: http://stackoverflow.com/questions/3727662/how-can-you-search-google-programmatically-java-api
+     * For search implementation next link was useful:
+     * <p>
+     * http://stackoverflow.com/questions/3727662/how-can-you-search-google-programmatically-java-api
      */
     public List<SearchResultItem> search(String searchString, int maxResults) {
         List<SearchResultItem> result = new ArrayList<>();
@@ -58,9 +61,9 @@ public class SearchHelper {
         String keyword = URLEncoder.encode(searchString, CHARSET);
         String url = String.format(SEARCH_URL, keyword, offset);
         return Jsoup
-            .connect(url)
-            .userAgent(USER_AGENT)
-            .get().select(".r>a");
+                .connect(url)
+                .userAgent(USER_AGENT)
+                .get().select(".rc a");
     }
 
     SearchResultItem extractSearchResultItemFromLink(Element link) throws Exception {
