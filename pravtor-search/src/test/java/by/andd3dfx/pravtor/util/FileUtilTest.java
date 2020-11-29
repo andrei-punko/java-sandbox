@@ -1,23 +1,20 @@
 package by.andd3dfx.pravtor.util;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-
 import bad.robot.excel.matchers.WorkbookMatcher;
 import by.andd3dfx.pravtor.model.BatchSearchResult;
 import by.andd3dfx.pravtor.model.SearchCriteria;
 import by.andd3dfx.pravtor.model.TorrentData;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.List;
-import org.apache.commons.io.FileUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class FileUtilTest {
 
