@@ -36,7 +36,7 @@
                   <discovery.type>single-node</discovery.type>
                 </env>
                 <wait>
-                  <log>license</log>
+                  <log>started</log>
                   <time>25000</time>
                 </wait>
               </run>

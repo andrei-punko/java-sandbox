@@ -37,7 +37,7 @@
                   <MYSQL_PASSWORD>password</MYSQL_PASSWORD>
                 </env>
                 <wait>
-                  <log>port: 3306  MySQL Community Server - GPL</log>
+                  <log>starting as process 1</log>
                   <time>20000</time>
                 </wait>
               </run>
