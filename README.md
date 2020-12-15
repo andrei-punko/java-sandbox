@@ -4,6 +4,9 @@
 * `akka-project`  
 App example with Akka framework usage 
 
+* `dagger-sample`  
+Example of Dagger usage
+
 * `db-versioning`  
 Example of DB versioning with usage of Liquibase and Flyway
 
