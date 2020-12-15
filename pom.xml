@@ -23,6 +23,7 @@
     <module>grpc-sample</module>
     <module>messaging-stomp-websocket</module>
     <module>dagger-sample</module>
+    <module>test-containers</module>
   </modules>
 
   <properties>

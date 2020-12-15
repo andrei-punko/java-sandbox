@@ -2,7 +2,7 @@
 ## Playground for Java coding experiments
 
 * `akka-project`  
-Example of Akka framework usage 
+App example with Akka framework usage 
 
 * `db-versioning`  
 Example of DB versioning with usage of Liquibase and Flyway
@@ -26,13 +26,16 @@ Example of STOMP messaging over WebSockets for building interactive web applicat
 Parser for pravtor.ru site to extract some info from it
 
 * `sandbox-core`  
-Unordered staff with Java experiments. In addition contains tasks from interviews
+Unordered staff with Java experiments. In addition, contains tasks from interviews
 
 * `swing-app-search-test-task`  
 Test task with desktop application with usage of Google search engine
 
+* `test-containets`  
+Example of Java Test containers usage with help of Docker
+
 * `two-factor-authentification`  
-Example of two-factor authentification application with usage of Google authenticator
+Example of two-factor authentication application with usage of Google authenticator
 
 * `unit-tests-debugging`  
 Example of different cases of tests debugging
