@@ -7,8 +7,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@DiscriminatorValue("Tube")
-public class ItemWithLengthAndDiameter extends AbstractItem {
+@DiscriminatorValue("TUBE")
+public class ItemWithLengthAndDiameter extends BaseItem {
 
     @Column(name = "size_1")
     private Double length;

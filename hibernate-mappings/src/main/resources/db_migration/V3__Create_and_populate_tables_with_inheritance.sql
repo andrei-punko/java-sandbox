@@ -13,10 +13,10 @@ create table ITEMS
 );
 
 insert into ITEMS (item_type, name, price, weight, size_1, size_2, size_3)
-values ('Box', 'Milk packet', 1.5, 1, 15, 5, 10);
+values ('BOX', 'Milk packet', 1.5, 1, 15, 5, 10);
 insert into ITEMS (item_type, name, price, weight, size_1, size_2)
-values ('Tube', 'Iron tube', 29.9, 100, 600, 15);
+values ('TUBE', 'Iron tube', 29.9, 100, 600, 15);
 insert into ITEMS (item_type, name, price, weight, size_1, size_2)
-values ('Tube', 'Copper tube', 19.5, 140, 200, 12);
+values ('TUBE', 'Copper tube', 19.5, 140, 200, 12);
 insert into ITEMS (item_type, name, price, weight)
-values ('Item', 'Toy house', 4.9, 0.05);
+values ('ITEM', 'Toy house', 4.9, 0.05);

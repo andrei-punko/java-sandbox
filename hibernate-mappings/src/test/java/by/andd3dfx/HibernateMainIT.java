@@ -1,7 +1,7 @@
 package by.andd3dfx;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import by.andd3dfx.model.library.Address;
 import by.andd3dfx.model.library.Author;
@@ -38,7 +38,6 @@ public class HibernateMainIT {
     private void getFromDbAndCheck(Session session, Class clazz, int expectedItemsCount) {
         List items = session.createCriteria(clazz).list();
 
-        System.out.println(items);
         assertThat("Wrong items count", items.size(), is(expectedItemsCount));
     }
 
@@ -46,7 +45,6 @@ public class HibernateMainIT {
         Query query = entityManager.createQuery("SELECT c FROM " + entityName + " c");
         List resultList = query.getResultList();
 
-        System.out.println(resultList);
         assertThat("Wrong items count", resultList.size(), is(expectedItemsCount));
     }
 }

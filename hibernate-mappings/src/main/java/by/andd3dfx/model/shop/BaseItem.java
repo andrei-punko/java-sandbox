@@ -15,11 +15,12 @@ import lombok.Data;
 @Table(name = "ITEMS")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "item_type", discriminatorType = DiscriminatorType.STRING)
-public abstract class AbstractItem {
+public abstract class BaseItem {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
+
     private String name;
     private Double price;
     private Double weight;

@@ -7,8 +7,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@DiscriminatorValue("Box")
-public class ItemWithThreeSizes extends AbstractItem {
+@DiscriminatorValue("BOX")
+public class ItemWithThreeSizes extends BaseItem {
 
     @Column(name = "size_1")
     private Double length;

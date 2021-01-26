@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@DiscriminatorValue("Item")
-public class ItemWithoutSize extends AbstractItem {
+@DiscriminatorValue("ITEM")
+public class ItemWithoutSize extends BaseItem {
 
 }
