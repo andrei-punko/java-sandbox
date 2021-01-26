@@ -10,9 +10,6 @@ Example of Dagger usage
 * `db-versioning`  
 Example of DB versioning with usage of Liquibase and Flyway
 
-* `design-patterns`  
-Design patterns examples
-
 * `elasticsearch`  
 Example of Elasticsearch usage
 

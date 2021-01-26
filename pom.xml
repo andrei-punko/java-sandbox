@@ -19,7 +19,6 @@
     <module>unit-tests-debugging</module>
     <module>akka-project</module>
     <module>db-versioning</module>
-    <module>design-patterns</module>
     <module>grpc-sample</module>
     <module>messaging-stomp-websocket</module>
     <module>dagger-sample</module>
