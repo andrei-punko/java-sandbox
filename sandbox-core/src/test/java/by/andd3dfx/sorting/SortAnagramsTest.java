@@ -1,6 +1,5 @@
 package by.andd3dfx.sorting;
 
-import by.andd3dfx.sorting.SortAnagrams;
 import org.junit.Before;
 import org.junit.Test;
 
