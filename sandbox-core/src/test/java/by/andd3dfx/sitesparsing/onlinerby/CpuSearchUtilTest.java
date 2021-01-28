@@ -2,7 +2,7 @@ package by.andd3dfx.sitesparsing.onlinerby;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.greaterThan;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import by.andd3dfx.sitesparsing.onlinerby.dto.CpuSearchResult;
 import java.io.IOException;

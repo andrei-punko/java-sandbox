@@ -2,7 +2,7 @@ package by.andd3dfx.interview.wf.exam;
 
 import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Collection;
 import org.junit.Test;

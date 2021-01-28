@@ -3,7 +3,7 @@ package by.andd3dfx.elasticsearch;
 import static java.lang.Thread.sleep;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import com.alibaba.fastjson.JSON;
 import java.io.IOException;

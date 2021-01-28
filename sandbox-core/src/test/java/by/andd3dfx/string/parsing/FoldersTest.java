@@ -2,7 +2,7 @@ package by.andd3dfx.string.parsing;
 
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import by.andd3dfx.string.parsing.Folders;
 import java.util.Collection;

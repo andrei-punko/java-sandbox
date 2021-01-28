@@ -3,7 +3,7 @@ package by.andd3dfx.interview.wf.exam;
 import static by.andd3dfx.interview.wf.exam.Paragraph.changeFormat;
 import static by.andd3dfx.interview.wf.exam.Paragraph.changeFormatAnotherWay;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Test;
 

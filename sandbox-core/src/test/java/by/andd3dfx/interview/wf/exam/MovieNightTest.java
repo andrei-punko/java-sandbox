@@ -1,7 +1,7 @@
 package by.andd3dfx.interview.wf.exam;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import by.andd3dfx.interview.wf.exam.MovieNight.Movie;
 import java.text.ParseException;

@@ -2,7 +2,7 @@ package by.andd3dfx.pravtor.util;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.greaterThan;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.fail;
 
 import by.andd3dfx.pravtor.model.SingleSearchResult;
