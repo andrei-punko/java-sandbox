@@ -12,7 +12,7 @@ public class PriceSearchUtil {
                 .connect(firstCatalogUrl)
                 .userAgent(USER_AGENT).get().select("[class=spec-about__price]").get(0).text();
         // text = 486,00 – 515,10 б.р.
-        text = text.substring(0, text.indexOf(","));
+        text = text.substring(0, text.indexOf(",")).replace(" ", "");
         return Double.parseDouble(text);
     }
 }

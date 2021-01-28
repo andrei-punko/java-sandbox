@@ -9,7 +9,7 @@ import org.junit.Test;
 public class PriceSearchUtilTest {
 
     private String FIRST_CATALOG_SEARCH_URL = "https://komp.1k.by/utility-graphicscards/msi/" +
-        "MSI_GeForce_GTX_1660_Ti_Gaming_X_1500MHz_PCI_E_30_6144MB_3000MHz_192_bit_HDMI_HDCP_3xDP-3556609.html";
+        "MSI_Radeon_RX_580_8192Mb_Armor_OC_RX_580_ARMOR_8G_OC-2876289.html";
 
     private PriceSearchUtil priceSearchUtil;
 
@@ -21,7 +21,6 @@ public class PriceSearchUtilTest {
     @Test
     public void testGetLowestFirstCatalogPriceByUrl() throws Exception {
         Double price = priceSearchUtil.getLowestFirstCatalogPriceByUrl(FIRST_CATALOG_SEARCH_URL);
-        System.out.println("1k: " + price);
         assertThat("Price should be greater than 0", price, Matchers.greaterThan(0.0));
     }
 }
