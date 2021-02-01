@@ -1,17 +1,17 @@
-package by.andd3dfx.common;
+package by.andd3dfx.interview.train2021;
 
 import org.junit.Test;
 
-import static by.andd3dfx.common.WeekDaysEnum.MONDAY;
-import static by.andd3dfx.common.WeekDaysEnum.SUNDAY;
+import static by.andd3dfx.interview.train2021.CustomEnum.MONDAY;
+import static by.andd3dfx.interview.train2021.CustomEnum.SUNDAY;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class WeekDaysEnumTest {
+public class CustomEnumTest {
 
     @Test
     public void values() {
-        WeekDaysEnum[] result = WeekDaysEnum.values();
+        CustomEnum[] result = CustomEnum.values();
 
         assertThat("Wrong size", result.length, is(2));
 
@@ -21,7 +21,7 @@ public class WeekDaysEnumTest {
 
     @Test
     public void valueOf() {
-        WeekDaysEnum result = WeekDaysEnum.valueOf("MONDAY");
+        CustomEnum result = CustomEnum.valueOf("MONDAY");
 
         assertThat("Wrong entity, MONDAY expected", result, is(MONDAY));
     }

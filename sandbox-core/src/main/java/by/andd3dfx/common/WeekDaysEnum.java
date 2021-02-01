@@ -5,10 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/*
-Предположить, что класса Enum в жава нету, реализовать свой класс WeekDaysEnum, реализующий поведение enum с днями недели и всеми нужными методами:
-values(), valueOf(), ordinal(), name()
-Постараться сделать класс расширяемым, чтобы можно легко можно было добавить новые значения
+/**
+ * Предположить, что класса Enum в жава нету, реализовать свой класс WeekDaysEnum,
+ * реализующий поведение enum с днями недели и всеми нужными методами: values(), valueOf(), ordinal(), name()
+ * <p>
+ * Постараться сделать класс расширяемым, чтобы можно легко можно было добавить новые значения
  */
 public final class WeekDaysEnum {
     private static final List<WeekDaysEnum> items = new ArrayList<>();
