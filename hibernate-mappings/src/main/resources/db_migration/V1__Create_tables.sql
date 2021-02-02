@@ -1,3 +1,4 @@
+
 create table AUTHOR
 (
   id   int          not null auto_increment,
