@@ -1,6 +1,9 @@
 package by.andd3dfx.model.library;
 
-import java.util.Collection;
+import lombok.Data;
+import lombok.ToString;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,8 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import lombok.Data;
-import lombok.ToString;
+import java.util.Collection;
 
 @Data
 @Entity
@@ -18,7 +20,9 @@ public class Publisher {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
+
+    @Column
     private String name;
 
     @OneToOne(optional = false)

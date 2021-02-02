@@ -1,5 +1,6 @@
 package by.andd3dfx.model.shop;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -21,8 +22,12 @@ public abstract class BaseItem {
     @GeneratedValue
     private Long id;
 
+    @Column
     private String name;
+    @Column
     private Double price;
+    @Column
     private Double weight;
+    @Column
     private String description;
 }

@@ -1,6 +1,7 @@
 package by.andd3dfx.model.library;
 
 import java.util.Set;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,7 +20,9 @@ public class Book {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
+
+    @Column
     private String title;
 
     @ManyToMany
