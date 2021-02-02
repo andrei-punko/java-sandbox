@@ -8,5 +8,4 @@ import lombok.Data;
 @Entity
 @DiscriminatorValue("ITEM")
 public class ItemWithoutSize extends BaseItem {
-
 }

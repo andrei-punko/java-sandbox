@@ -37,14 +37,16 @@ public class HibernateMainIT {
 
     private void getFromDbAndCheck(Session session, Class clazz, int expectedItemsCount) {
         List items = session.createCriteria(clazz).list();
+        System.out.println("Retrieved next items: " + items);
 
         assertThat("Wrong items count", items.size(), is(expectedItemsCount));
     }
 
     private void getFromDbAndCheck(EntityManager entityManager, String entityName, int expectedItemsCount) {
         Query query = entityManager.createQuery("SELECT c FROM " + entityName + " c");
-        List resultList = query.getResultList();
+        List items = query.getResultList();
+        System.out.println("Retrieved next items: " + items);
 
-        assertThat("Wrong items count", resultList.size(), is(expectedItemsCount));
+        assertThat("Wrong items count", items.size(), is(expectedItemsCount));
     }
 }

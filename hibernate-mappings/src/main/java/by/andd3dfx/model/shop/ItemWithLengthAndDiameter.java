@@ -15,4 +15,13 @@ public class ItemWithLengthAndDiameter extends BaseItem {
 
     @Column(name = "size_2")
     private Double diameter;
+
+    @Override
+    public String toString() {
+        return "ItemWithLengthAndDiameter{" +
+                super.toString() +
+                "length=" + length +
+                ", diameter=" + diameter +
+                '}';
+    }
 }

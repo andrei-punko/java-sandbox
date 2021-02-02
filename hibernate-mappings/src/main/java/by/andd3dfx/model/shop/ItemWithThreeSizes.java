@@ -18,4 +18,14 @@ public class ItemWithThreeSizes extends BaseItem {
 
     @Column(name = "size_3")
     private Double height;
+
+    @Override
+    public String toString() {
+        return "ItemWithThreeSizes{" +
+                super.toString() +
+                "length=" + length +
+                ", width=" + width +
+                ", height=" + height +
+                '}';
+    }
 }
