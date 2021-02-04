@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class CustomStack<T> {
 
     private Deque<T> deque = new ArrayDeque<>();
-    private ReentrantLock lock = new ReentrantLock();
+    private ReentrantLock lock = new ReentrantLock();   // TODO: switch to ReadWriteLock
 
     public T push(T element) {
         lock.lock();
