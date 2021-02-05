@@ -2,7 +2,7 @@ package by.andd3dfx.multithreading.stack;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Implement custom stack with multithreading support without using blocking operations
@@ -10,42 +10,42 @@ import java.util.concurrent.locks.ReentrantLock;
 public class CustomStack<T> {
 
     private Deque<T> deque = new ArrayDeque<>();
-    private ReentrantLock lock = new ReentrantLock();   // TODO: switch to ReadWriteLock
+    private ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
     public T push(T element) {
-        lock.lock();
+        lock.writeLock().lock();
         try {
             deque.push(element);
             return element;
         } finally {
-            lock.unlock();
+            lock.writeLock().unlock();
         }
     }
 
     public T pop() {
-        lock.lock();
+        lock.writeLock().lock();
         try {
             return deque.pop();
         } finally {
-            lock.unlock();
+            lock.writeLock().unlock();
         }
     }
 
     public T peek() {
-        lock.lock();
+        lock.readLock().lock();
         try {
             return deque.peek();
         } finally {
-            lock.unlock();
+            lock.readLock().unlock();
         }
     }
 
     public boolean isEmpty() {
-        lock.lock();
+        lock.readLock().lock();
         try {
             return deque.isEmpty();
         } finally {
-            lock.unlock();
+            lock.readLock().unlock();
         }
     }
 }
