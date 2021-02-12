@@ -1,4 +1,4 @@
-package by.andd3dfx.tree;
+package by.andd3dfx.tree.test;
 
 import org.junit.Before;
 import org.junit.Test;

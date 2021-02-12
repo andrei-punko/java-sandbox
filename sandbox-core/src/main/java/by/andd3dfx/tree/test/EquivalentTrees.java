@@ -1,4 +1,4 @@
-package by.andd3dfx.tree;
+package by.andd3dfx.tree.test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
