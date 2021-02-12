@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -50,26 +51,38 @@ public class EquivalentTreesTest {
     }
 
     @Test
-    public void findEquivalentSubtreesWhenManyCandidatesExist() {
-        EquivalentTrees.Node root = buildNode('A');
-        root.left = buildNode('B');
-        root.right = buildNode('C');
+    public void findEquivalentSubtreesWhenTwoCandidate() {
+        EquivalentTrees.Node node = new EquivalentTrees.Node('A');
+        node.left = new EquivalentTrees.Node('B');
+        node.left.left = new EquivalentTrees.Node('X');
+        node.right = new EquivalentTrees.Node('B');
+        node.right.right = new EquivalentTrees.Node('X');
 
-        root.left.left = buildNode('E');
-        root.left.left.left = buildNode('D');
+        List<EquivalentTrees.Node> result = equivalentTrees.findEquivalentSubtrees(node);
 
-        root.right.left = buildNode('D');
-        root.right.right = buildNode('E');
-        root.right.right.left = buildNode('E');
-        root.right.right.right = buildNode('D');
+        assertThat(result.size(), is(2));
+        assertThat(result, hasItems(node.left, node.right));
+    }
+
+    @Test
+    public void findEquivalentSubtreesComplexCase() {
+        EquivalentTrees.Node root = new EquivalentTrees.Node('A');
+        root.left = new EquivalentTrees.Node('B');
+        root.right = new EquivalentTrees.Node('C');
+
+        root.left.left = new EquivalentTrees.Node('E');
+        root.left.left.left = new EquivalentTrees.Node('D');
+
+        root.right.left = new EquivalentTrees.Node('D');
+        root.right.right = new EquivalentTrees.Node('E');
+        root.right.right.left = new EquivalentTrees.Node('E');
+        root.right.right.right = new EquivalentTrees.Node('D');
 
         List<EquivalentTrees.Node> result = equivalentTrees.findEquivalentSubtrees(root);
 
         assertThat("Two nodes expected", result.size(), is(2));
-        assertThat("Wrong pair of nodes", result, hasItems(root.left, root.right));
+        assertThat("Left node is absent", result, hasItem(root.left));
+        assertThat("Right node is absent", result, hasItem(root.right));
     }
 
-    private EquivalentTrees.Node buildNode(char value) {
-        return new EquivalentTrees.Node(value);
-    }
 }

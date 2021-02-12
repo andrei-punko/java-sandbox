@@ -38,10 +38,10 @@ public class EquivalentTrees {
 
         @Override
         public String toString() {
-            return "Node{" +
-                    "value=" + value +
-                    ", left=" + left +
-                    ", right=" + right +
+            return "{" +
+                    value +
+                    ((left != null) ? (", l=" + left) : "") +
+                    ((right != null) ? (", r=" + right) : "") +
                     '}';
         }
     }
@@ -51,12 +51,23 @@ public class EquivalentTrees {
             return null;
         }
 
-        // Build Node -> Vocabulary map
+        // Build map { Node -> (Vocabulary of sub nodes)}
         Map<Node, Set<Character>> node2Voc = new HashMap<>();
-        buildNode2Voc(root, node2Voc);
+        buildNodeVocabulary(root, node2Voc);
+
+        // Build Node->nodeSize map
+        Map<Node, Integer> node2Size = new HashMap<>();
+        buildNode2Size(root, node2Size);
 
         // Build Set<Character> -> List<Node> map
         Map<Set<Character>, List<Node>> voc2Nodes = new HashMap<>();
+        node2Voc = node2Voc.entrySet().stream()
+//                .filter(nodeSetEntry -> !nodeSetEntry.getValue().isEmpty())
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey(),
+                        entry -> entry.getValue()
+                ));
+
         for (Node node : node2Voc.keySet()) {
             Set<Character> value = node2Voc.get(node);
 
@@ -71,7 +82,10 @@ public class EquivalentTrees {
                 .filter(entry -> entry.getValue().size() >= 2)
                 .collect(Collectors.toMap(
                         entry -> entry.getKey(),
-                        entry -> entry.getValue()
+                        entry -> entry.getValue().stream()
+                                .sorted((o1, o2) -> node2Size.get(o2) - node2Size.get(o1))
+                                .limit(2)
+                                .collect(Collectors.toList())
                 ));
         // Only absent sets with at least 2 related nodes remain
 
@@ -79,29 +93,29 @@ public class EquivalentTrees {
             return null;
         }
 
-        // Build Node->nodeSize map
-        Map<Node, Integer> node2Size = new HashMap<>();
-        buildNode2Size(root, node2Size);
+        Map<Set<Character>, List<Node>> map = voc2Nodes.entrySet().stream()
+                .sorted((o1, o2) -> o2.getValue().stream().mapToInt(node2Size::get).sum() - o1.getValue().stream().mapToInt(node2Size::get).sum())
+                .limit(1)
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey(),
+                        entry -> entry.getValue()
+                ));
 
-        // TODO: UNFINISHED: in each list of voc2Nodes.value - find two nodes with max sum size of subtree. after that - find pair with max sum
-
-        // Until task not finished - just return first element
-        return (List<Node>) voc2Nodes.values().toArray()[0];
+        return (List<Node>) map.values().toArray()[0];
     }
 
-    private Set<Character> buildNode2Voc(Node node, Map<Node, Set<Character>> node2Voc) {
+    private Set<Character> buildNodeVocabulary(Node node, Map<Node, Set<Character>> node2Voc) {
         if (!node2Voc.containsKey(node)) {
             node2Voc.put(node, new HashSet());
         }
-        node2Voc.get(node).add(node.value);
-
         if (node.left != null) {
-            node2Voc.get(node).addAll(buildNode2Voc(node.left, node2Voc));
+            node2Voc.get(node).add(node.left.value);
+            node2Voc.get(node).addAll(buildNodeVocabulary(node.left, node2Voc));
         }
         if (node.right != null) {
-            node2Voc.get(node).addAll(buildNode2Voc(node.right, node2Voc));
+            node2Voc.get(node).add(node.right.value);
+            node2Voc.get(node).addAll(buildNodeVocabulary(node.right, node2Voc));
         }
-
         return node2Voc.get(node);
     }
 
@@ -109,15 +123,14 @@ public class EquivalentTrees {
         if (!node2Size.containsKey(node)) {
             node2Size.put(node, 0);
         }
-        node2Size.put(node, node2Size.get(node) + 1);
-
         if (node.left != null) {
+            node2Size.put(node, node2Size.get(node) + 1);
             node2Size.put(node, node2Size.get(node) + buildNode2Size(node.left, node2Size));
         }
         if (node.right != null) {
+            node2Size.put(node, node2Size.get(node) + 1);
             node2Size.put(node, node2Size.get(node) + buildNode2Size(node.right, node2Size));
         }
-
         return node2Size.get(node);
     }
 }
