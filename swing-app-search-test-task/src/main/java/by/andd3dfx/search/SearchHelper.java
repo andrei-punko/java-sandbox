@@ -63,7 +63,7 @@ public class SearchHelper {
         return Jsoup
                 .connect(url)
                 .userAgent(USER_AGENT)
-                .get().select(".rc a");
+                .get().select(".g a");
     }
 
     SearchResultItem extractSearchResultItemFromLink(Element link) throws Exception {
