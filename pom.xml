@@ -15,7 +15,6 @@
     <module>hibernate-mappings</module>
     <module>two-factor-authentification</module>
     <module>pravtor-search</module>
-    <module>swing-app-search-test-task</module>
     <module>unit-tests-debugging</module>
     <module>akka-project</module>
     <module>db-versioning</module>
