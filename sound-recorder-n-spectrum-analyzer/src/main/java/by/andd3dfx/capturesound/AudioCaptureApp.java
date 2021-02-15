@@ -4,7 +4,13 @@ import by.andd3dfx.capturesound.fft.FrequencyScanner;
 import by.andd3dfx.capturesound.threads.CaptureThread;
 import by.andd3dfx.capturesound.threads.PlayThread;
 
-import javax.sound.sampled.*;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.SourceDataLine;
+import javax.sound.sampled.TargetDataLine;
 import javax.swing.*;
 import java.awt.*;
 import java.io.ByteArrayInputStream;

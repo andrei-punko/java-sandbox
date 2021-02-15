@@ -22,6 +22,7 @@
     <module>messaging-stomp-websocket</module>
     <module>dagger-sample</module>
     <module>test-containers</module>
+    <module>sound-recorder-n-spectrum-analyzer</module>
   </modules>
 
   <properties>
