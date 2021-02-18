@@ -4,8 +4,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.hamcrest.Matchers;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore("Should not track 1k.by layout 24/7")
 public class PriceSearchUtilTest {
 
     private String FIRST_CATALOG_SEARCH_URL = "https://komp.1k.by/utility-graphicscards/msi/" +
