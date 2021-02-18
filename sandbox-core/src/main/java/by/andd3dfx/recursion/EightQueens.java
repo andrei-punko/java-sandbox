@@ -2,7 +2,7 @@ package by.andd3dfx.recursion;
 
 /**
  * Place N queens to NxN board
- *
+ * <p>
  * Used Rod Stephens - 'Essential Algorithms' book
  */
 public class EightQueens {
