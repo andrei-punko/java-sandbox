@@ -10,7 +10,6 @@
   <version>1.0-SNAPSHOT</version>
 
   <modules>
-    <module>sandbox-core</module>
     <module>elasticsearch</module>
     <module>hibernate-mappings</module>
     <module>two-factor-authentification</module>
