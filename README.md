@@ -1,5 +1,5 @@
 
-## Playground for Java coding experiments
+## Sandbox for Java coding experiments
 
 * `akka-project`  
 App example with Akka framework usage 
@@ -30,17 +30,14 @@ Example of STOMP messaging over WebSockets for building interactive web applicat
 
 
 * `pravtor-search`  
-Parser for pravtor.ru site to extract some info from it
+Parser for http://pravtor.ru site to extract some info from it
+  
 
-
-* `sandbox-core`  
-Unordered staff with Java experiments. In addition, contains tasks from interviews
-
-
-* `sound-recorder-n-spectrum-analyzer`  
-Application to record a sound from microphone and play after that
-
-Application to analyze a spectrum of microphone sound 
+* `sound-recorder-n-spectrum-analyzer`
+  
+      Application to record a microphone's sound and play after that
+  
+      Application to analyze a spectrum of microphone's sound 
 
 
 * `test-containets`  
