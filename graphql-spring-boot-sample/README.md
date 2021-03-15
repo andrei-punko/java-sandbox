@@ -1,4 +1,4 @@
-## Use GraphQL in Spring Boot application
+## Example of GraphQL usage in Spring Boot application
 
 Based on: https://github.com/eugenp/tutorials/tree/master/spring-boot-modules/spring-boot-libraries
 

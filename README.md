@@ -3,54 +3,64 @@
 
 [![Java CI with Maven](https://github.com/andrei-punko/java-sandbox/actions/workflows/maven.yml/badge.svg)](https://github.com/andrei-punko/java-sandbox/actions/workflows/maven.yml)
 
-* `akka-project`  
+* **akka-project**  
 App example with Akka framework usage 
 
 
-* `dagger-sample`  
+* **custom-spring-boot-starter**  
+  Spring Boot custom Starter example.
+  
+  See its [README](custom-spring-boot-starter/README.md) for details
+
+
+* **dagger-sample**  
 Example of Dagger usage
 
 
-* `db-versioning`  
-Example of DB versioning with usage of Liquibase and Flyway
+* **db-versioning**  
+Example of DB versioning with usage of [Liquibase](db-versioning/liquibase-db) and [Flyway](db-versioning/flyway-db)
 
 
-* `elasticsearch`  
+* **elasticsearch**  
 Example of Elasticsearch usage
 
 
-* `grpc-sample`  
+* **graphql-spring-boot-sample**  
+  Example of GraphQL usage in Spring Boot application.
+  
+  See its [README](graphql-spring-boot-sample/README.md) for details
+
+
+* **grpc-sample**  
 Example of gRPC service and its client
 
 
-* `hibernate-mappings`  
+* **hibernate-mappings**  
 Example of different cases of Hibernate mappings
 
 
-* `messaging-stomp-websocket`
+* **messaging-stomp-websocket**  
 Example of STOMP messaging over WebSockets for building interactive web application
 
 
-* `pravtor-search`  
+* **pravtor-search**  
 Parser for http://pravtor.ru site to extract some info from it
   
 
-* `sound-recorder-n-spectrum-analyzer`
-  
-      Application to record a microphone's sound and play after that
-  
-      Application to analyze a spectrum of microphone's sound 
+* **sound-recorder-n-spectrum-analyzer**  
+  - [Application](sound-recorder-n-spectrum-analyzer/src/main/java/by/andd3dfx/capturesound/AudioCaptureApp.java) to record a microphone's sound and play after that
+  - [Application](sound-recorder-n-spectrum-analyzer/src/main/java/by/andd3dfx/capturesound/ShowRealTimeSpectrumApp.java) to analyze a spectrum of microphone's sound 
 
 
-* `test-containets`  
+* **test-containets**  
 Example of Java Test containers usage with help of Docker
 
 
-* `two-factor-authentification`  
+* **two-factor-authentification**  
 Example of two-factor authentication application with usage of Google authenticator
 
 
-* `unit-tests-debugging`  
+* **unit-tests-debugging**  
 Example of different cases of tests debugging
 
 
