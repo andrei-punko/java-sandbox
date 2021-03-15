@@ -3,7 +3,7 @@
 Taken from: https://github.com/eugenp/tutorials/tree/master/spring-boot-modules/spring-boot-custom-starter
 
 ### Related Article: 
-- [Creating a Custom Starter with Spring Boot](https://www.baeldung.com/spring-boot-custom-starter)
+[Creating a Custom Starter with Spring Boot](https://www.baeldung.com/spring-boot-custom-starter)
 
 ### List of modules:
 

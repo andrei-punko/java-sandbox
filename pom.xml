@@ -23,6 +23,7 @@
     <module>test-containers</module>
     <module>sound-recorder-n-spectrum-analyzer</module>
     <module>custom-spring-boot-starter</module>
+      <module>graphql-spring-boot-sample</module>
   </modules>
 
   <properties>
