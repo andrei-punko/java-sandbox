@@ -22,6 +22,7 @@
     <module>dagger-sample</module>
     <module>test-containers</module>
     <module>sound-recorder-n-spectrum-analyzer</module>
+    <module>custom-spring-boot-starter</module>
   </modules>
 
   <properties>
