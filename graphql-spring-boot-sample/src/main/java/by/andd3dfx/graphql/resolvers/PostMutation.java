@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class Mutation implements GraphQLMutationResolver {
+public class PostMutation implements GraphQLMutationResolver {
     private PostDao postDao;
 
     @Autowired
-    public Mutation(PostDao postDao) {
+    public PostMutation(PostDao postDao) {
         this.postDao = postDao;
     }
 

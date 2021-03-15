@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class Query implements GraphQLQueryResolver {
+public class PostQuery implements GraphQLQueryResolver {
     private PostDao postDao;
 
     @Autowired
-    public Query(PostDao postDao) {
+    public PostQuery(PostDao postDao) {
         this.postDao = postDao;
     }
 
