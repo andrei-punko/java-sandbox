@@ -12,7 +12,7 @@
   <artifactId>hibernate-mappings</artifactId>
 
   <properties>
-    <mysql.version>8.0.18</mysql.version>
+    <mysql.version>8.0.23</mysql.version>
   </properties>
 
   <build>
@@ -72,7 +72,7 @@
         <version>6.1.0</version>
 
         <configuration>
-          <url>jdbc:mysql://127.0.0.1:3306/db</url>
+          <url>jdbc:mysql://127.0.0.1:3306/db?allowPublicKeyRetrieval=true&amp;useSSL=false</url>
           <user>root</user>
           <password>some_password</password>
           <locations>
