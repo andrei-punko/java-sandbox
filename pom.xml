@@ -13,7 +13,6 @@
     <module>elasticsearch</module>
     <module>hibernate-mappings</module>
     <module>two-factor-authentification</module>
-    <module>pravtor-search</module>
     <module>unit-tests-debugging</module>
     <module>akka-project</module>
     <module>db-versioning</module>
@@ -23,7 +22,7 @@
     <module>test-containers</module>
     <module>sound-recorder-n-spectrum-analyzer</module>
     <module>custom-spring-boot-starter</module>
-      <module>graphql-spring-boot-sample</module>
+    <module>graphql-spring-boot-sample</module>
   </modules>
 
   <properties>
