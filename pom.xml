@@ -23,6 +23,7 @@
     <module>sound-recorder-n-spectrum-analyzer</module>
     <module>custom-spring-boot-starter</module>
     <module>graphql-spring-boot-sample</module>
+    <module>common</module>
   </modules>
 
   <properties>
