@@ -56,16 +56,6 @@
             <artifactId>postgresql</artifactId>
             <version>${postgresql.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-remote-driver</artifactId>
-            <version>${selenium-remote-driver.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-            <version>${selenium-remote-driver.version}</version>
-        </dependency>
 
         <!-- Fix issue with 'SLF4J: Failed to load class “org.slf4j.impl.StaticLoggerBinder”' -->
         <dependency>
@@ -86,7 +76,6 @@
         <log4j2.version>2.13.2</log4j2.version>
         <testcontainers.version>1.15.3</testcontainers.version>
         <postgresql.version>42.2.6</postgresql.version>
-        <selenium-remote-driver.version>3.141.59</selenium-remote-driver.version>
         <slf4j.version>1.7.30</slf4j.version>
     </properties>
 
