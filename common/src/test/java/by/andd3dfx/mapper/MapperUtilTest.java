@@ -1,6 +1,7 @@
-package by.andd3dfx;
+package by.andd3dfx.mapper;
 
-import by.andd3dfx.dto.SomeObject;
+import by.andd3dfx.mapper.dto.SomeObject;
+import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -14,8 +15,8 @@ public class MapperUtilTest {
 
         SomeObject result = MapperUtil.jsonToObject(jsonString, SomeObject.class);
 
-        assertThat(result.getName(), is("Andrei"));
-        assertThat(result.getNickname(), is("L@Rs"));
+        MatcherAssert.assertThat(result.getName(), is("Andrei"));
+        MatcherAssert.assertThat(result.getNickname(), is("L@Rs"));
     }
 
     @Test

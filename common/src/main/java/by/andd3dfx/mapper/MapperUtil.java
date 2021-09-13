@@ -1,4 +1,4 @@
-package by.andd3dfx;
+package by.andd3dfx.mapper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;

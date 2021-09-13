@@ -1,4 +1,4 @@
-package by.andd3dfx.dto;
+package by.andd3dfx.mapper.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
