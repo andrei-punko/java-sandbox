@@ -1,4 +1,4 @@
-package by.andd3dfx.elasticsearch;
+package by.andd3dfx.elasticsearch.dto;
 
 import java.util.Date;
 
@@ -13,7 +13,7 @@ public class Person {
     public Person() {
     }
 
-    Person(int age, String fullName, Date dateOfBirth) {
+    public Person(int age, String fullName, Date dateOfBirth) {
         super();
         this.age = age;
         this.fullName = fullName;

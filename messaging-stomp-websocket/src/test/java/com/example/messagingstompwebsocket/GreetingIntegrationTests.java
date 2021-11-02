@@ -2,6 +2,8 @@ package com.example.messagingstompwebsocket;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import com.example.messagingstompwebsocket.dto.Greeting;
+import com.example.messagingstompwebsocket.dto.HelloMessage;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;

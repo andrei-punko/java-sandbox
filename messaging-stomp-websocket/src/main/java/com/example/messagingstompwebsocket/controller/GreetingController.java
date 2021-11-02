@@ -1,5 +1,7 @@
-package com.example.messagingstompwebsocket;
+package com.example.messagingstompwebsocket.controller;
 
+import com.example.messagingstompwebsocket.dto.Greeting;
+import com.example.messagingstompwebsocket.dto.HelloMessage;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
