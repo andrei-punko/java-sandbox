@@ -2,6 +2,8 @@
 ## Sandbox for Java coding experiments
 
 [![Java CI with Maven](https://github.com/andrei-punko/java-sandbox/actions/workflows/maven.yml/badge.svg)](https://github.com/andrei-punko/java-sandbox/actions/workflows/maven.yml)
+[![Coverage](.github/badges/jacoco.svg)](https://github.com/andrei-punko/java-sandbox/actions/workflows/maven.yml)
+[![Branches](.github/badges/branches.svg)](https://github.com/andrei-punko/java-sandbox/actions/workflows/maven.yml)
 
 * **akka-project**  
 App example with Akka framework usage 
