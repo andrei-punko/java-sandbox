@@ -24,17 +24,27 @@
         </dependency>
         <dependency>
             <groupId>by.andd3dfx</groupId>
-            <artifactId>custom-spring-boot-starter</artifactId>
+            <artifactId>greeter-library</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>by.andd3dfx</groupId>
+            <artifactId>greeter-spring-boot-autoconfigure</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>by.andd3dfx</groupId>
+            <artifactId>greeter-spring-boot-sample-app</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>by.andd3dfx</groupId>
+            <artifactId>greeter-spring-boot-starter</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>by.andd3dfx</groupId>
             <artifactId>dagger-sample</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>by.andd3dfx</groupId>
-            <artifactId>db-versioning</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
