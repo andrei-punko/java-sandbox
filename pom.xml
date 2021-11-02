@@ -24,6 +24,7 @@
     <module>custom-spring-boot-starter</module>
     <module>graphql-spring-boot-sample</module>
     <module>common</module>
+    <module>coverage-report</module>
   </modules>
 
   <properties>
@@ -35,6 +36,8 @@
 
     <lombok.version>1.18.10</lombok.version>
     <commons-lang.version>3.8.1</commons-lang.version>
+
+    <jacoco.version>0.8.7</jacoco.version>
   </properties>
 
   <dependencies>
@@ -72,4 +75,28 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>generate-code-coverage-report</id>
+            <phase>test</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
