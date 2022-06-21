@@ -12,7 +12,7 @@
   <artifactId>hibernate-mappings</artifactId>
 
   <properties>
-    <mysql.version>8.0.23</mysql.version>
+    <mysql.version>8.0.28</mysql.version>
   </properties>
 
   <build>
