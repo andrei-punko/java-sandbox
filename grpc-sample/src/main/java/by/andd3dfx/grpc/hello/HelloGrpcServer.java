@@ -1,4 +1,4 @@
-package by.andd3dfx.hello;
+package by.andd3dfx.grpc.hello;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;

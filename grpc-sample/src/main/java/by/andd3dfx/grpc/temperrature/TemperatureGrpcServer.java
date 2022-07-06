@@ -1,4 +1,4 @@
-package by.andd3dfx.temperrature;
+package by.andd3dfx.grpc.temperrature;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;

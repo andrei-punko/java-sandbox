@@ -1,8 +1,8 @@
-package by.andd3dfx.temperrature;
+package by.andd3dfx.grpc.temperrature;
 
-import by.andd3dfx.grpc.TemperatureRequest;
-import by.andd3dfx.grpc.TemperatureResponse;
-import by.andd3dfx.grpc.TemperatureServiceGrpc.TemperatureServiceImplBase;
+import by.andd3dfx.grpc.dto.TemperatureRequest;
+import by.andd3dfx.grpc.dto.TemperatureResponse;
+import by.andd3dfx.grpc.dto.TemperatureServiceGrpc.TemperatureServiceImplBase;
 import io.grpc.stub.StreamObserver;
 import java.util.ArrayList;
 import java.util.List;

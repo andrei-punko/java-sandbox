@@ -1,8 +1,8 @@
-package by.andd3dfx.hello;
+package by.andd3dfx.grpc.hello;
 
-import by.andd3dfx.grpc.HelloRequest;
-import by.andd3dfx.grpc.HelloResponse;
-import by.andd3dfx.grpc.HelloServiceGrpc;
+import by.andd3dfx.grpc.dto.HelloRequest;
+import by.andd3dfx.grpc.dto.HelloResponse;
+import by.andd3dfx.grpc.dto.HelloServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 

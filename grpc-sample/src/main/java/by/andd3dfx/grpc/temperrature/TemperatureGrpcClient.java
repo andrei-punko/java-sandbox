@@ -1,8 +1,8 @@
-package by.andd3dfx.temperrature;
+package by.andd3dfx.grpc.temperrature;
 
-import by.andd3dfx.grpc.TemperatureRequest;
-import by.andd3dfx.grpc.TemperatureResponse;
-import by.andd3dfx.grpc.TemperatureServiceGrpc;
+import by.andd3dfx.grpc.dto.TemperatureRequest;
+import by.andd3dfx.grpc.dto.TemperatureResponse;
+import by.andd3dfx.grpc.dto.TemperatureServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import java.util.Random;
