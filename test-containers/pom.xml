@@ -8,7 +8,7 @@
 
     <parent>
         <groupId>by.andd3dfx</groupId>
-        <artifactId>sandbox-root</artifactId>
+        <artifactId>java-sandbox</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 

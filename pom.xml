@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>by.andd3dfx</groupId>
-  <artifactId>sandbox-root</artifactId>
+  <artifactId>java-sandbox</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
 

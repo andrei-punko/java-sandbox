@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>sandbox-root</artifactId>
+        <artifactId>java-sandbox</artifactId>
         <groupId>by.andd3dfx</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
