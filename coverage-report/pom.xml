@@ -69,7 +69,7 @@
         </dependency>
         <dependency>
             <groupId>by.andd3dfx</groupId>
-            <artifactId>two-factor-authentification</artifactId>
+            <artifactId>two-factor-authentication</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
