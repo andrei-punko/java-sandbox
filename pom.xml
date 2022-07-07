@@ -12,7 +12,7 @@
   <modules>
     <module>elasticsearch</module>
     <module>hibernate-mappings</module>
-    <module>two-factor-authentification</module>
+    <module>two-factor-authentication</module>
     <module>unit-tests-debugging</module>
     <module>akka-project</module>
     <module>db-versioning</module>

@@ -9,7 +9,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>two-factor-authentification</artifactId>
+  <artifactId>two-factor-authentication</artifactId>
 
   <dependencies>
     <dependency>

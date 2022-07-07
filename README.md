@@ -58,7 +58,7 @@ Parser for http://pravtor.ru site to extract some info from it
 Example of Java Test containers usage with help of Docker
 
 
-* **two-factor-authentification**  
+* **two-factor-authentication**  
 Example of two-factor authentication application with usage of Google authenticator
 
 
