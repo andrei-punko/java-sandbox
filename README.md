@@ -9,6 +9,10 @@
 App example with Akka framework usage 
 
 
+* **common**  
+Example of annotation-driven masker
+
+
 * **custom-spring-boot-starter**  
   Spring Boot custom Starter example.
   
@@ -45,16 +49,12 @@ Example of different cases of Hibernate mappings
 Example of STOMP messaging over WebSockets for building interactive web application
 
 
-* **pravtor-search**  
-Parser for http://pravtor.ru site to extract some info from it
-  
-
 * **sound-recorder-n-spectrum-analyzer**  
   - [Application](sound-recorder-n-spectrum-analyzer/src/main/java/by/andd3dfx/capturesound/AudioCaptureApp.java) to record a microphone's sound and play after that
   - [Application](sound-recorder-n-spectrum-analyzer/src/main/java/by/andd3dfx/capturesound/ShowRealTimeSpectrumApp.java) to analyze a spectrum of microphone's sound 
 
 
-* **test-containets**  
+* **test-containers**  
 Example of Java Test containers usage with help of Docker
 
 
