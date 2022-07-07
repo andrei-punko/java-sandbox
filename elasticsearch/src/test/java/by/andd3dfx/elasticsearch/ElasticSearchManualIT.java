@@ -26,7 +26,6 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -53,7 +52,6 @@ public class ElasticSearchManualIT {
             IndexResponse response = createIndexResponse(person);
             assertEquals(Result.CREATED, response.getResult());
             assertEquals(response.getIndex(), "people");
-            assertEquals(response.getType(), "Bla");
         }
         sleep(1000);
     }
@@ -69,15 +67,6 @@ public class ElasticSearchManualIT {
             .prepareIndex("people", "Bla")
             .setSource(jsonObject, XContentType.JSON)
             .get();
-    }
-
-    @Ignore("Failed locally")
-    @Test
-    public void allItemsSearch() {
-        SearchResponse response = client
-            .prepareSearch()
-            .get();
-        checkSearchResponse(response, 5);
     }
 
     @Test
