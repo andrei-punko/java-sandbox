@@ -10,12 +10,19 @@ App example with Akka framework usage
 
 
 * **common**  
-Example of annotation-driven masker
+  - Digital signing of string/file/xml
+  - Encryption example
+  - Guice usage example
+  - JMS connector to get queue size by JMX
+  - MapStruct mapper example
+  - Example of annotation-driven masker
+  - RestClient
+  - Working with sockets
 
 
 * **custom-spring-boot-starter**  
-  Spring Boot custom Starter example.
-  
+  Spring Boot custom Starter example
+
   See its [README](custom-spring-boot-starter/README.md) for details
 
 
@@ -65,6 +72,9 @@ Example of two-factor authentication application with usage of Google authentica
 * **unit-tests-debugging**  
 Example of different cases of tests debugging
 
+## Prerequisites
+- Maven 3
+- JDK 17
 
 ### Build notes
 To allow `io.fabric8:docker-maven-plugin` manipulate with Docker images need to add 

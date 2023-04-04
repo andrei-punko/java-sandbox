@@ -32,6 +32,7 @@ jobs:
         jacoco-csv-file: coverage-report/target/site/jacoco-aggregate/jacoco.csv
 
     - name: Commit the badge (if it changed)
+      if: ${{ github.event_name != 'pull_request' }}
       run: |
         if [[ `git status --porcelain` ]]; then
           git config --global user.name 'Github workflow'
