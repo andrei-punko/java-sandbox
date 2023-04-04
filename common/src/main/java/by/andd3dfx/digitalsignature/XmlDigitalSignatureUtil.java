@@ -30,6 +30,8 @@ import java.util.List;
 
 /**
  * https://docs.oracle.com/javase/8/docs/technotes/guides/security/xmldsig/XMLDigitalSignature.html
+ *
+ * https://docs.oracle.com/en/java/javase/18/security/java-xml-digital-signature-api-overview-and-tutorial.html
  */
 public class XmlDigitalSignatureUtil {
 
@@ -52,9 +54,9 @@ public class XmlDigitalSignatureUtil {
         // * Creating a Public Key Pair
         // We generate a public key pair. Later in the example, we will use the private key to generate
         // the signature. We create the key pair with a KeyPairGenerator.
-        // In this example, we will create a DSA KeyPair with a length of 512 bytes :
-        KeyPairGenerator kpg = KeyPairGenerator.getInstance("DSA");
-        kpg.initialize(512);
+        // In this example, we will create a DSA KeyPair with a length of 1024 bytes :
+        KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
+        kpg.initialize(2048);
         KeyPair kp = kpg.generateKeyPair();
 
         // In practice, the private key is usually previously generated and stored in a KeyStore file with an associated public key certificate.
@@ -78,7 +80,7 @@ public class XmlDigitalSignatureUtil {
         // - A single Transform, the enveloped Transform, which is required for enveloped signatures so that the signature itself
         // is removed before calculating the signature value
         Reference ref = fac.newReference
-                ("", fac.newDigestMethod(DigestMethod.SHA1, null),
+                ("", fac.newDigestMethod(DigestMethod.SHA256, null),
                         Collections.singletonList
                                 (fac.newTransform(Transform.ENVELOPED,
                                         (TransformParameterSpec) null)), null, null
@@ -93,7 +95,7 @@ public class XmlDigitalSignatureUtil {
                 (fac.newCanonicalizationMethod
                                 (CanonicalizationMethod.INCLUSIVE_WITH_COMMENTS,
                                         (C14NMethodParameterSpec) null),
-                        fac.newSignatureMethod(SignatureMethod.DSA_SHA1, null),
+                        fac.newSignatureMethod(SignatureMethod.RSA_SHA256, null),
                         Collections.singletonList(ref));
 
         // Next, we create the optional KeyInfo object, which contains information that enables the recipient
@@ -255,10 +257,10 @@ public class XmlDigitalSignatureUtil {
 
         static boolean algEquals(String algURI, String algName) {
             if (algName.equalsIgnoreCase("DSA") &&
-                    algURI.equalsIgnoreCase(SignatureMethod.DSA_SHA1)) {
+                    algURI.equalsIgnoreCase(SignatureMethod.DSA_SHA256)) {
                 return true;
             } else if (algName.equalsIgnoreCase("RSA") &&
-                    algURI.equalsIgnoreCase(SignatureMethod.RSA_SHA1)) {
+                    algURI.equalsIgnoreCase(SignatureMethod.RSA_SHA256)) {
                 return true;
             } else {
                 return false;
