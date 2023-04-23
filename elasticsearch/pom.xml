@@ -12,7 +12,7 @@
   <artifactId>elasticsearch</artifactId>
 
   <properties>
-    <elasticsearch.version>7.14.0</elasticsearch.version>
+    <elasticsearch.version>7.17.9</elasticsearch.version>
     <fastjson.version>1.2.83</fastjson.version>
   </properties>
 
