@@ -16,6 +16,10 @@
 
   <name>DB versioning : Liquibase</name>
 
+  <properties>
+    <liquibase.version>4.21.1</liquibase.version>
+  </properties>
+
   <build>
     <plugins>
       <plugin>
