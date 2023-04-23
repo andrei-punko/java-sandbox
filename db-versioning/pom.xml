@@ -15,7 +15,7 @@
 
   <properties>
     <liquibase.version>3.5.3</liquibase.version>
-    <h2.db.version>1.4.191</h2.db.version>
+    <h2.db.version>2.1.214</h2.db.version>
     <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
     <jdbc.url>dbc:h2:mem:liquibase</jdbc.url>
     <jdbc.username>liquibase</jdbc.username>
