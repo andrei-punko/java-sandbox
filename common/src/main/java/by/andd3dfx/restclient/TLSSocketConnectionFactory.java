@@ -1,5 +1,20 @@
 package by.andd3dfx.restclient;
 
+import org.bouncycastle.crypto.tls.Certificate;
+import org.bouncycastle.crypto.tls.CertificateRequest;
+import org.bouncycastle.crypto.tls.DefaultTlsClient;
+import org.bouncycastle.crypto.tls.ExtensionType;
+import org.bouncycastle.crypto.tls.TlsAuthentication;
+import org.bouncycastle.crypto.tls.TlsClientProtocol;
+import org.bouncycastle.crypto.tls.TlsCredentials;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import javax.net.ssl.HandshakeCompletedListener;
+import javax.net.ssl.SSLPeerUnverifiedException;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSessionContext;
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -20,21 +35,6 @@ import java.security.cert.CertificateFactory;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
-import javax.net.ssl.HandshakeCompletedListener;
-import javax.net.ssl.SSLPeerUnverifiedException;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSessionContext;
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.SSLSocketFactory;
-import javax.security.cert.X509Certificate;
-import org.bouncycastle.crypto.tls.Certificate;
-import org.bouncycastle.crypto.tls.CertificateRequest;
-import org.bouncycastle.crypto.tls.DefaultTlsClient;
-import org.bouncycastle.crypto.tls.ExtensionType;
-import org.bouncycastle.crypto.tls.TlsAuthentication;
-import org.bouncycastle.crypto.tls.TlsClientProtocol;
-import org.bouncycastle.crypto.tls.TlsCredentials;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 /**
  * This class needed as workaround to allow us to use TLSv.1.2 with Java 6u45
@@ -180,11 +180,6 @@ public class TLSSocketConnectionFactory extends SSLSocketFactory {
                     @Override
                     public int getPacketBufferSize() {
                         throw new UnsupportedOperationException();
-                    }
-
-                    @Override
-                    public X509Certificate[] getPeerCertificateChain() throws SSLPeerUnverifiedException {
-                        return null;
                     }
 
                     @Override

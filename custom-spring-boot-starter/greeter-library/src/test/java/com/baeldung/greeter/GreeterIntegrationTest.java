@@ -19,7 +19,7 @@ public class GreeterIntegrationTest {
     private static GreetingConfig greetingConfig;
 
     @BeforeClass
-    public static void initalizeGreetingConfig() {
+    public static void initializeGreetingConfig() {
         greetingConfig = new GreetingConfig();
         greetingConfig.put(USER_NAME, "World");
         greetingConfig.put(MORNING_MESSAGE, "Good Morning");

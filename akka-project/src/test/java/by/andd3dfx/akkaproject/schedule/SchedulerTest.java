@@ -56,7 +56,7 @@ public class SchedulerTest {
     }
 
     @Test
-    public void performRegularAction() throws Exception {
+    public void performRegularAction() {
         DataItem dataItem = new DataItem();
         List<DataItem> dataItems = Arrays.asList(dataItem);
 
