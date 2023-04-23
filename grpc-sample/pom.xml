@@ -12,7 +12,7 @@
   <artifactId>grpc-sample</artifactId>
 
   <properties>
-    <io.grpc.version>1.25.0</io.grpc.version>
+    <io.grpc.version>1.54.1</io.grpc.version>
   </properties>
 
   <dependencies>
