@@ -67,7 +67,7 @@
       <!-- This plugin used for running integration tests in integration-test build phase -->
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>2.22.1</version>
+        <version>3.0.0</version>
         <executions>
           <execution>
             <goals>
