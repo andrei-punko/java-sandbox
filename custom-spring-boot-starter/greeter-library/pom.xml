@@ -5,8 +5,7 @@
 
     <artifactId>greeter-library</artifactId>
     <version>1.0-SNAPSHOT</version>
-	<name>greeter-library</name>
-	
+
     <parent>
         <groupId>by.andd3dfx</groupId>
         <artifactId>custom-spring-boot-starter</artifactId>

@@ -22,13 +22,13 @@
         <dependency>
             <groupId>by.andd3dfx</groupId>
             <artifactId>greeter-library</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>by.andd3dfx</groupId>
             <artifactId>greeter-spring-boot-autoconfigure</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
