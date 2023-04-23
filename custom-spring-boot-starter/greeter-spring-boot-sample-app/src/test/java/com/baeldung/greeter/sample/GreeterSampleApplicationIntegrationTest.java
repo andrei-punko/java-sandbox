@@ -1,7 +1,6 @@
 package com.baeldung.greeter.sample;
 
 import com.baeldung.greeter.library.Greeter;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import java.time.LocalDateTime;
 
 import static org.junit.Assert.assertEquals;
 
-@Disabled
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = GreeterSampleApplication.class)
 public class GreeterSampleApplicationIntegrationTest {
