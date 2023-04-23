@@ -69,7 +69,7 @@
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
-        <version>6.1.0</version>
+        <version>9.16.3</version>
 
         <configuration>
           <url>jdbc:mysql://127.0.0.1:3306/db?allowPublicKeyRetrieval=true&amp;useSSL=false</url>
