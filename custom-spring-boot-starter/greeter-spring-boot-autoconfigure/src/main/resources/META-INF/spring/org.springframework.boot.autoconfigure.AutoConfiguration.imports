@@ -1,0 +1,2 @@
+# Support of autoconfiguration for Spring Boot 3:
+com.baeldung.greeter.autoconfigure.GreeterAutoConfiguration
