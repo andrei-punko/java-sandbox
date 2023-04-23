@@ -15,7 +15,7 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <activemq.version>5.14.5</activemq.version>
+        <activemq.version>5.16.6</activemq.version>
     </properties>
 
     <dependencies>
