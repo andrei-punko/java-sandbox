@@ -1,13 +1,15 @@
 package by.andd3dfx.restclient;
 
-import org.bouncycastle.crypto.tls.Certificate;
-import org.bouncycastle.crypto.tls.CertificateRequest;
-import org.bouncycastle.crypto.tls.DefaultTlsClient;
-import org.bouncycastle.crypto.tls.ExtensionType;
-import org.bouncycastle.crypto.tls.TlsAuthentication;
-import org.bouncycastle.crypto.tls.TlsClientProtocol;
-import org.bouncycastle.crypto.tls.TlsCredentials;
+import org.bouncycastle.tls.Certificate;
+import org.bouncycastle.tls.CertificateRequest;
+import org.bouncycastle.tls.DefaultTlsClient;
+import org.bouncycastle.tls.ExtensionType;
+import org.bouncycastle.tls.TlsAuthentication;
+import org.bouncycastle.tls.TlsClientProtocol;
+import org.bouncycastle.tls.TlsCredentials;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.tls.TlsServerCertificate;
+import org.bouncycastle.tls.crypto.impl.bc.BcTlsCrypto;
 
 import javax.net.ssl.HandshakeCompletedListener;
 import javax.net.ssl.SSLPeerUnverifiedException;
@@ -58,7 +60,7 @@ public class TLSSocketConnectionFactory extends SSLSocketFactory {
         }
 
         final TlsClientProtocol tlsClientProtocol = new TlsClientProtocol(socket.getInputStream(),
-            socket.getOutputStream(), new SecureRandom());
+            socket.getOutputStream());
 
         return _createSSLSocket(host, tlsClientProtocol);
     }
@@ -294,7 +296,7 @@ public class TLSSocketConnectionFactory extends SSLSocketFactory {
 
             @Override
             public void startHandshake() throws IOException {
-                tlsClientProtocol.connect(new DefaultTlsClient() {
+                tlsClientProtocol.connect(new DefaultTlsClient(new BcTlsCrypto(new SecureRandom())) {
 
                     @SuppressWarnings("unchecked")
                     @Override
@@ -323,17 +325,17 @@ public class TLSSocketConnectionFactory extends SSLSocketFactory {
                         return new TlsAuthentication() {
 
                             @Override
-                            public void notifyServerCertificate(Certificate serverCertificate) throws IOException {
+                            public void notifyServerCertificate(TlsServerCertificate tlsServerCertificate) throws IOException {
                                 try {
                                     KeyStore ks = _loadKeyStore();
 
                                     CertificateFactory cf = CertificateFactory.getInstance("X.509");
                                     List<java.security.cert.Certificate> certs = new LinkedList<java.security.cert.Certificate>();
                                     boolean trustedCertificate = false;
-                                    for (org.bouncycastle.asn1.x509.Certificate c : serverCertificate
-                                        .getCertificateList()) {
+                                    for (var c : tlsServerCertificate.getCertificate()
+                                            .getCertificateList()) {
                                         java.security.cert.Certificate cert = cf
-                                            .generateCertificate(new ByteArrayInputStream(c.getEncoded()));
+                                                .generateCertificate(new ByteArrayInputStream(c.getEncoded()));
                                         certs.add(cert);
 
                                         String alias = ks.getCertificateAlias(cert);
