@@ -12,7 +12,7 @@
   <artifactId>dagger-sample</artifactId>
 
   <properties>
-    <dagger.version>2.46</dagger.version>
+    <dagger.version>2.46.1</dagger.version>
   </properties>
 
   <dependencies>
