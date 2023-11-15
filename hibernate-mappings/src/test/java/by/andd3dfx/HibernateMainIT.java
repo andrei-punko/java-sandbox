@@ -23,10 +23,10 @@ public class HibernateMainIT {
         Session session = sf.openSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
 
-        getFromDbAndCheck(session, Book.class, 3);
-        getFromDbAndCheck(session, Address.class, 3);
+        getFromDbAndCheck(session, Book.class, 4);
+        getFromDbAndCheck(session, Address.class, 2);
         getFromDbAndCheck(session, Author.class, 3);
-        getFromDbAndCheck(session, Publisher.class, 3);
+        getFromDbAndCheck(session, Publisher.class, 2);
 
         getFromDbAndCheck(entityManager, "ItemWithoutSize", 1);
         getFromDbAndCheck(entityManager, "ItemWithLengthAndDiameter", 2);
