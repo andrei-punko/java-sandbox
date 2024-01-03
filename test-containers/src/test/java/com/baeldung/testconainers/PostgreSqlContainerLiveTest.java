@@ -5,9 +5,7 @@ import org.junit.Test;
 import org.junit.platform.commons.annotation.Testable;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
@@ -20,17 +18,22 @@ public class PostgreSqlContainerLiveTest {
 
     @Test
     public void whenSelectQueryExecuted_thenResultsReturned() throws Exception {
-        ResultSet resultSet = performQuery(postgresContainer, "SELECT 1");
-        resultSet.next();
-        int result = resultSet.getInt(1);
+        var result = performQuery(postgresContainer, "SELECT 1");
         assertEquals(1, result);
     }
 
-    private ResultSet performQuery(PostgreSQLContainer postgres, String query) throws SQLException {
-        String jdbcUrl = postgres.getJdbcUrl();
-        String username = postgres.getUsername();
-        String password = postgres.getPassword();
-        Connection conn = DriverManager.getConnection(jdbcUrl, username, password);
-        return conn.createStatement().executeQuery(query);
+    private Object performQuery(PostgreSQLContainer container, String query) throws SQLException {
+        var jdbcUrl = container.getJdbcUrl();
+        var username = container.getUsername();
+        var password = container.getPassword();
+
+        try (var connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+            try (var stmt = connection.createStatement()) {
+                try (var rs = stmt.executeQuery(query)) {
+                    rs.next();
+                    return rs.getObject(1);
+                }
+            }
+        }
     }
 }
