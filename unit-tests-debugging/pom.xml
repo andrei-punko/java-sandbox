@@ -16,9 +16,8 @@
       <plugins>
         <!-- Used to run tests -->
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0</version>
+          <version>${maven-surefire-plugin.version}</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -26,9 +25,8 @@
     <plugins>
       <!-- Used to run integration tests -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>${maven-failsafe-plugin.version}</version>
         <executions>
           <execution>
             <goals>

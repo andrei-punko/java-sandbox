@@ -20,7 +20,7 @@
       <plugin>
         <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>0.42.1</version>
+        <version>${docker-maven-plugin.version}</version>
         <configuration>
           <showLogs>true</showLogs>
           <images>
@@ -69,7 +69,7 @@
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
-        <version>9.19.4</version>
+        <version>${flyway-maven-plugin.version}</version>
 
         <configuration>
           <url>jdbc:mysql://127.0.0.1:3306/db?allowPublicKeyRetrieval=true&amp;useSSL=false</url>
@@ -93,9 +93,8 @@
       </plugin>
 
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.11.0</version>
+        <version>${maven-compiler-plugin.version}</version>
         <configuration>
           <annotationProcessorPaths>
             <path>
@@ -110,7 +109,7 @@
        <!--This plugin used for running integration tests in integration-test build phase-->
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>${maven-failsafe-plugin.version}</version>
         <executions>
           <execution>
             <goals>

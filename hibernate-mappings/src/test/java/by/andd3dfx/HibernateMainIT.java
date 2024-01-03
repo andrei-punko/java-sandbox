@@ -18,7 +18,7 @@ import org.junit.Test;
 public class HibernateMainIT {
 
     @Test
-    public void main() {
+    public void checkRecordsExistence() {
         SessionFactory sf = new Configuration().configure().buildSessionFactory();
         Session session = sf.openSession();
         EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();

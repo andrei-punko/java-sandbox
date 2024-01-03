@@ -13,7 +13,7 @@
 
   <properties>
     <elasticsearch.version>7.17.14</elasticsearch.version>
-    <fastjson.version>2.0.29</fastjson.version>
+    <fastjson.version>2.0.44</fastjson.version>
   </properties>
 
   <build>
@@ -21,7 +21,7 @@
       <plugin>
         <groupId>io.fabric8</groupId>
         <artifactId>docker-maven-plugin</artifactId>
-        <version>0.42.1</version>
+        <version>${docker-maven-plugin.version}</version>
         <configuration>
           <showLogs>true</showLogs>
           <images>
@@ -67,7 +67,7 @@
       <!-- This plugin used for running integration tests in integration-test build phase -->
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>${maven-failsafe-plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -92,8 +92,8 @@
       <version>${elasticsearch.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
+      <groupId>com.alibaba.fastjson2</groupId>
+      <artifactId>fastjson2</artifactId>
       <version>${fastjson.version}</version>
     </dependency>
   </dependencies>

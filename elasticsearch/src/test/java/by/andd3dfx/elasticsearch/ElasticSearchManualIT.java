@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import by.andd3dfx.elasticsearch.dto.Person;
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ import org.junit.Test;
  */
 public class ElasticSearchManualIT {
 
-    private static List<Person> listOfPersons = new ArrayList<Person>() {{
+    private static List<Person> listOfPersons = new ArrayList<>() {{
         add(new Person(8, "John Woodcraft", new Date()));
         add(new Person(10, "John Doe", new Date()));
         add(new Person(25, "Janette Doe", new Date()));

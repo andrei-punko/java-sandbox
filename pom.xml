@@ -34,10 +34,18 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
 
-    <lombok.version>1.18.28</lombok.version>
-    <commons-lang3.version>3.12.0</commons-lang3.version>
-    <spring-boot.version>3.1.1</spring-boot.version>
-    <jacoco.version>0.8.10</jacoco.version>
+    <lombok.version>1.18.30</lombok.version>
+    <commons-lang3.version>3.14.0</commons-lang3.version>
+    <spring-boot.version>3.2.1</spring-boot.version>
+    <h2.db.version>2.2.220</h2.db.version>
+    <testcontainers.version>1.19.3</testcontainers.version>
+
+    <jacoco-maven-plugin.version>0.8.11</jacoco-maven-plugin.version>
+    <docker-maven-plugin.version>0.43.4</docker-maven-plugin.version>
+    <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+    <maven-failsafe-plugin.version>3.2.3</maven-failsafe-plugin.version>
+    <maven-surefire-plugin.version>3.2.3</maven-surefire-plugin.version>
+    <flyway-maven-plugin.version>10.4.1</flyway-maven-plugin.version>
   </properties>
 
   <dependencies>
@@ -45,12 +53,6 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.13.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jmock</groupId>
-      <artifactId>jmock-legacy</artifactId>
-      <version>2.12.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -81,7 +83,7 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <version>${jacoco.version}</version>
+        <version>${jacoco-maven-plugin.version}</version>
         <executions>
           <execution>
             <goals>

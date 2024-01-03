@@ -10,7 +10,6 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <groupId>by.andd3dfx</groupId>
   <artifactId>liquibase-db</artifactId>
   <packaging>jar</packaging>
 

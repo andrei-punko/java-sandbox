@@ -13,6 +13,7 @@ import org.jmock.lib.concurrent.Synchroniser;
 import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.allOf;
@@ -20,7 +21,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasProperty;
 
 public class MigrationActorTest {
-    @org.junit.Rule
+    @Rule
     public final JUnitRuleMockery mockery = new JUnitRuleMockery() {{
         setImposteriser(ClassImposteriser.INSTANCE);
         setThreadingPolicy(new Synchroniser());

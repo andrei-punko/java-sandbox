@@ -4,16 +4,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.0.6</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <artifactId>java-sandbox</artifactId>
+    <groupId>by.andd3dfx</groupId>
+    <version>1.0-SNAPSHOT</version>
   </parent>
 
-  <groupId>by.andd3dfx</groupId>
   <artifactId>messaging-stomp-websocket</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>messaging-stomp-websocket</name>
 
   <dependencies>
     <dependency>
@@ -63,8 +59,29 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
       </plugin>
     </plugins>
   </build>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.10.1</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+
+      <dependency>
+        <!-- Import dependency management from Spring Boot -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>

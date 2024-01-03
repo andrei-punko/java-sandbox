@@ -3,9 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>by.andd3dfx</groupId>
   <artifactId>akka-project</artifactId>
-  <version>1.0-SNAPSHOT</version>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
@@ -99,8 +97,8 @@
 
       <!-- https://github.com/spring-projects/spring-framework/issues/28699 -->
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
         <configuration>
           <argLine>
             --add-opens java.base/java.lang=ALL-UNNAMED

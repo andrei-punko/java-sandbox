@@ -71,12 +71,10 @@
     </dependencies>
 
     <properties>
-        <junit.platform.version>1.9.2</junit.platform.version>
-        <junit.vintage.version>5.9.3</junit.vintage.version>
-        <log4j2.version>2.20.0</log4j2.version>
-        <testcontainers.version>1.18.0</testcontainers.version>
-        <postgresql.version>42.6.0</postgresql.version>
-        <slf4j.version>2.0.7</slf4j.version>
+        <junit.platform.version>1.10.1</junit.platform.version>
+        <junit.vintage.version>5.10.1</junit.vintage.version>
+        <log4j2.version>2.22.1</log4j2.version>
+        <postgresql.version>42.7.1</postgresql.version>
+        <slf4j.version>2.0.10</slf4j.version>
     </properties>
-
 </project>
