@@ -2,26 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>java-sandbox</artifactId>
+    <groupId>by.andd3dfx</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
 
   <artifactId>akka-project</artifactId>
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.0.6</version>
-    <relativePath/> <!-- lookup parent from repository -->
-  </parent>
-
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <java.version>17</java.version>
     <akka.version>[2.5.16,)</akka.version>
     <jmock.version>2.12.0</jmock.version>
   </properties>
 
   <dependencies>
-    <!-- Spring boot dependencies -->
+    <!-- Spring Boot -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
@@ -35,7 +30,7 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!-- Test dependencies -->
+    <!-- Tests -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -93,6 +88,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
       </plugin>
 
       <!-- https://github.com/spring-projects/spring-framework/issues/28699 -->
@@ -113,4 +109,25 @@
       </plugin>
     </plugins>
   </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>5.10.1</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+
+      <dependency>
+        <!-- Import dependency management from Spring Boot -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
