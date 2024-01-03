@@ -1,5 +1,6 @@
 
 create table PERSON (
-    ID int not null,
-    NAME varchar(100) not null
+    id int not null,
+    name varchar(100) not null,
+    primary key (id)
 );
