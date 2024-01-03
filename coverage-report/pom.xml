@@ -44,6 +44,21 @@
         </dependency>
         <dependency>
             <groupId>by.andd3dfx</groupId>
+            <artifactId>liquibase-db</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>by.andd3dfx</groupId>
+            <artifactId>flyway-db</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>by.andd3dfx</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>by.andd3dfx</groupId>
             <artifactId>graphql-spring-boot-sample</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -69,7 +84,17 @@
         </dependency>
         <dependency>
             <groupId>by.andd3dfx</groupId>
+            <artifactId>test-containers</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>by.andd3dfx</groupId>
             <artifactId>two-factor-authentication</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>by.andd3dfx</groupId>
+            <artifactId>unit-tests-debugging</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

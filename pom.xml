@@ -6,25 +6,26 @@
 
   <groupId>by.andd3dfx</groupId>
   <artifactId>java-sandbox</artifactId>
-  <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
 
+  <packaging>pom</packaging>
+
   <modules>
-    <module>elasticsearch</module>
-    <module>hibernate-mappings</module>
-    <module>two-factor-authentication</module>
-    <module>unit-tests-debugging</module>
     <module>akka-project</module>
-    <module>db-versioning</module>
-    <module>grpc-sample</module>
-    <module>messaging-stomp-websocket</module>
-    <module>dagger-sample</module>
-    <module>test-containers</module>
-    <module>sound-recorder-n-spectrum-analyzer</module>
-    <module>custom-spring-boot-starter</module>
-    <module>graphql-spring-boot-sample</module>
     <module>common</module>
     <module>coverage-report</module>
+    <module>custom-spring-boot-starter</module>
+    <module>dagger-sample</module>
+    <module>db-versioning</module>
+    <module>elasticsearch</module>
+    <module>graphql-spring-boot-sample</module>
+    <module>grpc-sample</module>
+    <module>hibernate-mappings</module>
+    <module>messaging-stomp-websocket</module>
+    <module>sound-recorder-n-spectrum-analyzer</module>
+    <module>test-containers</module>
+    <module>two-factor-authentication</module>
+    <module>unit-tests-debugging</module>
   </modules>
 
   <properties>
@@ -98,6 +99,13 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <excludes>
+            <exclude>**/config/**</exclude>
+            <exclude>**/dto/**</exclude>
+            <exclude>**/model/**</exclude>
+          </excludes>
+        </configuration>
       </plugin>
     </plugins>
   </build>
