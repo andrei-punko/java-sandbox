@@ -16,7 +16,6 @@ App example with Akka framework usage
   - JMS connector to get queue size by JMX
   - MapStruct mapper example
   - Example of annotation-driven masker
-  - RestClient
   - Working with sockets
 
 
