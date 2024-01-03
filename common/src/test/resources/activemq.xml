@@ -6,7 +6,7 @@
 
   <broker xmlns="http://activemq.apache.org/schema/core" brokerName="localhost" dataDirectory="ActiveMQData" useShutdownHook="false">
     <persistenceAdapter>
-      <kahaDB directory="target/ActiveMQData/kahadb"/>
+      <kahaDB directory="common/target/ActiveMQData/kahadb"/>
     </persistenceAdapter>
 
     <transportConnectors>
