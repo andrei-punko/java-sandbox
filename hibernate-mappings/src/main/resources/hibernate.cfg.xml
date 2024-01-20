@@ -18,8 +18,9 @@
     <mapping class="by.andd3dfx.model.library.Address"/>
     <mapping class="by.andd3dfx.model.library.Publisher"/>
 
-    <mapping class="by.andd3dfx.model.shop.ItemWithLengthAndDiameter"/>
-    <mapping class="by.andd3dfx.model.shop.ItemWithoutSize"/>
-    <mapping class="by.andd3dfx.model.shop.ItemWithThreeSizes"/>
+    <mapping class="by.andd3dfx.model.shop.ZeroSizeItem"/>
+    <mapping class="by.andd3dfx.model.shop.OneSizeItem"/>
+    <mapping class="by.andd3dfx.model.shop.TwoSizeItem"/>
+    <mapping class="by.andd3dfx.model.shop.ThreeSizeItem"/>
   </session-factory>
 </hibernate-configuration>

@@ -7,25 +7,17 @@ import lombok.Data;
 
 @Data
 @Entity
-@DiscriminatorValue("BOX")
-public class ItemWithThreeSizes extends BaseItem {
+@DiscriminatorValue("2-size")
+public class TwoSizeItem extends OneSizeItem {
 
-    @Column(name = "size_1")
-    private Double length;
-
-    @Column(name = "size_2")
+    @Column
     private Double width;
-
-    @Column(name = "size_3")
-    private Double height;
 
     @Override
     public String toString() {
-        return "ItemWithThreeSizes{" +
+        return "TwoSizeItem{" +
                 super.toString() +
-                "length=" + length +
                 ", width=" + width +
-                ", height=" + height +
                 '}';
     }
 }
