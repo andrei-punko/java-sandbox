@@ -3,36 +3,38 @@ package by.andd3dfx;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import by.andd3dfx.model.library.Address;
 import by.andd3dfx.model.library.Author;
 import by.andd3dfx.model.library.Book;
 import by.andd3dfx.model.library.Publisher;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
+import lombok.SneakyThrows;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 
 public class HibernateMainIT {
 
+    @SneakyThrows
     @Test
     public void checkRecordsExistence() {
-        SessionFactory sf = new Configuration().configure().buildSessionFactory();
-        Session session = sf.openSession();
-        EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
+        try (var sessionFactory = new Configuration().configure().buildSessionFactory()) {
+            try (var session = sessionFactory.openSession()) {
+                getFromDbAndCheck(session, Book.class, 4);
+                getFromDbAndCheck(session, Address.class, 2);
+                getFromDbAndCheck(session, Author.class, 3);
+                getFromDbAndCheck(session, Publisher.class, 2);
 
-        getFromDbAndCheck(session, Book.class, 4);
-        getFromDbAndCheck(session, Address.class, 2);
-        getFromDbAndCheck(session, Author.class, 3);
-        getFromDbAndCheck(session, Publisher.class, 2);
-
-        getFromDbAndCheck(entityManager, "ItemWithoutSize", 1);
-        getFromDbAndCheck(entityManager, "ItemWithLengthAndDiameter", 2);
-        getFromDbAndCheck(entityManager, "ItemWithThreeSizes", 1);
-
-        session.close();
+                EntityManager entityManager = session.getEntityManagerFactory().createEntityManager();
+                getFromDbAndCheck(entityManager, "ZeroSizeItem", 1);
+                getFromDbAndCheck(entityManager, "OneSizeItem", 1);
+                getFromDbAndCheck(entityManager, "TwoSizeItem", 2);
+                getFromDbAndCheck(entityManager, "ThreeSizeItem", 1);
+            }
+        }
     }
 
     private void getFromDbAndCheck(Session session, Class clazz, int expectedItemsCount) {
