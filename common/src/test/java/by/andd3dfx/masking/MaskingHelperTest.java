@@ -1,17 +1,17 @@
 package by.andd3dfx.masking;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 import by.andd3dfx.masking.dto.PortfolioResponse;
 import by.andd3dfx.masking.dto.WithoutAnyAnnotation;
 import by.andd3dfx.masking.dto.WithoutMasked;
 import by.andd3dfx.masking.dto.WithoutMaskedProperty;
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MaskingHelperTest {
 
@@ -63,18 +63,20 @@ public class MaskingHelperTest {
                 .integer(345)
                 .integerList(Arrays.asList(90, 89, 88))
                 .baseInt(21)
-                .baseIntArray(new int[] {56, 45})
+                .baseIntArray(new int[]{56, 45})
                 .build();
 
         PortfolioResponse result = MaskingHelper.mask(object);
 
         checkPortfolioResponseAsserts(result, "Alien", "123456******5678");
-        assertThat(result.getStringList(), is(Arrays.asList("one", "two", "1116788912560023")));
-        assertThat(result.getMaskedStringList(), is(Arrays.asList("***", "***", "***")));
-        assertThat(result.getStringSet(), is(Set.of("Axton", "Maya", "1116788912567823")));
-        assertThat(result.getMaskedStringSet(), is(Set.of("Axton", "Brick", "121678-ZZZ-7823")));
-        assertThat(result.getStringToStringMap(), is(Map.of("Bob", "1116788912560099", "Mary", "1116788912560088")));
-        assertThat(result.getMaskedStringToStringMap(), is(Map.of("Bob", "111678-XYZ-0077", "Mary", "111678-XYZ-0066")));
+        assertThat(result.getStringList()).isEqualTo(Arrays.asList("one", "two", "1116788912560023"));
+        assertThat(result.getMaskedStringList()).isEqualTo(Arrays.asList("***", "***", "***"));
+        assertThat(result.getStringSet()).isEqualTo(Set.of("Axton", "Maya", "1116788912567823"));
+        assertThat(result.getMaskedStringSet()).isEqualTo(Set.of("Axton", "Brick", "121678-ZZZ-7823"));
+        assertThat(result.getStringToStringMap()).isEqualTo(
+                Map.of("Bob", "1116788912560099", "Mary", "1116788912560088"));
+        assertThat(result.getMaskedStringToStringMap()).isEqualTo(
+                Map.of("Bob", "111678-XYZ-0077", "Mary", "111678-XYZ-0066"));
 
         checkPortfolioResponseAsserts(result.getPortfolioResponse(),
                 "inner str field", "455678******7823");
@@ -91,16 +93,16 @@ public class MaskingHelperTest {
         checkPortfolioResponseAsserts(result.getStringToPortfolioResponseMap().get("K2"),
                 "K2 str field", "458978******8978");
 
-        assertThat(result.getInteger(), is(345));
-        assertThat(result.getIntegerList(), is(Arrays.asList(90, 89, 88)));
-        assertThat(result.getBaseInt(), is(21));
-        assertThat(result.getBaseIntArray(), is(new int[] {56, 45}));
+        assertThat(result.getInteger()).isEqualTo(345);
+        assertThat(result.getIntegerList()).isEqualTo(Arrays.asList(90, 89, 88));
+        assertThat(result.getBaseInt()).isEqualTo(21);
+        assertThat(result.getBaseIntArray()).isEqualTo(new int[]{56, 45});
     }
 
     private void checkPortfolioResponseAsserts(PortfolioResponse innerPortfolioResponse, String string, String maskedStringWithPattern) {
-        assertThat(innerPortfolioResponse.getString(), is(string));
-        assertThat(innerPortfolioResponse.getMaskedString(), is("***"));
-        assertThat(innerPortfolioResponse.getMaskedStringWithPattern(), is(maskedStringWithPattern));
+        assertThat(innerPortfolioResponse.getString()).isEqualTo(string);
+        assertThat(innerPortfolioResponse.getMaskedString()).isEqualTo("***");
+        assertThat(innerPortfolioResponse.getMaskedStringWithPattern()).isEqualTo(maskedStringWithPattern);
     }
 
     @Test
@@ -111,7 +113,7 @@ public class MaskingHelperTest {
 
         WithoutAnyAnnotation result = MaskingHelper.mask(object);
 
-        assertThat(result.getString(), is("Alien"));
+        assertThat(result.getString()).isEqualTo("Alien");
     }
 
     @Test
@@ -123,8 +125,8 @@ public class MaskingHelperTest {
 
         WithoutMasked result = MaskingHelper.mask(object);
 
-        assertThat(result.getString(), is("Alien"));
-        assertThat(result.getMaskedString(), is("Very Important Info"));
+        assertThat(result.getString()).isEqualTo("Alien");
+        assertThat(result.getMaskedString()).isEqualTo("Very Important Info");
     }
 
     @Test
@@ -135,6 +137,6 @@ public class MaskingHelperTest {
 
         WithoutMaskedProperty result = MaskingHelper.mask(object);
 
-        assertThat(result.getString(), is("Very Important Info"));
+        assertThat(result.getString()).isEqualTo("Very Important Info");
     }
 }

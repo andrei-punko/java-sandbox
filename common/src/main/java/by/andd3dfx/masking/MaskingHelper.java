@@ -1,5 +1,9 @@
 package by.andd3dfx.masking;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.SneakyThrows;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -8,19 +12,16 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import lombok.SneakyThrows;
 
 /**
  * Helper for masking secure string fields.
  * <p>
- * Annotate required class with {@link by.andd3dfx.masking.Masked}
- * and its fields with {@link by.andd3dfx.masking.MaskedProperty}.
+ * Annotate required class with {@link Masked} and its fields with {@link MaskedProperty}.
+ * <p>
  * Use {@link MaskedProperty#pattern()} and {@link MaskedProperty#replacement()} when needed.
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MaskingHelper {
-
-    private MaskingHelper() {
-    }
 
     @SneakyThrows
     public static <T> T mask(T object) {

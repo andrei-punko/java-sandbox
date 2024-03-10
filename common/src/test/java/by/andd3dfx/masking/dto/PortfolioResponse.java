@@ -1,13 +1,14 @@
 package by.andd3dfx.masking.dto;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import by.andd3dfx.masking.Masked;
+import by.andd3dfx.masking.MaskedProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import by.andd3dfx.masking.Masked;
-import by.andd3dfx.masking.MaskedProperty;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
