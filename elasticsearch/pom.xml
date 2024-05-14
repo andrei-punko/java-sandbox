@@ -26,7 +26,7 @@
           <showLogs>true</showLogs>
           <images>
             <image>
-              <name>docker.elastic.co/elasticsearch/elasticsearch:${elasticsearch.version}</name>
+              <name>elasticsearch:${elasticsearch.version}</name>
               <run>
                 <ports>
                   <port>9200:9200</port>
