@@ -73,7 +73,7 @@ Example of different cases of tests debugging
 
 ## Prerequisites
 - Maven 3
-- JDK 17
+- JDK 21
 
 ### Build notes
 To allow `io.fabric8:docker-maven-plugin` manipulate with Docker images need to add 
