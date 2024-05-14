@@ -1,25 +1,25 @@
 
 create table AUTHOR (
-  ID   int          primary key autoincrement,
+  ID   int          primary key auto_increment,
   NAME varchar(100) not null
 );
 
 create table ADDRESS (
-  ID            int          primary key autoincrement,
+  ID            int          primary key auto_increment,
   COUNTRY       varchar(50)  not null,
   TOWN          varchar(50)  not null,
   STREET_AND_BUILDING varchar(100) not null
 );
 
 create table PUBLISHER (
-  ID            int          primary key autoincrement,
+  ID            int          primary key auto_increment,
   NAME          varchar(100) not null,
   ADDRESS_ID    int          not null,
   foreign key (ADDRESS_ID) references ADDRESS(ID)
 );
 
 create table BOOK (
-  ID            int          not null primary key autoincrement,
+  ID            int          not null primary key auto_increment,
   TITLE         varchar(100) not null,
   PUBLISHER_ID  int   not null,
   foreign key (PUBLISHER_ID) references PUBLISHER(ID)

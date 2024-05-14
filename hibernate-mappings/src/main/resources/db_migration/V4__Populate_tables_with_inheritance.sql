@@ -10,6 +10,3 @@ insert into ITEMS (ITEM_TYPE, NAME, PRICE, WEIGHT) values
     ('0-size', 'Toy house', 4.9, 0.05);
 
 select count(*) from ITEMS;
-
--- Show info about tables in DB:
-select TABLE_NAME, TABLE_TYPE, ROW_COUNT_ESTIMATE from INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA='PUBLIC';

@@ -1,6 +1,6 @@
 
 create table ITEMS (
-  ID          int           not null primary key autoincrement,
+  ID          int           not null primary key auto_increment,
   NAME        varchar(100)  not null,
   PRICE       decimal(5, 2) not null,
   WEIGHT      decimal(5, 2) not null,
