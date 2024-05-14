@@ -75,6 +75,7 @@ public class ElasticSearchManualIT {
             .prepareSearch()
             .setIndices("people")
             .get();
+
         checkSearchResponse(response, 5);
     }
 
@@ -84,6 +85,7 @@ public class ElasticSearchManualIT {
             .prepareSearch()
             .setQuery(QueryBuilders.rangeQuery("age").from(10).to(30))
             .get();
+
         checkSearchResponse(response, 2);
     }
 
