@@ -15,8 +15,8 @@
   <name>DB versioning : Flyway</name>
 
   <properties>
-    <junit.vintage.version>5.10.1</junit.vintage.version>
-    <junit.platform.version>1.10.1</junit.platform.version>
+    <junit.vintage.version>5.10.2</junit.vintage.version>
+    <junit.platform.version>1.10.2</junit.platform.version>
   </properties>
 
   <dependencies>
@@ -39,47 +39,130 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <version>${h2.db.version}</version>
-      <scope>test</scope>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>5.6.15.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-mysql</artifactId>
+      <version>${flyway-maven-plugin.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
       <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>${docker-maven-plugin.version}</version>
+        <configuration>
+          <showLogs>true</showLogs>
+          <images>
+            <image>
+              <name>mysql:${mysql.version}</name>
+              <run>
+                <ports>
+                  <port>3306:3306</port>
+                </ports>
+                <env>
+                  <MYSQL_DATABASE>db</MYSQL_DATABASE>
+                  <MYSQL_ROOT_PASSWORD>some_password</MYSQL_ROOT_PASSWORD>
+                  <MYSQL_USER>user</MYSQL_USER>
+                  <MYSQL_PASSWORD>password</MYSQL_PASSWORD>
+                </env>
+                <wait>
+                  <log>starting as process 1</log>
+                  <time>20000</time>
+                </wait>
+              </run>
+            </image>
+          </images>
+        </configuration>
+
+        <!-- Connect start/stop to pre- and post- integration-test phase respectively
+        if you want to start your docker containers during integration tests -->
+        <executions>
+          <execution>
+            <id>start</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>stop</goal>
+              <goal>start</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>stop</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
         <version>${flyway-maven-plugin.version}</version>
-
         <configuration>
-          <url>jdbc:h2:mem:flywaydb</url>
+          <url>${jdbc.url}</url>
           <user>${jdbc.username}</user>
           <password>${jdbc.password}</password>
+          <encoding>UTF-8</encoding>
+          <cleanDisabled>false</cleanDisabled>
           <locations>
             <location>some_folder/db/migration</location>
           </locations>
-          <cleanDisabled>false</cleanDisabled>
         </configuration>
 
         <executions>
           <execution>
-            <phase>process-test-resources</phase>
+            <id>execution</id>
+            <phase>integration-test</phase>
             <goals>
               <goal>clean</goal>
               <goal>migrate</goal>
             </goals>
           </execution>
         </executions>
+      </plugin>
 
-        <dependencies>
-          <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>${h2.db.version}</version>
-          </dependency>
-        </dependencies>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
+      </plugin>
+
+      <!--This plugin used for running integration tests in integration-test build phase-->
+      <plugin>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>${maven-failsafe-plugin.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
