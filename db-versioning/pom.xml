@@ -14,10 +14,11 @@
   <name>DB versioning : Root</name>
 
   <properties>
-    <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
-    <jdbc.url>dbc:h2:mem:liquibase</jdbc.url>
-    <jdbc.username>liquibase</jdbc.username>
-    <jdbc.password></jdbc.password>
+    <mysql.version>8.0.28</mysql.version>
+    <jdbc.driverClassName>com.mysql.cj.jdbc.Driver</jdbc.driverClassName>
+    <jdbc.url>jdbc:mysql://127.0.0.1:3306/db?allowPublicKeyRetrieval=true&amp;useSSL=false</jdbc.url>
+    <jdbc.username>root</jdbc.username>
+    <jdbc.password>some_password</jdbc.password>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
