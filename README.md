@@ -5,54 +5,64 @@
 [![Coverage](.github/badges/jacoco.svg)](https://github.com/andrei-punko/java-sandbox/actions/workflows/maven.yml)
 [![Branches](.github/badges/branches.svg)](https://github.com/andrei-punko/java-sandbox/actions/workflows/maven.yml)
 
+## Prerequisites
+- Maven 3
+- JDK 21
+
+## Modules
+
 * **akka-project**  
-App example with Akka framework usage 
+[Example](akka-project) of app with Akka framework usage
 
 
 * **common**  
-  - Digital signing of string/file/xml
-  - Encryption example
-  - Guice usage example
-  - JMS connector to get queue size by JMX
-  - MapStruct mapper example
-  - Example of annotation-driven masker
-  - Working with sockets
+  - [Digital signing](common/src/main/java/by/andd3dfx/digitalsignature) of string/file/xml
+  - Encryption [example](common/src/main/java/by/andd3dfx/encrypt)
+  - Guice usage [example](common/src/main/java/by/andd3dfx/guice)
+  - [JMS connector](common/src/main/java/by/andd3dfx/jms) to get queue size by JMX
+  - MapStruct mapper [example](common/src/main/java/by/andd3dfx/mapper)
+  - [Example](common/src/main/java/by/andd3dfx/masking) of annotation-driven masker
+  - [Example](common/src/main/java/by/andd3dfx/sockets) of work with sockets
 
 
 * **custom-spring-boot-starter**  
-  Spring Boot custom Starter example
-
-  See its [README](custom-spring-boot-starter/README.md) for details
+[Example](custom-spring-boot-starter/README.md) of custom Spring Boot Starter
 
 
 * **dagger-sample**  
-Example of Dagger usage
+[Example](dagger-sample) of Dagger usage
 
 
 * **db-versioning**  
-Example of DB versioning with usage of [Liquibase](db-versioning/liquibase-db) and [Flyway](db-versioning/flyway-db)
+Example of DB versioning usage with help of
+  * [Liquibase](db-versioning/liquibase-db)
+  * [Flyway](db-versioning/flyway-db)
 
 
 * **elasticsearch**  
-Example of Elasticsearch usage
+[Example](elasticsearch) of Elasticsearch usage
 
 
 * **graphql-spring-boot-sample**  
-  Example of GraphQL usage in Spring Boot application.
-  
-  See its [README](graphql-spring-boot-sample/README.md) for details
+[Example](graphql-spring-boot-sample/README.md) of GraphQL usage in Spring Boot application
 
 
 * **grpc-sample**  
-Example of gRPC service and its client
+[Example](grpc-sample) of gRPC service and its client
 
 
 * **hibernate-mappings**  
-Example of different cases of Hibernate mappings
+[Example](hibernate-mappings) of different cases of Hibernate mappings
+
+
+* **openapi-generator-sample**  
+Example of OpenApi generation:
+  * [Usual Java app](openapi-generator-sample/openapi-generator-java)
+  * [Spring Boot app](openapi-generator-sample/openapi-generator-spring)
 
 
 * **messaging-stomp-websocket**  
-Example of STOMP messaging over WebSockets for building interactive web application
+[Example](messaging-stomp-websocket) of STOMP messaging over WebSockets for building interactive web application
 
 
 * **sound-recorder-n-spectrum-analyzer**  
@@ -61,19 +71,16 @@ Example of STOMP messaging over WebSockets for building interactive web applicat
 
 
 * **test-containers**  
-Example of Java Test containers usage with help of Docker
+[Example](test-containers) of Java Test containers usage with help of Docker
 
 
 * **two-factor-authentication**  
-Example of two-factor authentication application with usage of Google authenticator
+[Example](two-factor-authentication) of two-factor authentication application with usage of Google authenticator
 
 
 * **unit-tests-debugging**  
-Example of different cases of tests debugging
+[Example](unit-tests-debugging) of different cases of tests debugging
 
-## Prerequisites
-- Maven 3
-- JDK 21
 
 ### Build notes
 To allow `io.fabric8:docker-maven-plugin` manipulate with Docker images need to add 
