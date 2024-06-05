@@ -14,6 +14,7 @@
 
     <modules>
         <module>openapi-contract</module>
-        <module>openapi-generator</module>
+        <module>openapi-generator-java</module>
+        <module>openapi-generator-spring</module>
     </modules>
 </project>

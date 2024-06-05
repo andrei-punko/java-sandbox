@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>openapi-generator</artifactId>
+    <artifactId>openapi-generator-java</artifactId>
 
     <properties>
         <swagger-annotations-version>1.5.8</swagger-annotations-version>
