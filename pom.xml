@@ -26,6 +26,7 @@
     <module>test-containers</module>
     <module>two-factor-authentication</module>
     <module>unit-tests-debugging</module>
+    <module>openapi-generator-sample</module>
   </modules>
 
   <properties>
