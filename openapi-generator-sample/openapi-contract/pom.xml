@@ -11,4 +11,6 @@
 
     <artifactId>openapi-contract</artifactId>
 
+    <name>OpenApi generator : Contract in yaml</name>
+
 </project>

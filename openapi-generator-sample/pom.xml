@@ -12,6 +12,11 @@
 
     <artifactId>openapi-generator-sample</artifactId>
 
+    <name>OpenApi generator : Root</name>
+    <!-- Used examples from:
+    https://github.com/OpenAPITools/openapi-generator
+      -->
+
     <modules>
         <module>openapi-contract</module>
         <module>openapi-generator-java</module>

@@ -11,6 +11,8 @@
 
     <artifactId>openapi-generator-java</artifactId>
 
+    <name>OpenApi generator : Generation for Java app</name>
+
     <properties>
         <swagger-annotations-version>1.5.8</swagger-annotations-version>
         <jersey-version>2.35</jersey-version>
@@ -175,5 +177,4 @@
             <version>2.2</version>
         </dependency>
     </dependencies>
-
 </project>

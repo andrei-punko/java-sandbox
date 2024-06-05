@@ -11,6 +11,8 @@
 
     <artifactId>openapi-generator-spring</artifactId>
 
+    <name>OpenApi generator : Generation for Spring Boot app</name>
+
     <properties>
         <springfox.version>2.9.2</springfox.version>
         <swagger-ui.version>4.15.5</swagger-ui.version>
