@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,10 +31,10 @@ public class HibernateMainIT {
                 var emFactory = session.getEntityManagerFactory();
                 var em = emFactory.createEntityManager();
 
-                getFromDbAndCheck(em, Book.class, 4);
+                getFromDbAndCheck(em, Publisher.class, 2);
                 getFromDbAndCheck(em, Address.class, 2);
                 getFromDbAndCheck(em, Author.class, 3);
-                getFromDbAndCheck(em, Publisher.class, 2);
+                getFromDbAndCheck(em, Book.class, 4);
 
                 getFromDbAndCheck_ForEntityWithDiscriminator(em, ZeroSizeItem.class, 1);
                 getFromDbAndCheck_ForEntityWithDiscriminator(em, OneSizeItem.class, 1);
@@ -43,18 +44,20 @@ public class HibernateMainIT {
         }
     }
 
-    private <T> void getFromDbAndCheck(EntityManager em, Class<T> clazz, int expectedItemsCount) {
+    private <T> List<T> getFromDbAndCheck(EntityManager em, Class<T> clazz, int expectedItemsCount) {
+        System.out.println("---");
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(clazz);
         Root<T> variableRoot = query.from(clazz);
         query.select(variableRoot);
         var items = em.createQuery(query).getResultList();
 
-        System.out.println("Retrieved next items: " + items);
-        assertThat("Wrong items count", items.size(), is(expectedItemsCount));
+        printExtractedItems_andCheckTheirAmount(items, expectedItemsCount);
+        System.out.println("---");
+        return items;
     }
 
-    private <T> void getFromDbAndCheck_ForEntityWithDiscriminator(EntityManager em, Class<T> clazz, int expectedItemsCount) {
+    private <T> List<T> getFromDbAndCheck_ForEntityWithDiscriminator(EntityManager em, Class<T> clazz, int expectedItemsCount) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(clazz);
         Root<T> variableRoot = query.from(clazz);
@@ -62,7 +65,12 @@ public class HibernateMainIT {
         query.select(variableRoot);
         var items = em.createQuery(query).getResultList();
 
-        System.out.println("Retrieved next items: " + items);
+        printExtractedItems_andCheckTheirAmount(items, expectedItemsCount);
+        return items;
+    }
+
+    private static <T> void printExtractedItems_andCheckTheirAmount(List<T> items, int expectedItemsCount) {
+        System.out.println(">> Retrieved next items: " + items);
         assertThat("Wrong items count", items.size(), is(expectedItemsCount));
     }
 }
