@@ -23,6 +23,7 @@
   - MapStruct mapper [example](common/src/main/java/by/andd3dfx/mapper)
   - [Example](common/src/main/java/by/andd3dfx/masking) of annotation-driven masker
   - [Example](common/src/main/java/by/andd3dfx/sockets) of work with sockets
+  - [Example](common/src/main/java/by/andd3dfx/testing) of testing classes using Mockito / JMock mocks
 
 
 * **custom-spring-boot-starter**  
