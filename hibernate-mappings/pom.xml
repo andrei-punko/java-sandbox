@@ -70,13 +70,12 @@
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
         <version>${flyway-maven-plugin.version}</version>
-
         <configuration>
           <url>jdbc:mysql://127.0.0.1:3306/db?allowPublicKeyRetrieval=true&amp;useSSL=false</url>
           <user>root</user>
           <password>some_password</password>
           <encoding>UTF-8</encoding>
-          <cleanDisabled>false</cleanDisabled>
+          <connectRetries>5</connectRetries>
           <locations>
             <location>db_migration</location>
           </locations>
@@ -87,7 +86,6 @@
             <id>execution</id>
             <phase>pre-integration-test</phase>
             <goals>
-              <goal>clean</goal>
               <goal>migrate</goal>
             </goals>
           </execution>
