@@ -119,7 +119,7 @@
           <user>${jdbc.username}</user>
           <password>${jdbc.password}</password>
           <encoding>UTF-8</encoding>
-          <cleanDisabled>false</cleanDisabled>
+          <connectRetries>5</connectRetries>
           <locations>
             <location>some_folder/db/migration</location>
           </locations>
@@ -128,9 +128,8 @@
         <executions>
           <execution>
             <id>execution</id>
-            <phase>integration-test</phase>
+            <phase>pre-integration-test</phase>
             <goals>
-              <goal>clean</goal>
               <goal>migrate</goal>
             </goals>
           </execution>
