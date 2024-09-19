@@ -12,15 +12,18 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.TargetDataLine;
 import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
 
 /**
  * Application that shows real-time spectrum
  */
 public class ShowRealTimeSpectrumApp {
 
+    private final static int BUCKETS_AMOUNT = 1_000;
+
     public static void main(String[] args) throws LineUnavailableException {
         FrequencyScanner frequencyScanner = new FrequencyScanner();
-        AudioFormat audioFormat = getAudioFormat();
+        AudioFormat audioFormat = buildAudioFormat();
         DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -31,6 +34,8 @@ public class ShowRealTimeSpectrumApp {
         chartContainer.show();
 
         byte tempBuffer[] = new byte[10_000];
+        double[] xData = new double[BUCKETS_AMOUNT];
+        double[] yData = new double[BUCKETS_AMOUNT];
         while (true) {
             targetDataLine.start();
             int count = targetDataLine.read(tempBuffer, 0, tempBuffer.length);
@@ -45,24 +50,25 @@ public class ShowRealTimeSpectrumApp {
             double[] frequencies = frequencyInfoContainer.frequencies();
             double[] magnitudes = frequencyInfoContainer.magnitudes();
 
-            int N = 1_000;
-            double[] xData = new double[N];
-            double[] yData = new double[N];
-            for (int bucketIndex = 0; bucketIndex < N; bucketIndex++) {
-                xData[bucketIndex] = frequencies[(int) ((bucketIndex + 0.5) * magnitudes.length / N)];
+            Arrays.fill(xData, 0);
+            Arrays.fill(yData, 0);
+            final int magnitudesPerBucket = magnitudes.length / BUCKETS_AMOUNT;
+            for (int bucket = 0; bucket < BUCKETS_AMOUNT; bucket++) {
+                xData[bucket] = frequencies[(int) ((bucket + 0.5) * magnitudesPerBucket)];
 
-                for (int i = 0; i < magnitudes.length / N; i++) {
-                    yData[bucketIndex] += magnitudes[bucketIndex * magnitudes.length / N + i];
+                for (int i = 0; i < magnitudesPerBucket; i++) {
+                    yData[bucket] += magnitudes[bucket * magnitudesPerBucket + i];
                 }
             }
-            var maxFrequency = frequencyInfoContainer.maxFrequency();
 
+            var maxFrequency = frequencyInfoContainer.maxFrequency();
             String title = String.format("%1$.0f Hz", maxFrequency);
+
             chartContainer.update(xData, yData, title);
         }
     }
 
-    private static AudioFormat getAudioFormat() {
+    private static AudioFormat buildAudioFormat() {
         return new AudioFormat(44_100.0F, 16, 1, true, false);
     }
 

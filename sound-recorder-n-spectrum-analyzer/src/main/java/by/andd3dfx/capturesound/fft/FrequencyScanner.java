@@ -13,8 +13,6 @@ import java.nio.ByteOrder;
  */
 public class FrequencyScanner {
 
-    private double[] windowFilter;
-
     public FrequencyInfoContainer detectFrequency(byte[] audioData, int sampleRate) {
         short[] sampleData = new short[audioData.length / 2];
         ByteBuffer.wrap(audioData).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(sampleData);
@@ -62,24 +60,7 @@ public class FrequencyScanner {
     }
 
     /**
-     * build a Hamming window filter for samples of a given size
-     * <p>
-     * See http://www.labbookpages.co.uk/audio/firWindowing.html#windows
-     *
-     * @param size the sample size for which the filter will be created
-     */
-    private void buildHammingWindow(int size) {
-        if (windowFilter != null && windowFilter.length == size) {
-            return;
-        }
-        windowFilter = new double[size];
-        for (int i = 0; i < size; ++i) {
-            windowFilter[i] = .54 - .46 * Math.cos(2 * Math.PI * i / (size - 1.0));
-        }
-    }
-
-    /**
-     * apply a Hamming window filter to raw input data
+     * Apply a Hamming window filter to raw input data
      *
      * @param input an array containing unfiltered input data
      * @return a double array containing the filtered data
@@ -88,9 +69,24 @@ public class FrequencyScanner {
         var len = input.length;
         double[] res = new double[len];
 
-        buildHammingWindow(len);
+        double[] windowFilter = buildHammingWindow(len);
         for (int i = 0; i < len; ++i) {
             res[i] = (double) input[i] * windowFilter[i];
+        }
+        return res;
+    }
+
+    /**
+     * Build a Hamming window filter for samples of a given size
+     * <p>
+     * See <a href="http://www.labbookpages.co.uk/audio/firWindowing.html#windows">link</a> for details
+     *
+     * @param size the sample size for which the filter will be created
+     */
+    private double[] buildHammingWindow(int size) {
+        var res = new double[size];
+        for (int i = 0; i < size; ++i) {
+            res[i] = 0.54 - 0.46 * Math.cos(2 * Math.PI * i / (size - 1.0));
         }
         return res;
     }
