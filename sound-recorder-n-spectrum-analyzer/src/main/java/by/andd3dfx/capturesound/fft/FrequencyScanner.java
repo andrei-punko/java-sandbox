@@ -30,24 +30,26 @@ public class FrequencyScanner {
      */
     public FrequencyInfoContainer extractFrequencyInfo(short[] sampleData, int sampleRate) {
         /* sampleData + zero padding */
-        DoubleFFT_1D fft = new DoubleFFT_1D(sampleData.length + 24 * sampleData.length);
-        double[] a = new double[(sampleData.length + 24 * sampleData.length) * 2];
+        final int sampleRateLen = sampleData.length;
+        final int aLen_2 = sampleRateLen + 24 * sampleRateLen;
+        double[] a = new double[aLen_2 * 2];
+        var fft = new DoubleFFT_1D(aLen_2);
 
-        System.arraycopy(applyWindow(sampleData), 0, a, 0, sampleData.length);
+        System.arraycopy(applyWindow(sampleData), 0, a, 0, sampleRateLen);
         fft.realForward(a);
 
-        double frequencies[] = new double[a.length / 2];
-        double magnitudes[] = new double[a.length / 2];
+        double[] frequencies = new double[aLen_2];
+        double[] magnitudes = new double[aLen_2];
 
         /* find the peak magnitude and it's index */
         double maxMag = Double.NEGATIVE_INFINITY;
         int maxInd = -1;
 
-        for (int i = 0; i < a.length / 2; ++i) {
+        for (int i = 0; i < aLen_2; ++i) {
             double re = a[2 * i];
             double im = a[2 * i + 1];
             double mag = Math.sqrt(re * re + im * im);
-            frequencies[i] = (double) sampleRate * i / (a.length / 2);
+            frequencies[i] = (double) sampleRate * i / aLen_2;
             magnitudes[i] = mag;
 
             if (mag > maxMag) {
@@ -55,7 +57,7 @@ public class FrequencyScanner {
                 maxInd = i;
             }
         }
-        double maxFrequency = (double) sampleRate * maxInd / (a.length / 2);
+        double maxFrequency = (double) sampleRate * maxInd / aLen_2;
         return new FrequencyInfoContainer(frequencies, magnitudes, maxFrequency);
     }
 
@@ -83,10 +85,11 @@ public class FrequencyScanner {
      * @return a double array containing the filtered data
      */
     private double[] applyWindow(short[] input) {
-        double[] res = new double[input.length];
+        var len = input.length;
+        double[] res = new double[len];
 
-        buildHammingWindow(input.length);
-        for (int i = 0; i < input.length; ++i) {
+        buildHammingWindow(len);
+        for (int i = 0; i < len; ++i) {
             res[i] = (double) input[i] * windowFilter[i];
         }
         return res;

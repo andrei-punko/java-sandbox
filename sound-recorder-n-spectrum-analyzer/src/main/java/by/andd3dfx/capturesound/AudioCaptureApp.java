@@ -88,7 +88,7 @@ public class AudioCaptureApp extends JFrame {
 
 
             double frequency = frequencyScanner.detectFrequency(audioData, (int) audioFormat.getSampleRate())
-                    .getMaxFrequency();
+                    .maxFrequency();
             System.out.println("Freq=" + frequency);
 
             AudioInputStream audioInputStream = new AudioInputStream(

@@ -42,8 +42,8 @@ public class ShowRealTimeSpectrumApp {
             byteArrayOutputStream.reset();
 
             FrequencyInfoContainer frequencyInfoContainer = frequencyScanner.detectFrequency(audioData, (int) audioFormat.getSampleRate());
-            double[] frequencies = frequencyInfoContainer.getFrequencies();
-            double[] magnitudes = frequencyInfoContainer.getMagnitudes();
+            double[] frequencies = frequencyInfoContainer.frequencies();
+            double[] magnitudes = frequencyInfoContainer.magnitudes();
 
             int N = 1_000;
             double[] xData = new double[N];
@@ -55,9 +55,9 @@ public class ShowRealTimeSpectrumApp {
                     yData[bucketIndex] += magnitudes[bucketIndex * magnitudes.length / N + i];
                 }
             }
-            int maxFrequency = (int) frequencyInfoContainer.getMaxFrequency();
+            var maxFrequency = frequencyInfoContainer.maxFrequency();
 
-            String title = String.format("%d Hz", maxFrequency);
+            String title = String.format("%1$.0f Hz", maxFrequency);
             chartContainer.update(xData, yData, title);
         }
     }
