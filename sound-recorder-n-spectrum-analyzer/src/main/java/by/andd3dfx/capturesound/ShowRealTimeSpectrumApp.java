@@ -15,7 +15,9 @@ import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 
 /**
- * Application that shows real-time spectrum
+ * Application that shows real-time spectrum of sound
+ *
+ * @see <a href="https://youtu.be/OfHj-EmXh2k">Youtube video</a> with project description
  */
 public class ShowRealTimeSpectrumApp {
 

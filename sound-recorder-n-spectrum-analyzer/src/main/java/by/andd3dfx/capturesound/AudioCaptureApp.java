@@ -17,12 +17,15 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 /**
+ * <pre>
+ * Microphone sound recorder/player
+ *
  * Press [Start] button to start recording
- * <p>
  * Press [Stop] button to stop recording
- * <p>
- * Press [Playback] button to start play of recorded audio.
+ * Press [Playback] button to start play of recorded audio
+ *
  * Main frequency printed into console after that
+ * </pre>
  */
 public class AudioCaptureApp extends JFrame {
 
