@@ -95,8 +95,7 @@ public class AudioCaptureApp extends JFrame {
                     byteArrayInputStream, audioFormat, audioData.length / audioFormat.getFrameSize());
 
             DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, audioFormat);
-            try {
-                SourceDataLine sourceDataLine = (SourceDataLine) AudioSystem.getLine(dataLineInfo);
+            try (var sourceDataLine = (SourceDataLine) AudioSystem.getLine(dataLineInfo)) {
                 sourceDataLine.open(audioFormat);
                 sourceDataLine.start();
 
