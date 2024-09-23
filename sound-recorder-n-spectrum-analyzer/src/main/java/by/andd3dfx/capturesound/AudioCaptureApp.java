@@ -58,7 +58,7 @@ public class AudioCaptureApp extends JFrame {
             stopButton.setEnabled(true);
             playButton.setEnabled(false);
 
-            AudioFormat audioFormat = getAudioFormat();
+            AudioFormat audioFormat = buildAudioFormat();
             DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
             try {
                 TargetDataLine targetDataLine = (TargetDataLine) AudioSystem.getLine(dataLineInfo);
@@ -84,7 +84,7 @@ public class AudioCaptureApp extends JFrame {
         playButton.addActionListener(e -> {
             byte audioData[] = captureThread[0].getByteArrayOutputStream().toByteArray();
             InputStream byteArrayInputStream = new ByteArrayInputStream(audioData);
-            AudioFormat audioFormat = getAudioFormat();
+            AudioFormat audioFormat = buildAudioFormat();
 
 
             double frequency = frequencyScanner.detectFrequency(audioData, (int) audioFormat.getSampleRate())
@@ -113,7 +113,7 @@ public class AudioCaptureApp extends JFrame {
         return new Insets(40, 20, 10, 20);
     }
 
-    private AudioFormat getAudioFormat() {
+    private AudioFormat buildAudioFormat() {
         return new AudioFormat(44_100.0F, 16, 1, true, false);
     }
 }
