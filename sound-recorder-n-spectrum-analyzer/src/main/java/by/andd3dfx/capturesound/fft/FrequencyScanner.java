@@ -13,6 +13,8 @@ import java.nio.ByteOrder;
  */
 public class FrequencyScanner {
 
+    private double[] windowFilter = new double[]{};
+
     public FrequencyInfoContainer detectFrequency(byte[] audioData, int sampleRate) {
         short[] sampleData = new short[audioData.length / 2];
         ByteBuffer.wrap(audioData).order(ByteOrder.LITTLE_ENDIAN).asShortBuffer().get(sampleData);
@@ -69,7 +71,7 @@ public class FrequencyScanner {
         var len = input.length;
         double[] res = new double[len];
 
-        double[] windowFilter = buildHammingWindow(len);
+        rebuildHammingWindowIfNeeded(len);
         for (int i = 0; i < len; ++i) {
             res[i] = (double) input[i] * windowFilter[i];
         }
@@ -83,11 +85,15 @@ public class FrequencyScanner {
      *
      * @param size the sample size for which the filter will be created
      */
-    private double[] buildHammingWindow(int size) {
-        var res = new double[size];
-        for (int i = 0; i < size; ++i) {
-            res[i] = 0.54 - 0.46 * Math.cos(2 * Math.PI * i / (size - 1.0));
+    private void rebuildHammingWindowIfNeeded(int size) {
+        // Build new window only if requested size differs from size of existing window
+        if (windowFilter.length == size) {
+            return;
         }
-        return res;
+
+        windowFilter = new double[size];
+        for (int i = 0; i < size; ++i) {
+            windowFilter[i] = 0.54 - 0.46 * Math.cos(2 * Math.PI * i / (size - 1.0));
+        }
     }
 }
