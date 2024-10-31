@@ -35,15 +35,15 @@ public class DateTimeTest {
         var ids = ZoneId.getAvailableZoneIds();   // all available timezone ids
 
         ZoneId zone1 = ZoneId.of("Europe/Berlin");
-        ZoneId zone2 = ZoneId.of("Brazil/East");
+        ZoneId zone2 = ZoneId.of("Europe/London");
         var zoneRules1 = zone1.getRules();       // ZoneRules[currentStandardOffset=+01:00]
-        var zoneRules2 = zone2.getRules();       // ZoneRules[currentStandardOffset=-03:00]
+        var zoneRules2 = zone2.getRules();       // ZoneRules[currentStandardOffset=00:00]
     }
 
     @Test
     public void localTime() {
         ZoneId zone1 = ZoneId.of("Europe/Berlin");
-        ZoneId zone2 = ZoneId.of("Brazil/East");
+        ZoneId zone2 = ZoneId.of("Europe/London");
 
         LocalTime now1 = LocalTime.now(zone1);
         LocalTime now2 = LocalTime.now(zone2);
@@ -51,17 +51,20 @@ public class DateTimeTest {
         var isNow1BeforeNow2 = now1.isBefore(now2);
         assertThat(isNow1BeforeNow2).isFalse();
 
-        long hoursBetween = ChronoUnit.HOURS.between(now1, now2);   //4
+        long hoursBetween = ChronoUnit.HOURS.between(now1, now2);
         long minutesBetween = ChronoUnit.MINUTES.between(now1, now2);
-        assertThat(minutesBetween).isEqualTo(-299);
+        System.out.println(hoursBetween + " " + minutesBetween);
+        assertThat(minutesBetween).isEqualTo(-59L);
 
-        LocalTime late = LocalTime.of(23, 59, 59);   // 23:59:59
+        LocalTime late = LocalTime.of(23, 59, 59);
+        assertThat(String.valueOf(late)).isEqualTo("23:59:59");
 
         DateTimeFormatter germanFormatter = DateTimeFormatter
                 .ofLocalizedTime(FormatStyle.SHORT)
                 .withLocale(Locale.GERMAN);
 
-        LocalTime germanTime = LocalTime.parse("13:37", germanFormatter); // 13:37
+        LocalTime germanTime = LocalTime.parse("13:37", germanFormatter);
+        assertThat(String.valueOf(germanTime)).isEqualTo("13:37");
     }
 
     @Test
@@ -80,7 +83,8 @@ public class DateTimeTest {
                         .ofLocalizedDate(FormatStyle.MEDIUM)
                         .withLocale(Locale.GERMAN);
 
-        LocalDate xmas = LocalDate.parse("24.12.2014", germanFormatter);    // 2014-12-24
+        LocalDate xmas = LocalDate.parse("24.12.2014", germanFormatter);
+        assertThat(String.valueOf(xmas)).isEqualTo("2014-12-24");
     }
 
     @Test
