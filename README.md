@@ -21,7 +21,7 @@
 - Encryption [example](common/src/main/java/by/andd3dfx/encrypt)
 - Guice usage [example](common/src/main/java/by/andd3dfx/guice)
 - [JMS connector](common/src/main/java/by/andd3dfx/jms) to get queue size by JMX
-- MapStruct mapper [example](common/src/main/java/by/andd3dfx/mapper)
+- ObjectMapper usage [example](common/src/main/java/by/andd3dfx/mapper) with serialization/deserialization object to/from string
 - [Example](common/src/main/java/by/andd3dfx/masking) of annotation-driven masker
 - [Example](common/src/main/java/by/andd3dfx/sockets) of work with sockets
 - [Example](common/src/main/java/by/andd3dfx/testing) of testing classes using Mockito / JMock mocks
