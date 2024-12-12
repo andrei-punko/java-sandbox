@@ -5,11 +5,11 @@
 
 <hibernate-configuration>
   <session-factory>
-    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/db?allowPublicKeyRetrieval=true&amp;useSSL=false</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">some_password</property>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+    <property name="hibernate.connection.url">jdbc:postgresql://127.0.0.1:5432/person-db</property>
+    <property name="hibernate.connection.username">person-user</property>
+    <property name="hibernate.connection.password">person-password</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
     <property name="show_sql">true</property>
     <property name="hibernate.id.new_generator_mappings">false</property>
 

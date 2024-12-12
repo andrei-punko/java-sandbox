@@ -11,10 +11,6 @@
 
   <artifactId>hibernate-mappings</artifactId>
 
-  <properties>
-    <mysql.version>8.0.28</mysql.version>
-  </properties>
-
   <build>
     <plugins>
       <plugin>
@@ -25,19 +21,18 @@
           <showLogs>true</showLogs>
           <images>
             <image>
-              <name>mysql:${mysql.version}</name>
+              <name>postgres:15-alpine</name>
               <run>
                 <ports>
-                  <port>3306:3306</port>
+                  <port>5432:5432</port>
                 </ports>
                 <env>
-                  <MYSQL_DATABASE>db</MYSQL_DATABASE>
-                  <MYSQL_ROOT_PASSWORD>some_password</MYSQL_ROOT_PASSWORD>
-                  <MYSQL_USER>user</MYSQL_USER>
-                  <MYSQL_PASSWORD>password</MYSQL_PASSWORD>
+                  <POSTGRES_DB>person-db</POSTGRES_DB>
+                  <POSTGRES_USER>person-user</POSTGRES_USER>
+                  <POSTGRES_PASSWORD>person-password</POSTGRES_PASSWORD>
                 </env>
                 <wait>
-                  <log>starting as process 1</log>
+                  <log>database system is ready to accept connections</log>
                   <time>20000</time>
                 </wait>
               </run>
@@ -71,9 +66,9 @@
         <artifactId>flyway-maven-plugin</artifactId>
         <version>${flyway-maven-plugin.version}</version>
         <configuration>
-          <url>jdbc:mysql://127.0.0.1:3306/db?allowPublicKeyRetrieval=true&amp;useSSL=false</url>
-          <user>root</user>
-          <password>some_password</password>
+          <url>jdbc:postgresql://127.0.0.1:5432/person-db</url>
+          <user>person-user</user>
+          <password>person-password</password>
           <encoding>UTF-8</encoding>
           <connectRetries>5</connectRetries>
           <locations>
@@ -129,14 +124,15 @@
       <version>5.6.15.Final</version>
     </dependency>
     <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>${mysql.version}</version>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.6.2</version>
     </dependency>
     <dependency>
       <groupId>org.flywaydb</groupId>
-      <artifactId>flyway-mysql</artifactId>
-      <version>${flyway-maven-plugin.version}</version>
+      <artifactId>flyway-database-postgresql</artifactId>
+      <version>11.0.1</version>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
