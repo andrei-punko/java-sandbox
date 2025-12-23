@@ -45,16 +45,21 @@ public class DateTimeTest {
         ZoneId zone1 = ZoneId.of("Europe/Berlin");
         ZoneId zone2 = ZoneId.of("Europe/London");
 
-        LocalTime now1 = LocalTime.now(zone1);
-        LocalTime now2 = LocalTime.now(zone2);
+        // Use fixed Instant (same moment in time) to avoid DST-related test instability
+        // In winter (January): Berlin (CET) is UTC+1, London (GMT) is UTC+0
+        // Same moment in UTC will show different local times in different zones
+        Instant fixedInstant = Instant.parse("2024-01-15T12:00:00Z"); // UTC time
+        LocalTime time1 = fixedInstant.atZone(zone1).toLocalTime(); // 13:00 in Berlin (UTC+1)
+        LocalTime time2 = fixedInstant.atZone(zone2).toLocalTime(); // 12:00 in London (UTC+0)
 
-        var isNow1BeforeNow2 = now1.isBefore(now2);
-        assertThat(isNow1BeforeNow2).isFalse();
+        var isTime1BeforeTime2 = time1.isBefore(time2);
+        assertThat(isTime1BeforeTime2).isFalse();
 
-        long hoursBetween = ChronoUnit.HOURS.between(now1, now2);
-        long minutesBetween = ChronoUnit.MINUTES.between(now1, now2);
+        long hoursBetween = ChronoUnit.HOURS.between(time1, time2);
+        long minutesBetween = ChronoUnit.MINUTES.between(time1, time2);
         System.out.println(hoursBetween + " " + minutesBetween);
-        assertThat(minutesBetween).isEqualTo(-59L);
+        // In winter time (January), Berlin is 1 hour ahead of London = -60 minutes
+        assertThat(minutesBetween).isEqualTo(-60L);
 
         LocalTime late = LocalTime.of(23, 59, 59);
         assertThat(String.valueOf(late)).isEqualTo("23:59:59");
