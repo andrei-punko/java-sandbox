@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 
 import org.junit.ClassRule;
 import org.junit.Test;
@@ -16,15 +18,29 @@ public class DockerComposeContainerLiveTest {
 
     @ClassRule
     public static DockerComposeContainer compose =
-            new DockerComposeContainer(
-                    new File("src/test/resources/test-compose.yml"))
-                    .withExposedService("simpleWebServer_1", 80);
+            new DockerComposeContainer(getDockerComposeFile())
+                    .withExposedService("simpleWebServer", 80);
+
+    private static File getDockerComposeFile() {
+        try {
+            URL resource = DockerComposeContainerLiveTest.class
+                    .getClassLoader()
+                    .getResource("test-compose.yml");
+            if (resource == null) {
+                throw new IllegalStateException("test-compose.yml not found in resources");
+            }
+            String filePath = URLDecoder.decode(resource.getFile(), StandardCharsets.UTF_8);
+            return new File(filePath);
+        } catch (Exception e) {
+            throw new IllegalStateException("Failed to load test-compose.yml", e);
+        }
+    }
 
     @Test
     public void givenSimpleWebServerContainer_whenGetReuqest_thenReturnsResponse()
             throws Exception {
-        String address = "http://" + compose.getServiceHost("simpleWebServer_1", 80)
-                + ":" + compose.getServicePort("simpleWebServer_1", 80);
+        String address = "http://" + compose.getServiceHost("simpleWebServer", 80)
+                + ":" + compose.getServicePort("simpleWebServer", 80);
         String response = simpleGetRequest(address);
 
         assertEquals(response, "Hello World!");
