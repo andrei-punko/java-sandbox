@@ -1,7 +1,6 @@
 package by.andd3dfx.digitalsignature;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -33,9 +32,8 @@ import java.util.List;
  *
  * https://docs.oracle.com/en/java/javase/18/security/java-xml-digital-signature-api-overview-and-tutorial.html
  */
+@Slf4j
 public class XmlDigitalSignatureUtil {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(XmlDigitalSignatureUtil.class);
 
     public void signXmlFile(String fileToSignName, String resultFileName) throws Exception {
 
@@ -189,19 +187,19 @@ public class XmlDigitalSignatureUtil {
 
         // Check core validation status.
         if (coreValidity == false) {
-            LOGGER.error("Signature failed core validation");
+            log.error("Signature failed core validation");
             boolean sv = signature.getSignatureValue().validate(valContext);
-            LOGGER.info("signature validation status: " + sv);
+            log.info("signature validation status: {}", sv);
             if (sv == false) {
                 // Check the validation status of each Reference.
                 Iterator i = signature.getSignedInfo().getReferences().iterator();
                 for (int j = 0; i.hasNext(); j++) {
                     boolean refValid = ((Reference) i.next()).validate(valContext);
-                    LOGGER.info("ref[" + j + "] validity status: " + refValid);
+                    log.info("ref[{}] validity status: {}", j, refValid);
                 }
             }
         } else {
-            System.out.println("Signature passed core validation");
+            log.info("Signature passed core validation");
         }
 
         return coreValidity;

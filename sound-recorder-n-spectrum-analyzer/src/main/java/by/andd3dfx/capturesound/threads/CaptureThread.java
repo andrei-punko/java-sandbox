@@ -1,14 +1,12 @@
 package by.andd3dfx.capturesound.threads;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.sound.sampled.TargetDataLine;
 import java.io.ByteArrayOutputStream;
 
+@Slf4j
 public class CaptureThread implements Runnable {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(CaptureThread.class);
 
     private final ByteArrayOutputStream byteArrayOutputStream;
     private final TargetDataLine targetDataLine;
@@ -36,7 +34,7 @@ public class CaptureThread implements Runnable {
             byteArrayOutputStream.close();
             targetDataLine.close();         // Was not present in source code
         } catch (Exception e) {
-            LOGGER.error("Error during audio capture", e);
+            log.error("Error during audio capture", e);
             System.exit(0);
         }
     }

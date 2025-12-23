@@ -1,16 +1,18 @@
 package somepackage;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+@Slf4j
 public class SomeTest {
 
     @Test
     public void someMethod() {
-        System.out.println("Run usual test...");
+        log.debug("Run usual test...");
     }
 
     @Test
     public void someAnotherMethod() {
-        System.out.println("Run usual test...");
+        log.debug("Run usual test...");
     }
 }

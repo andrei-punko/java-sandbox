@@ -17,6 +17,8 @@
 package by.andd3dfx.dagger2.coffeemachine;
 
 import dagger.Component;
+import lombok.extern.slf4j.Slf4j;
+
 import javax.inject.Singleton;
 
 /**
@@ -26,6 +28,7 @@ import javax.inject.Singleton;
  * <p>
  * The main app responsible for brewing the coffee and printing the logs.
  */
+@Slf4j
 public class CoffeeApp {
 
     @Singleton
@@ -45,6 +48,6 @@ public class CoffeeApp {
     public static void main(String[] args) {
         CoffeeShop coffeeShop = DaggerCoffeeApp_CoffeeShop.builder().build();
         coffeeShop.maker().brew();
-        coffeeShop.logger().logs().forEach(log -> System.out.println(log));
+        coffeeShop.logger().logs().forEach(logEntry -> log.info(logEntry));
     }
 }

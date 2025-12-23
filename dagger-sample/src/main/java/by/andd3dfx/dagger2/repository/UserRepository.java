@@ -1,7 +1,10 @@
 package by.andd3dfx.dagger2.repository;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.inject.Inject;
 
+@Slf4j
 public class UserRepository {
 
     private final UserLocalDataSource userLocalDataSource;
@@ -13,16 +16,16 @@ public class UserRepository {
         this.userLocalDataSource = userLocalDataSource;
         this.userRemoteDataSource = userRemoteDataSource;
 
-        System.out.println("user repository initialized");
+        log.info("user repository initialized");
     }
 
     public String useLocalDataSource() {
-        System.out.println("Local data source used");
+        log.info("Local data source used");
         return "Local data source used";
     }
 
     public String useRemoteDataSource() {
-        System.out.println("Remote data source used");
+        log.info("Remote data source used");
         return "Remote data source used";
     }
 }

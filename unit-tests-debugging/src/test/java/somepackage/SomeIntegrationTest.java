@@ -1,11 +1,13 @@
 package somepackage;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+@Slf4j
 public class SomeIntegrationTest {
 
     @Test
     public void someMethod() {
-        System.out.println("Run integration test...");
+        log.debug("Run integration test...");
     }
 }

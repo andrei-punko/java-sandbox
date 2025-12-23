@@ -57,12 +57,8 @@
             <version>${postgresql.version}</version>
         </dependency>
 
-        <!-- Fix issue with 'SLF4J: Failed to load class “org.slf4j.impl.StaticLoggerBinder”' -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
+        <!-- Fix issue with 'SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder"' -->
+        <!-- slf4j-simple includes slf4j-api transitively -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>

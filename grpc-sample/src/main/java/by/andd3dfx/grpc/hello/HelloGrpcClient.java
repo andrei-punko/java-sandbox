@@ -5,7 +5,9 @@ import by.andd3dfx.grpc.dto.HelloResponse;
 import by.andd3dfx.grpc.dto.HelloServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class HelloGrpcClient {
 
     public static void main(String[] args) {
@@ -20,7 +22,7 @@ public class HelloGrpcClient {
             .setLastName("Punko")
             .build();
         HelloResponse helloResponse = stub.hello(request);
-        System.out.printf("Response received from server:\n%s", helloResponse);
+        log.info("Response received from server:\n{}", helloResponse);
 
         channel.shutdown();
     }

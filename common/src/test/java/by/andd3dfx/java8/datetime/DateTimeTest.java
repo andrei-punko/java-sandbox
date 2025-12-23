@@ -1,5 +1,6 @@
 package by.andd3dfx.java8.datetime;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.time.Clock;
@@ -19,6 +20,7 @@ import java.util.Locale;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Slf4j
 public class DateTimeTest {
 
     @Test
@@ -57,7 +59,7 @@ public class DateTimeTest {
 
         long hoursBetween = ChronoUnit.HOURS.between(time1, time2);
         long minutesBetween = ChronoUnit.MINUTES.between(time1, time2);
-        System.out.println(hoursBetween + " " + minutesBetween);
+        log.debug("Time difference: {} hours, {} minutes", hoursBetween, minutesBetween);
         // In winter time (January), Berlin is 1 hour ahead of London = -60 minutes
         assertThat(minutesBetween).isEqualTo(-60L);
 

@@ -9,6 +9,7 @@ import by.andd3dfx.model.shop.ThreeSizeItem;
 import by.andd3dfx.model.shop.TwoSizeItem;
 import by.andd3dfx.model.shop.ZeroSizeItem;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 
@@ -21,6 +22,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+@Slf4j
 public class HibernateMainIT {
 
     @SneakyThrows
@@ -45,7 +47,7 @@ public class HibernateMainIT {
     }
 
     private <T> List<T> getFromDbAndCheck(EntityManager em, Class<T> clazz, int expectedItemsCount) {
-        System.out.println("---");
+        log.debug("---");
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<T> query = builder.createQuery(clazz);
         Root<T> variableRoot = query.from(clazz);
@@ -53,7 +55,7 @@ public class HibernateMainIT {
         var items = em.createQuery(query).getResultList();
 
         printExtractedItems_andCheckTheirAmount(items, expectedItemsCount);
-        System.out.println("---");
+        log.debug("---");
         return items;
     }
 
@@ -70,7 +72,7 @@ public class HibernateMainIT {
     }
 
     private static <T> void printExtractedItems_andCheckTheirAmount(List<T> items, int expectedItemsCount) {
-        System.out.println(">> Retrieved next items: " + items);
+        log.debug(">> Retrieved next items: {}", items);
         assertThat("Wrong items count", items.size(), is(expectedItemsCount));
     }
 }

@@ -2,8 +2,11 @@ package by.andd3dfx.guice;
 
 import by.andd3dfx.guice.util.Communicator;
 import by.andd3dfx.guice.util.Spawner;
+import lombok.extern.slf4j.Slf4j;
+
 import javax.inject.Inject;
 
+@Slf4j
 public class Greeter {
 
     private final String message;
@@ -31,7 +34,7 @@ public class Greeter {
 
     public void sayHello() {
         for (int i = 0; i < count; i++) {
-            System.out.println(message);
+            log.info(message);
         }
     }
 

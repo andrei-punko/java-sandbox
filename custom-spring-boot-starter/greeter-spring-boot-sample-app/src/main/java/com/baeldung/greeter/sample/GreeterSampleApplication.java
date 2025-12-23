@@ -1,12 +1,13 @@
 package com.baeldung.greeter.sample;
 
+import com.baeldung.greeter.library.Greeter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.baeldung.greeter.library.Greeter;
-
+@Slf4j
 @SpringBootApplication
 public class GreeterSampleApplication implements CommandLineRunner {
 
@@ -20,6 +21,6 @@ public class GreeterSampleApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         String message = greeter.greet();
-        System.out.println(message);
+        log.info(message);
     }
 }

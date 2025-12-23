@@ -2,6 +2,7 @@ package by.andd3dfx;
 
 import by.andd3dfx.model.Person;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 
@@ -13,6 +14,7 @@ import javax.persistence.criteria.Root;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+@Slf4j
 public class MigrationIT {
 
     @SneakyThrows
@@ -35,7 +37,7 @@ public class MigrationIT {
         query.select(variableRoot);
         var items = em.createQuery(query).getResultList();
 
-        System.out.println("Retrieved next items: " + items);
+        log.debug("Retrieved next items: {}", items);
         assertThat("Wrong items count", items.size(), is(expectedItemsCount));
     }
 }

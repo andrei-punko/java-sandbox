@@ -5,8 +5,11 @@ import by.andd3dfx.grpc.dto.TemperatureResponse;
 import by.andd3dfx.grpc.dto.TemperatureServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Random;
 
+@Slf4j
 public class TemperatureGrpcClient {
 
     public static void main(String[] args) {
@@ -22,7 +25,7 @@ public class TemperatureGrpcClient {
                 .setNewValue(random.nextDouble())
                 .build();
             TemperatureResponse response = stub.add(request);
-            System.out.printf("Response received from server:\n%s", response);
+            log.info("Response received from server:\n{}", response);
         }
 
         channel.shutdown();
