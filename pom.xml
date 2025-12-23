@@ -40,10 +40,10 @@
     <commons-lang3.version>3.14.0</commons-lang3.version>
     <spring-boot.version>3.2.9</spring-boot.version>
     <h2.db.version>2.2.220</h2.db.version>
-    <testcontainers.version>1.19.3</testcontainers.version>
+    <testcontainers.version>1.21.4</testcontainers.version>
 
     <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
-    <docker-maven-plugin.version>0.45.0</docker-maven-plugin.version>
+    <docker-maven-plugin.version>0.48.0</docker-maven-plugin.version>
     <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
     <maven-failsafe-plugin.version>3.2.3</maven-failsafe-plugin.version>
     <maven-surefire-plugin.version>3.2.3</maven-surefire-plugin.version>
