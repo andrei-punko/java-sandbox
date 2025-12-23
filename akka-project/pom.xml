@@ -59,11 +59,15 @@
       <scope>test</scope>
     </dependency>
 
-    <!-- Logging -->
+    <!-- Lombok -->
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
     </dependency>
+
+    <!-- Logging -->
+    <!-- slf4j-api is included transitively by Spring Boot, but we need logback for implementation -->
+    <!-- Spring Boot includes logback by default, but explicit dependency ensures consistency -->
 
     <!-- Akka -->
     <dependency>
@@ -89,6 +93,20 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
         <version>${spring-boot.version}</version>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+              <version>${lombok.version}</version>
+            </path>
+          </annotationProcessorPaths>
+        </configuration>
       </plugin>
 
       <!-- https://github.com/spring-projects/spring-framework/issues/28699 -->
