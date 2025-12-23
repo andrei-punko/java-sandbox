@@ -51,7 +51,7 @@
           <showLogs>true</showLogs>
           <images>
             <image>
-              <name>postgres:15-alpine</name>
+              <name>postgres:16-alpine</name>
               <run>
                 <ports>
                   <port>5432:5432</port>
