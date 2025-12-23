@@ -3,6 +3,8 @@ package by.andd3dfx.capturesound;
 import by.andd3dfx.capturesound.fft.FrequencyScanner;
 import by.andd3dfx.capturesound.threads.CaptureThread;
 import by.andd3dfx.capturesound.threads.PlayThread;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -28,6 +30,8 @@ import java.io.InputStream;
  * </pre>
  */
 public class AudioCaptureApp extends JFrame {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AudioCaptureApp.class);
 
     public static void main(String[] args) {
         AudioCaptureApp app = new AudioCaptureApp();
@@ -71,7 +75,7 @@ public class AudioCaptureApp extends JFrame {
                 captureThread[0] = new CaptureThread(targetDataLine);
 
             } catch (LineUnavailableException lue) {
-                lue.printStackTrace();
+                LOGGER.error("Error opening target data line for recording", lue);
             }
         });
 
@@ -105,7 +109,7 @@ public class AudioCaptureApp extends JFrame {
                 new PlayThread(audioInputStream, sourceDataLine);
 
             } catch (LineUnavailableException lue) {
-                lue.printStackTrace();
+                LOGGER.error("Error opening target data line for recording", lue);
             }
         });
     }

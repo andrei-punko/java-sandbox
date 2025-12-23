@@ -1,9 +1,14 @@
 package by.andd3dfx.capturesound.threads;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.SourceDataLine;
 
 public class PlayThread implements Runnable {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PlayThread.class);
 
     private final AudioInputStream audioInputStream;
     private final SourceDataLine sourceDataLine;
@@ -29,7 +34,7 @@ public class PlayThread implements Runnable {
             sourceDataLine.drain();
             sourceDataLine.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Error during audio playback", e);
             System.exit(0);
         }
     }

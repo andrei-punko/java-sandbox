@@ -1,10 +1,15 @@
 package by.andd3dfx.sockets;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.net.InetAddress;
 import java.net.Socket;
 
 public class SocketClient implements AutoCloseable {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SocketClient.class);
 
     private Socket socket;
     private DataInputStream dataInputStream;
@@ -32,7 +37,7 @@ public class SocketClient implements AutoCloseable {
                     String lineFromServer = dataInputStream.readUTF();// ждем пока сервер отошлет строку текста
                     System.out.println("CLIENT: received response from server: " + lineFromServer);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOGGER.error("Error during data transmission", e);
                 }
             });
         }

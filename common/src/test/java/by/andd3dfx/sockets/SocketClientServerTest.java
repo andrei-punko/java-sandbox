@@ -1,12 +1,16 @@
 package by.andd3dfx.sockets;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 import static java.lang.Thread.sleep;
 
 public class SocketClientServerTest {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SocketClientServerTest.class);
 
     private static SocketServer server = new SocketServer();
     private static SocketClient client = new SocketClient();
@@ -17,7 +21,7 @@ public class SocketClientServerTest {
             try {
                 server.start(12345);
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error("Error starting server", e);
             }
         });
         serverThread.start();
@@ -27,7 +31,7 @@ public class SocketClientServerTest {
                 client.start(12345, "127.0.0.1");
                 client.transmit("src/test/resources/file-to-send-via-socket.txt");
             } catch (IOException e) {
-                e.printStackTrace();
+                LOGGER.error("Error starting server", e);
             }
         });
         clientThread.start();
