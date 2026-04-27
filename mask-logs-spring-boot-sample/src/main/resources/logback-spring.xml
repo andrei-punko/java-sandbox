@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
+    <appender name="NON_MASKED_CONVERTER" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
     <conversionRule conversionWord="maskedMsg"
                     converterClass="by.andd3dfx.masklogs.logging.MaskingMessageConverter"/>
-
     <appender name="MASKED_CONVERTER" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger - %maskedMsg%n</pattern>
@@ -14,6 +19,7 @@
 
     <!-- Default option: masking in custom converter -->
     <root level="INFO">
+<!--        <appender-ref ref="NON_MASKED_CONVERTER"/>-->
         <appender-ref ref="MASKED_CONVERTER"/>
     </root>
 
