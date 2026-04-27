@@ -1,0 +1,3 @@
+spring:
+  application:
+    name: mask-logs-spring-boot-sample

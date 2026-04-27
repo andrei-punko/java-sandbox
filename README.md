@@ -67,6 +67,10 @@ Example of OpenApi generation:
 
 [Example](messaging-stomp-websocket) of STOMP messaging over WebSockets for building interactive web application
 
+### mask-logs-spring-boot-sample
+
+[Example](mask-logs-spring-boot-sample/README.md) of masking secure information in logs in Spring Boot using custom Logback converter/appender
+
 ### sound-recorder-n-spectrum-analyzer
 
 - [Application](sound-recorder-n-spectrum-analyzer/src/main/java/by/andd3dfx/capturesound/AudioCaptureApp.java) to
