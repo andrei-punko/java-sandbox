@@ -5,8 +5,9 @@ action state.
 
 - **Coordinates:** `by.andd3dfx:access-decision`
 - **Java:** 21
-- **Packages:** `by.andd3dfx.accessdecision.back` (core and factories), `by.andd3dfx.accessdecision.front` (DTOs and
-  enums for API/UI)
+- **Packages:**
+  - `by.andd3dfx.accessdecision.back` (core and factories),
+  - `by.andd3dfx.accessdecision.front` (DTOs and enums for API/UI)
 
 ## Purpose
 
@@ -25,10 +26,18 @@ Factories are exposed via `AccessDecisions` (`VIEW_RIGHT`, `PERMISSION`, `ACTION
 - **`isGranted()`** — quick check that everything is allowed.
 
 There is **no `judge()`** in the library: how you signal denial (exceptions, problem details, etc.) is
-application-specific. The example test shows a typical `judgeExample(...)` pattern with neutral runtime exceptions; plug
-in your own types in production (e.g. via something like `AccessDecisionAggregateJudge` in the host project).
+application-specific. The example test shows a typical `judgeExample(...)` pattern with neutral runtime exceptions; in
+real code, replace that with your own exception types and mapping from `Reason` / aggregate state.
 
 ## Build and install to local Maven
+
+From the monorepo root (the module is listed in the parent [`pom.xml`](../pom.xml)):
+
+```bash
+mvn -pl access-decision clean install
+```
+
+Standalone, using only this module’s POM:
 
 ```bash
 mvn -f access-decision/pom.xml clean install
@@ -45,7 +54,8 @@ After `install`, depend on the artifact:
 </dependency>
 ```
 
-Keep the version in sync with your parent POM or BOM.
+Keep the version in sync with your parent POM or BOM. This artifact does not inherit the sandbox parent; treat the
+version as the library’s own unless you add a `<parent>` later.
 
 ## Library dependencies
 
@@ -57,11 +67,10 @@ Keep the version in sync with your parent POM or BOM.
 
 ## Docs and examples
 
-| Resource                                                                                                                 | Description                                                                                               |
-|--------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
-| [`doc/access-decision-class-model.puml`](doc/access-decision-class-model.puml)                                           | PlantUML class diagram                                                                                    |
-| [`doc/generate.bat`](doc/generate.bat)                                                                                   | Windows helper: set `PLANTUML_JAR` to your `plantuml.jar`, then run from anywhere (script `cd`s to `doc`) |
-| [`AccessDecisionUsageExampleTest`](src/test/java/by/andd3dfx/accessdecision/example/AccessDecisionUsageExampleTest.java) | Examples: `toActionState()`, `judge`-style flow with demo exceptions                                      |
+| Resource                                                                                                                 | Description                                                          |
+|--------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| [`doc/access-decision-class-model.puml`](doc/access-decision-class-model.puml)                                           | PlantUML class diagram                                               |
+| [`AccessDecisionUsageExampleTest`](src/test/java/by/andd3dfx/accessdecision/example/AccessDecisionUsageExampleTest.java) | Examples: `toActionState()`, `judge`-style flow with demo exceptions |
 
 Run tests for this module only:
 
