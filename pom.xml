@@ -121,13 +121,6 @@
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <excludes>
-            <exclude>**/config/**</exclude>
-            <exclude>**/dto/**</exclude>
-            <exclude>**/model/**</exclude>
-          </excludes>
-        </configuration>
       </plugin>
     </plugins>
   </build>

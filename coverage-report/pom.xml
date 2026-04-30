@@ -122,9 +122,10 @@
                 </executions>
                 <configuration>
                     <excludes>
-                        <exclude>**/config/**</exclude>
-                        <exclude>**/dto/**</exclude>
-                        <exclude>**/model/**</exclude>
+                        <!-- OpenAPI Generator (openapi-generator-spring / openapi-generator-java) -->
+                        <exclude>org/openapitools/**</exclude>
+                        <!-- gRPC / protobuf generated (grpc-sample, package by.andd3dfx.grpc.dto) -->
+                        <exclude>by/andd3dfx/grpc/dto/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
