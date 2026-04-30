@@ -11,6 +11,10 @@
 
 ## Modules
 
+### access-decision
+
+[Layered access-decision model](access-decision/README.md) for UI and services (view, permission, action; `ActionVisibilityState` / `Reason`).
+
 ### akka-project
 
 [Example](akka-project) of app with Akka framework usage

@@ -1,0 +1,93 @@
+@startuml
+!theme toy
+skinparam classAttributeIconSize 0
+
+package "by.andd3dfx.accessdecision.back" {
+  abstract class AbstractAccessDecision {
+    +isGranted(): boolean
+    +getReasons(): List~Reason~
+    +isNotGranted(): boolean
+    +getExceptionMessage(): String
+  }
+
+  class ViewRightAccessDecision
+  class PermissionAccessDecision
+  class ActionRightAccessDecision
+
+  AbstractAccessDecision <|-- ViewRightAccessDecision
+  AbstractAccessDecision <|-- PermissionAccessDecision
+  AbstractAccessDecision <|-- ActionRightAccessDecision
+
+  class AccessDecisionFactory<T> {
+    +granted(): T
+    +granted(message: String): T
+    +granted(messages: List~String~): T
+    +denied(): T
+    +denied(message: String): T
+    +denied(messages: List~String~): T
+    {static} +messagesToReasons(...): List~Reason~
+  }
+
+  class AccessDecisions <<utility>> {
+    {static} +VIEW_RIGHT: AccessDecisionFactory~ViewRightAccessDecision~
+    {static} +PERMISSION: AccessDecisionFactory~PermissionAccessDecision~
+    {static} +ACTION_RIGHT: AccessDecisionFactory~ActionRightAccessDecision~
+  }
+
+  AccessDecisions ..> AccessDecisionFactory : holds
+
+  record AccessDecisionAggregate {
+    +viewRight(): ViewRightAccessDecision
+    +permission(): PermissionAccessDecision
+    +actionRight(): ActionRightAccessDecision
+    +toActionState(): ActionVisibilityState
+    +isGranted(): boolean
+  }
+
+  AccessDecisionAggregate *-- ViewRightAccessDecision
+  AccessDecisionAggregate *-- PermissionAccessDecision
+  AccessDecisionAggregate *-- ActionRightAccessDecision
+}
+
+package "by.andd3dfx.accessdecision.front" {
+  enum VisibilityState {
+    ENABLED
+    DISABLED
+    INVISIBLE
+  }
+
+  enum ReasonType {
+    VIEW_RIGHT
+    PERMISSION
+    ACTION_RIGHT
+  }
+
+  record Reason {
+    +message(): String
+    +type(): ReasonType
+    +uiTooltip(): String
+  }
+
+  Reason --> ReasonType
+
+  record ActionVisibilityState {
+    +state(): VisibilityState
+    +reasons(): List~Reason~
+    {static} +enabled(): ActionVisibilityState
+    {static} +enabled(reasons: List~Reason~): ActionVisibilityState
+    {static} +disabled(reasons: List~Reason~): ActionVisibilityState
+    {static} +invisible(reasons: List~Reason~): ActionVisibilityState
+  }
+
+  ActionVisibilityState --> VisibilityState
+  ActionVisibilityState --> Reason
+}
+
+AccessDecisionAggregate ..> ActionVisibilityState : toActionState()
+
+note bottom of AccessDecisionAggregate
+  No judge() in the library:
+  applications map denials to their own exceptions.
+end note
+
+@enduml

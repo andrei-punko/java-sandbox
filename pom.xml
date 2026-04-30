@@ -11,6 +11,7 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>access-decision</module>
     <module>akka-project</module>
     <module>common</module>
     <module>coverage-report</module>
@@ -21,13 +22,13 @@
     <module>graphql-spring-boot-sample</module>
     <module>grpc-sample</module>
     <module>hibernate-mappings</module>
-    <module>messaging-stomp-websocket</module>
     <module>mask-logs-spring-boot-sample</module>
+    <module>messaging-stomp-websocket</module>
+    <module>openapi-generator-sample</module>
     <module>sound-recorder-n-spectrum-analyzer</module>
     <module>test-containers</module>
     <module>two-factor-authentication</module>
     <module>unit-tests-debugging</module>
-    <module>openapi-generator-sample</module>
   </modules>
 
   <properties>
