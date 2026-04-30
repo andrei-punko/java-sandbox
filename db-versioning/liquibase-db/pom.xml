@@ -66,9 +66,11 @@
                   <POSTGRES_USER>person-user</POSTGRES_USER>
                   <POSTGRES_PASSWORD>person-password</POSTGRES_PASSWORD>
                 </env>
+                <!-- Do not wait on "database system is ready..." alone: it appears for the
+                     short-lived initdb bootstrap server, then Liquibase can run during restart. -->
                 <wait>
-                  <log>database system is ready to accept connections</log>
-                  <time>20000</time>
+                  <log>listening on IPv4 address "0.0.0.0", port 5432</log>
+                  <time>120000</time>
                 </wait>
               </run>
             </image>

@@ -85,9 +85,10 @@
                   <POSTGRES_USER>person-user</POSTGRES_USER>
                   <POSTGRES_PASSWORD>person-password</POSTGRES_PASSWORD>
                 </env>
+                <!-- Same as liquibase-db: avoid matching initdb bootstrap "ready" too early. -->
                 <wait>
-                  <log>database system is ready to accept connections</log>
-                  <time>20000</time>
+                  <log>listening on IPv4 address "0.0.0.0", port 5432</log>
+                  <time>120000</time>
                 </wait>
               </run>
             </image>
