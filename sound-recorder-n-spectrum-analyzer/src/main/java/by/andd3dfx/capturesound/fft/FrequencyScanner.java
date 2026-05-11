@@ -10,6 +10,9 @@ import java.nio.ByteOrder;
  * Frequency extraction taken from this page:
  * <p>
  * https://stackoverflow.com/questions/7649003/jtransforms-fft-in-android-from-pcm-data
+ * <p>
+ * FFT output: {@link DoubleFFT_1D#realForwardFull(double[])} (same layout as in JTransforms
+ * {@code testRealForwardFull}); magnitudes for bins {@code 0..n/2} only.
  */
 public class FrequencyScanner {
 
@@ -32,20 +35,24 @@ public class FrequencyScanner {
         /* sampleData + zero padding */
         final int sampleRateLen = sampleData.length;
         final int aLen_2 = sampleRateLen + 24 * sampleRateLen;
+        if (sampleRateLen == 0) {
+            return new FrequencyInfoContainer(new double[0], new double[0], 0.0);
+        }
         double[] a = new double[aLen_2 * 2];
         var fft = new DoubleFFT_1D(aLen_2);
 
         System.arraycopy(applyWindow(sampleData), 0, a, 0, sampleRateLen);
-        fft.realForward(a);
+        fft.realForwardFull(a);
 
-        double[] frequencies = new double[aLen_2];
-        double[] magnitudes = new double[aLen_2];
+        int oneSidedBins = aLen_2 / 2 + 1;
+        double[] frequencies = new double[oneSidedBins];
+        double[] magnitudes = new double[oneSidedBins];
 
         /* find the peak magnitude and it's index */
         double maxMag = Double.NEGATIVE_INFINITY;
         int maxInd = -1;
 
-        for (int i = 0; i < aLen_2; ++i) {
+        for (int i = 0; i < oneSidedBins; ++i) {
             double re = a[2 * i];
             double im = a[2 * i + 1];
             double mag = Math.sqrt(re * re + im * im);
@@ -93,7 +100,7 @@ public class FrequencyScanner {
 
         windowFilter = new double[size];
         for (int i = 0; i < size; ++i) {
-            windowFilter[i] = 0.54 - 0.46 * Math.cos(2 * Math.PI * i / (size - 1.0));
+            windowFilter[i] = 0.54 - 0.46 * Math.cos(2 * Math.PI * i / (size > 1 ? size - 1.0 : 1.0));
         }
     }
 }
