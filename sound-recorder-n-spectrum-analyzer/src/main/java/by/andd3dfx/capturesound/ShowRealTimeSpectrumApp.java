@@ -11,8 +11,12 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.TargetDataLine;
-import java.io.ByteArrayOutputStream;
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Application that shows real-time spectrum of sound
@@ -28,45 +32,58 @@ public class ShowRealTimeSpectrumApp {
         AudioFormat audioFormat = buildAudioFormat();
         DataLine.Info dataLineInfo = new DataLine.Info(TargetDataLine.class, audioFormat);
 
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         TargetDataLine targetDataLine = (TargetDataLine) AudioSystem.getLine(dataLineInfo);
         targetDataLine.open(audioFormat);
 
         ChartContainer chartContainer = new ChartContainer();
-        chartContainer.show();
+        JFrame chartFrame = chartContainer.show();
+        chartFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        AtomicBoolean capturing = new AtomicBoolean(true);
+        chartFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                capturing.set(false);
+                targetDataLine.stop();
+            }
+        });
 
         byte tempBuffer[] = new byte[10_000];
         double[] xData = new double[BUCKETS_AMOUNT];
         double[] yData = new double[BUCKETS_AMOUNT];
-        while (true) {
-            targetDataLine.start();
-            int count = targetDataLine.read(tempBuffer, 0, tempBuffer.length);
-            if (count > 0) {
-                byteArrayOutputStream.write(tempBuffer, 0, count);
-            }
-            byte audioData[] = byteArrayOutputStream.toByteArray();
-            targetDataLine.stop();
-            byteArrayOutputStream.reset();
-
-            FrequencyInfoContainer frequencyInfoContainer = frequencyScanner.detectFrequency(audioData, (int) audioFormat.getSampleRate());
-            double[] frequencies = frequencyInfoContainer.frequencies();
-            double[] magnitudes = frequencyInfoContainer.magnitudes();
-
-            Arrays.fill(xData, 0);
-            Arrays.fill(yData, 0);
-            final int magnitudesPerBucket = magnitudes.length / BUCKETS_AMOUNT;
-            for (int bucket = 0; bucket < BUCKETS_AMOUNT; bucket++) {
-                xData[bucket] = frequencies[(int) ((bucket + 0.5) * magnitudesPerBucket)];
-
-                for (int i = 0; i < magnitudesPerBucket; i++) {
-                    yData[bucket] += magnitudes[bucket * magnitudesPerBucket + i];
+        targetDataLine.start();
+        try {
+            while (capturing.get()) {
+                int count = targetDataLine.read(tempBuffer, 0, tempBuffer.length);
+                if (count <= 0) {
+                    continue;
                 }
+                byte[] audioData = Arrays.copyOf(tempBuffer, count);
+
+                FrequencyInfoContainer frequencyInfoContainer =
+                        frequencyScanner.detectFrequency(audioData, (int) audioFormat.getSampleRate());
+                double[] frequencies = frequencyInfoContainer.frequencies();
+                double[] magnitudes = frequencyInfoContainer.magnitudes();
+
+                Arrays.fill(xData, 0);
+                Arrays.fill(yData, 0);
+                final int magnitudesPerBucket = magnitudes.length / BUCKETS_AMOUNT;
+                for (int bucket = 0; bucket < BUCKETS_AMOUNT; bucket++) {
+                    xData[bucket] = frequencies[(int) ((bucket + 0.5) * magnitudesPerBucket)];
+
+                    for (int i = 0; i < magnitudesPerBucket; i++) {
+                        yData[bucket] += magnitudes[bucket * magnitudesPerBucket + i];
+                    }
+                }
+
+                var maxFrequency = frequencyInfoContainer.maxFrequency();
+                String title = String.format("%1$.0f Hz", maxFrequency);
+
+                chartContainer.update(xData, yData, title);
             }
-
-            var maxFrequency = frequencyInfoContainer.maxFrequency();
-            String title = String.format("%1$.0f Hz", maxFrequency);
-
-            chartContainer.update(xData, yData, title);
+        } finally {
+            targetDataLine.stop();
+            targetDataLine.close();
         }
     }
 
@@ -85,9 +102,9 @@ public class ShowRealTimeSpectrumApp {
             chart.getStyler().setXAxisLogarithmic(true);
         }
 
-        public void show() {
+        public JFrame show() {
             chartSwingWrapper = new SwingWrapper<>(chart);
-            chartSwingWrapper.displayChart();
+            return chartSwingWrapper.displayChart();
         }
 
         public void update(double[] xData, double[] yData, String title) {
