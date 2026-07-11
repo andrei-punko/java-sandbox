@@ -131,7 +131,7 @@
         <artifactId>liquibase-maven-plugin</artifactId>
         <version>${liquibase.version}</version>
         <configuration>
-          <changeLogFile>src/main/db-migration/changelog.xml</changeLogFile>
+          <changeLogFile>src/main/resources/db-migration/changelog.xml</changeLogFile>
           <driver>${jdbc.driverClassName}</driver>
           <url>${jdbc.url}</url>
           <username>${jdbc.username}</username>
