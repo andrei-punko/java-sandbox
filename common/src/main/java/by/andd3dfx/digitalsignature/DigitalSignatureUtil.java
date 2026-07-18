@@ -5,20 +5,28 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.math.BigInteger;
-import java.security.*;
+import java.nio.charset.StandardCharsets;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.SecureRandom;
+import java.security.Signature;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 public class DigitalSignatureUtil {
 
     /**
-     * According to documentation - https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#KeyPairGenerator
-     * possible cases for algorithm are next: DiffieHellman, DSA, RSA, EC
+     * According to <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#KeyPairGenerator">documentation</a>
+     * <p>
+     * Possible cases for algorithm are next: DiffieHellman, DSA, RSA, EC
      */
-    public KeyPair generateKeysPair(String algorithm, int keysize) throws Exception {
+    public KeyPair generateKeysPair(String algorithm, int keySize) throws Exception {
         KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance(algorithm);
         SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
-        keyGenerator.initialize(keysize, random);
+        keyGenerator.initialize(keySize, random);
         return keyGenerator.generateKeyPair();
     }
 
@@ -65,13 +73,14 @@ public class DigitalSignatureUtil {
 
     /**
      * Sign string with definite algorithm and privateKey.
+     * <p>
      * Usage: signString("SHA256withECDSA", privateKey, "Some string ...")
      */
     public byte[] signString(String algorithm, PrivateKey privateKey, String stringTiSign) throws Exception {
         Signature dsa = Signature.getInstance(algorithm);
         dsa.initSign(privateKey);
 
-        byte[] strByte = stringTiSign.getBytes("UTF-8");
+        byte[] strByte = stringTiSign.getBytes(StandardCharsets.UTF_8);
         dsa.update(strByte);
 
         return dsa.sign();
@@ -79,6 +88,7 @@ public class DigitalSignatureUtil {
 
     /**
      * Sign file with definite algorithm and privateKey.
+     * <p>
      * Usage: signFile("SHA256withECDSA", privateKey, "d:/some-filename.txt")
      */
     public byte[] signFile(String algorithm, PrivateKey privateKey, String nameOfFileToSign) throws Exception {
@@ -97,6 +107,9 @@ public class DigitalSignatureUtil {
         return dsa.sign();
     }
 
+    /**
+     * Convert signature into human-readable string
+     */
     public String convertBytesArrayToString(byte[] signature) {
         return new BigInteger(1, signature).toString(16);
     }
@@ -104,7 +117,7 @@ public class DigitalSignatureUtil {
     public boolean verifyStringSignature(String algorithm, PublicKey publicKey, String signedString, byte[] signature) throws Exception {
         Signature sig = Signature.getInstance(algorithm);
         sig.initVerify(publicKey);
-        sig.update(signedString.getBytes("UTF-8"));
+        sig.update(signedString.getBytes(StandardCharsets.UTF_8));
         return sig.verify(signature);
     }
 
