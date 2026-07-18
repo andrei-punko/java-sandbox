@@ -20,8 +20,7 @@ public class DigitalSignatureUtilTest {
     }
 
     @Test
-    public void verifyStringSigning() throws Exception {
-
+    public void verifyStringSigningUsingGeneratedKey() throws Exception {
         KeyPair keyPair = digitalSignatureUtil.generateKeysPair("EC", 256);
         PrivateKey privateKey = keyPair.getPrivate();
         PublicKey publicKey = keyPair.getPublic();
@@ -32,6 +31,25 @@ public class DigitalSignatureUtilTest {
 
         assertThat("Valid signature expected", result, is(true));
     }
+
+    @Test
+    public void verifyStringSigningUsingKeyFromFile() throws Exception {
+        final String algorithm = "EC";
+        final String privateKeyFilename = "target/private-key-fname";
+        final String publicKeyFilename = "target/public-key-fname";
+        KeyPair keyPair = digitalSignatureUtil.generateKeysPair(algorithm, 256);
+
+        digitalSignatureUtil.storeKeysToFiles(keyPair, privateKeyFilename, publicKeyFilename);
+        PrivateKey privateKey = digitalSignatureUtil.loadPrivateKeyFromFile(algorithm, privateKeyFilename);
+        PublicKey publicKey = digitalSignatureUtil.loadPublicKeyFromFile(algorithm, publicKeyFilename);
+
+        String stringToSign = "This is string to sign";
+        byte[] signature = digitalSignatureUtil.signString("SHA256withECDSA", privateKey, stringToSign);
+        boolean result = digitalSignatureUtil.verifyStringSignature("SHA256withECDSA", publicKey, stringToSign, signature);
+
+        assertThat("Valid signature expected", result, is(true));
+    }
+
 
     @Test
     public void verifyFileSigning() throws Exception {
