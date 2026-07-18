@@ -35,10 +35,10 @@ public class DigitalSignatureUtilTest {
     @Test
     public void verifyStringSigningUsingKeyFromFile() throws Exception {
         final String algorithm = "EC";
-        final String privateKeyFilename = "target/private-key-fname";
-        final String publicKeyFilename = "target/public-key-fname";
         KeyPair keyPair = digitalSignatureUtil.generateKeysPair(algorithm, 256);
 
+        final String privateKeyFilename = "target/private-key-fname";
+        final String publicKeyFilename = "target/public-key-fname";
         digitalSignatureUtil.storeKeysToFiles(keyPair, privateKeyFilename, publicKeyFilename);
         PrivateKey privateKey = digitalSignatureUtil.loadPrivateKeyFromFile(algorithm, privateKeyFilename);
         PublicKey publicKey = digitalSignatureUtil.loadPublicKeyFromFile(algorithm, publicKeyFilename);
@@ -52,10 +52,28 @@ public class DigitalSignatureUtilTest {
 
 
     @Test
-    public void verifyFileSigning() throws Exception {
+    public void verifyFileSigningUsingGeneratedKey() throws Exception {
         KeyPair keyPair = digitalSignatureUtil.generateKeysPair("EC", 256);
         PrivateKey privateKey = keyPair.getPrivate();
         PublicKey publicKey = keyPair.getPublic();
+
+        String nameOfFileToSign = "target/test-classes/file-to-sign.xml";
+        byte[] signature = digitalSignatureUtil.signFile("SHA256withECDSA", privateKey, nameOfFileToSign);
+        boolean result = digitalSignatureUtil.verifyFileSignature("SHA256withECDSA", publicKey, nameOfFileToSign, signature);
+
+        assertThat("Valid signature expected", result, is(true));
+    }
+
+    @Test
+    public void verifyFileSigningUsingKeyFromFile() throws Exception {
+        final String algorithm = "EC";
+        KeyPair keyPair = digitalSignatureUtil.generateKeysPair(algorithm, 256);
+
+        final String privateKeyFilename = "target/private-key-fname";
+        final String publicKeyFilename = "target/public-key-fname";
+        digitalSignatureUtil.storeKeysToFiles(keyPair, privateKeyFilename, publicKeyFilename);
+        PrivateKey privateKey = digitalSignatureUtil.loadPrivateKeyFromFile(algorithm, privateKeyFilename);
+        PublicKey publicKey = digitalSignatureUtil.loadPublicKeyFromFile(algorithm, publicKeyFilename);
 
         String nameOfFileToSign = "target/test-classes/file-to-sign.xml";
         byte[] signature = digitalSignatureUtil.signFile("SHA256withECDSA", privateKey, nameOfFileToSign);
