@@ -76,6 +76,10 @@ Example of OpenApi generation:
 
 [Example](mask-logs-spring-boot-sample/README.md) of masking secure information in logs in Spring Boot using custom Logback converter/appender
 
+### soap-service-sample
+
+[Example](soap-service-sample/README.md) of standalone SOAP service (Apache CXF) generated from NBRB ExRates WSDL
+
 ### sound-recorder-n-spectrum-analyzer
 
 - [Application](sound-recorder-n-spectrum-analyzer/src/main/java/by/andd3dfx/capturesound/AudioCaptureApp.java) to
