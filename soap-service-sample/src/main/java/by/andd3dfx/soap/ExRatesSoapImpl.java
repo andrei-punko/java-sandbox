@@ -1,21 +1,21 @@
 package by.andd3dfx.soap;
 
-import https.www_nbrb.CurrenciesRef2Response;
-import https.www_nbrb.CurrenciesRefDailyResponse;
-import https.www_nbrb.CurrenciesRefMonthlyResponse;
-import https.www_nbrb.CurrenciesRefResponse;
-import https.www_nbrb.ExRatesDaily2Response;
-import https.www_nbrb.ExRatesDailyResponse;
-import https.www_nbrb.ExRatesDynResponse;
-import https.www_nbrb.ExRatesMonthly2Response;
-import https.www_nbrb.ExRatesMonthlyResponse;
-import https.www_nbrb.IngotsPricesResponse;
-import https.www_nbrb.MetalsPricesResponse;
-import https.www_nbrb.MetalsRefResponse;
-import https.www_nbrb.RefRateDynResponse;
-import https.www_nbrb.RefRateOnDateResponse;
-import https.www_nbrb.StockAddRatesResponse;
-import https.www_nbrb_by.ExRatesSoap;
+import by.nbrb.CurrenciesRef2Response;
+import by.nbrb.CurrenciesRefDailyResponse;
+import by.nbrb.CurrenciesRefMonthlyResponse;
+import by.nbrb.CurrenciesRefResponse;
+import by.nbrb.ExRatesDaily2Response;
+import by.nbrb.ExRatesDailyResponse;
+import by.nbrb.ExRatesDynResponse;
+import by.nbrb.ExRatesMonthly2Response;
+import by.nbrb.ExRatesMonthlyResponse;
+import by.nbrb.IngotsPricesResponse;
+import by.nbrb.MetalsPricesResponse;
+import by.nbrb.MetalsRefResponse;
+import by.nbrb.RefRateDynResponse;
+import by.nbrb.RefRateOnDateResponse;
+import by.nbrb.StockAddRatesResponse;
+import by.nbrb.ExRatesSoap;
 import jakarta.jws.WebService;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -25,7 +25,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 @WebService(
-        endpointInterface = "https.www_nbrb_by.ExRatesSoap",
+        endpointInterface = "by.nbrb.ExRatesSoap",
         targetNamespace = "https://www.nbrb.by/",
         serviceName = "ExRates",
         portName = "ExRatesSoap"
