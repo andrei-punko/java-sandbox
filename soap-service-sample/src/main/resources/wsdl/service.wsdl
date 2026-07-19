@@ -16,8 +16,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="CurrenciesRefDailyResult">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -33,8 +32,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="CurrenciesRefMonthlyResult">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -88,8 +86,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="ExRatesDailyResult">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -109,8 +106,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="ExRatesMonthlyResult">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -130,8 +126,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="ExRatesDaily2Result">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -151,8 +146,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="ExRatesMonthly2Result">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -174,8 +168,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="ExRatesDynResult">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -195,8 +188,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="CurrenciesRefResult">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -216,8 +208,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="CurrenciesRef2Result">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -243,8 +234,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="MetalsRefResult">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -266,8 +256,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="MetalsPricesResult">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -287,8 +276,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="IngotsPricesResult">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -318,8 +306,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="StockAddRatesResult">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -349,8 +336,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="RefRateOnDateResult">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
@@ -366,8 +352,7 @@
             <s:element minOccurs="0" maxOccurs="1" name="RefRateDynResult">
               <s:complexType>
                 <s:sequence>
-                  <s:element ref="s:schema" />
-                  <s:any />
+                  <s:any minOccurs="0" maxOccurs="unbounded" processContents="lax"/>
                 </s:sequence>
               </s:complexType>
             </s:element>
