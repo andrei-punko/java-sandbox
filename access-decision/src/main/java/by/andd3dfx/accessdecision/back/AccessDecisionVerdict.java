@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * Access decision verdict with view, permission and action levels
@@ -34,20 +34,29 @@ public record AccessDecisionVerdict(
      */
     public ActionVisibilityState toActionState() {
         if (viewRight.isNotGranted()) {
-            return ActionVisibilityState.invisible(collectReasons(viewRight));
+            return ActionVisibilityState.invisible(collectNegativeReasons(viewRight));
         }
 
         if (permission.isNotGranted() || actionRight.isNotGranted()) {
-            return ActionVisibilityState.disabled(collectReasons(permission, actionRight));
+            return ActionVisibilityState.disabled(collectNegativeReasons(permission, actionRight));
         }
 
-        return ActionVisibilityState.enabled(collectReasons(viewRight, permission, actionRight));
+        return ActionVisibilityState.enabled(collectPositiveReasons(viewRight, permission, actionRight));
     }
 
-    private List<Reason> collectReasons(AbstractAccessDecision... accessDecisions) {
+    private List<Reason> collectNegativeReasons(AbstractAccessDecision... accessDecisions) {
+        return collectReasons(AbstractAccessDecision::isNotGranted, accessDecisions);
+    }
+
+    private List<Reason> collectPositiveReasons(AbstractAccessDecision... accessDecisions) {
+        return collectReasons(AbstractAccessDecision::isGranted, accessDecisions);
+    }
+
+    private List<Reason> collectReasons(Predicate<? super AbstractAccessDecision> predicate,
+                                        AbstractAccessDecision... accessDecisions) {
         return Arrays.stream(accessDecisions)
+                .filter(predicate)
                 .map(AbstractAccessDecision::getReasons)
-                .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
                 .sorted(Comparator.comparing(Reason::type).thenComparing(Reason::message))
                 .toList();
