@@ -1,7 +1,6 @@
 package by.andd3dfx.accessdecision.back;
 
 import by.andd3dfx.accessdecision.front.Reason;
-import jakarta.annotation.Nullable;
 
 import java.util.List;
 
@@ -10,7 +9,7 @@ import java.util.List;
  */
 public final class ViewRightAccessDecision extends AbstractAccessDecision {
 
-    public ViewRightAccessDecision(boolean isGranted, @Nullable List<Reason> reasons) {
+    public ViewRightAccessDecision(boolean isGranted, List<Reason> reasons) {
         super(isGranted, reasons);
     }
 }

@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.function.BiFunction;
 
 /**
- * Factory for creating type-safe access decisions per layer.
+ * Factory for creating access decisions. Used to create type-safe Access Decisions for each layer
  */
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public final class AccessDecisionFactory<T extends AbstractAccessDecision> {
@@ -20,7 +20,7 @@ public final class AccessDecisionFactory<T extends AbstractAccessDecision> {
     private final BiFunction<Boolean, List<Reason>, T> constructor;
 
     public T granted() {
-        return constructor.apply(true, null);
+        return constructor.apply(true, List.of());
     }
 
     public T granted(String message) {
