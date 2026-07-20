@@ -1,6 +1,6 @@
 package by.andd3dfx.accessdecision.example;
 
-import by.andd3dfx.accessdecision.back.AccessDecisionAggregate;
+import by.andd3dfx.accessdecision.back.AccessDecisionVerdict;
 import by.andd3dfx.accessdecision.back.AccessDecisions;
 import by.andd3dfx.accessdecision.front.ActionVisibilityState;
 import by.andd3dfx.accessdecision.front.VisibilityState;
@@ -36,7 +36,7 @@ class AccessDecisionUsageExampleTest {
      * Same layering idea as in a real service: view and permission denials vs action-right denial.
      * The library does not ship this method so it stays free of your exception types.
      */
-    static void judgeExample(AccessDecisionAggregate aggregate) {
+    static void judgeExample(AccessDecisionVerdict aggregate) {
         if (aggregate.viewRight().isNotGranted()) {
             throw new ExamplePermissionDeniedException(aggregate.viewRight().getExceptionMessage());
         }
@@ -50,7 +50,7 @@ class AccessDecisionUsageExampleTest {
 
     @Test
     void grantedAggregateMapsToEnabled() {
-        var aggregate = new AccessDecisionAggregate(
+        var aggregate = new AccessDecisionVerdict(
                 AccessDecisions.VIEW_RIGHT.granted("Visible in view"),
                 AccessDecisions.PERMISSION.granted("Role allows action"),
                 AccessDecisions.ACTION_RIGHT.granted("Business rules pass"));
@@ -63,7 +63,7 @@ class AccessDecisionUsageExampleTest {
 
     @Test
     void viewDeniedMapsToInvisible() {
-        var aggregate = new AccessDecisionAggregate(
+        var aggregate = new AccessDecisionVerdict(
                 AccessDecisions.VIEW_RIGHT.denied("Hidden in this view"),
                 AccessDecisions.PERMISSION.granted(),
                 AccessDecisions.ACTION_RIGHT.granted());
@@ -75,7 +75,7 @@ class AccessDecisionUsageExampleTest {
 
     @Test
     void permissionDeniedMapsToDisabled() {
-        var aggregate = new AccessDecisionAggregate(
+        var aggregate = new AccessDecisionVerdict(
                 AccessDecisions.VIEW_RIGHT.granted(),
                 AccessDecisions.PERMISSION.denied("Missing grant"),
                 AccessDecisions.ACTION_RIGHT.granted());
@@ -87,7 +87,7 @@ class AccessDecisionUsageExampleTest {
 
     @Test
     void judgeThrowsPermissionExceptionWhenViewDenied() {
-        var aggregate = new AccessDecisionAggregate(
+        var aggregate = new AccessDecisionVerdict(
                 AccessDecisions.VIEW_RIGHT.denied("Not in allowed view"),
                 AccessDecisions.PERMISSION.granted(),
                 AccessDecisions.ACTION_RIGHT.granted());
@@ -101,7 +101,7 @@ class AccessDecisionUsageExampleTest {
 
     @Test
     void judgeThrowsPermissionExceptionWhenPermissionDenied() {
-        var aggregate = new AccessDecisionAggregate(
+        var aggregate = new AccessDecisionVerdict(
                 AccessDecisions.VIEW_RIGHT.granted(),
                 AccessDecisions.PERMISSION.denied("Role missing"),
                 AccessDecisions.ACTION_RIGHT.granted());
@@ -115,7 +115,7 @@ class AccessDecisionUsageExampleTest {
 
     @Test
     void judgeThrowsBusinessRuleExceptionWhenActionRightDenied() {
-        var aggregate = new AccessDecisionAggregate(
+        var aggregate = new AccessDecisionVerdict(
                 AccessDecisions.VIEW_RIGHT.granted(),
                 AccessDecisions.PERMISSION.granted(),
                 AccessDecisions.ACTION_RIGHT.denied("Entity in wrong state"));
@@ -129,7 +129,7 @@ class AccessDecisionUsageExampleTest {
 
     @Test
     void judgeDoesNothingWhenAllGranted() {
-        var aggregate = new AccessDecisionAggregate(
+        var aggregate = new AccessDecisionVerdict(
                 AccessDecisions.VIEW_RIGHT.granted(),
                 AccessDecisions.PERMISSION.granted(),
                 AccessDecisions.ACTION_RIGHT.granted());

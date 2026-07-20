@@ -11,11 +11,20 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Aggregate of view, permission, and action-right decisions.
+ * Access decision verdict with view, permission and action levels
  */
-public record AccessDecisionAggregate(
+public record AccessDecisionVerdict(
+        /*
+          View-level access (e.g. program visible in view)
+         */
         @NotNull ViewRightAccessDecision viewRight,
+        /*
+          Grant-level permission (regions, roles)
+         */
         @NotNull PermissionAccessDecision permission,
+        /*
+          Runtime/business action right (entity state, business rules)
+         */
         @NotNull ActionRightAccessDecision actionRight
 ) {
 
