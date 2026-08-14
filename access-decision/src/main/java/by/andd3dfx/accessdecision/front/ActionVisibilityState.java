@@ -5,18 +5,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
 
-@SuppressFBWarnings(value = {"EI_EXPOSE_REP"}, justification = "DTO serialized to clients")
-@Schema(description = "Action visibility with optional reasons for the UI")
+@SuppressFBWarnings(value = {"EI_EXPOSE_REP"}, justification = "DTO for frontend, data is serialized out")
+@Schema(description = "Action visibility state with reasons for frontend")
 public record ActionVisibilityState(
-        @Schema(description = "ENABLED, DISABLED, or INVISIBLE")
+        @Schema(description = "Visibility state: ENABLED / DISABLED / INVISIBLE")
         VisibilityState state,
-        @Schema(description = "Reasons for the current state", nullable = true)
+        @Schema(description = "Grant/denial reasons of state", nullable = true)
         List<Reason> reasons
 ) {
-    public static ActionVisibilityState enabled() {
-        return enabled(null);
-    }
-
     public static ActionVisibilityState enabled(List<Reason> reasons) {
         return new ActionVisibilityState(VisibilityState.ENABLED, reasons);
     }

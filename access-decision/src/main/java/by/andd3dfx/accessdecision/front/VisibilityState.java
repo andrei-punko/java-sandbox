@@ -2,7 +2,7 @@ package by.andd3dfx.accessdecision.front;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Visibility state for UI actions")
+@Schema(description = "Action state for UI")
 public enum VisibilityState {
     @Schema(description = "Action is visible and enabled")
     ENABLED,

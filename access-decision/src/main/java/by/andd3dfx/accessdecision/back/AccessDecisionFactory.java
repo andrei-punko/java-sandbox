@@ -1,13 +1,16 @@
 package by.andd3dfx.accessdecision.back;
 
 import by.andd3dfx.accessdecision.front.Reason;
+import by.andd3dfx.accessdecision.front.ReasonLayer;
 import by.andd3dfx.accessdecision.front.ReasonType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * Factory for creating access decisions. Used to create type-safe Access Decisions for each layer
@@ -15,38 +18,25 @@ import java.util.function.BiFunction;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public final class AccessDecisionFactory<T extends AbstractAccessDecision> {
 
-    private final String defaultDenialMessage;
-    private final ReasonType reasonType;
-    private final BiFunction<Boolean, List<Reason>, T> constructor;
+    private final ReasonLayer reasonLayer;
+    private final Function<List<Reason>, T> accessDecisionConstructor;
 
-    public T granted() {
-        return constructor.apply(true, List.of());
+    public T create() {
+        return accessDecisionConstructor.apply(new ArrayList<>());
     }
 
-    public T granted(String message) {
-        return granted(List.of(message));
+    public T granted(String... messages) {
+        return accessDecisionConstructor.apply(messagesToReasons(ReasonType.POSITIVE, messages));
     }
 
-    public T granted(List<String> messages) {
-        return constructor.apply(true, messagesToReasons(messages, reasonType));
+    public T denied(String... messages) {
+        return accessDecisionConstructor.apply(messagesToReasons(ReasonType.NEGATIVE, messages));
     }
 
-    public T denied() {
-        return denied(defaultDenialMessage);
-    }
-
-    public T denied(String message) {
-        return denied(List.of(message));
-    }
-
-    public T denied(List<String> messages) {
-        return constructor.apply(false, messagesToReasons(messages, reasonType));
-    }
-
-    public static List<Reason> messagesToReasons(List<String> messages, ReasonType type) {
-        return messages.stream()
+    private List<Reason> messagesToReasons(ReasonType reasonType, String... messages) {
+        return Arrays.stream(messages).toList().stream()
                 .filter(Objects::nonNull)
-                .map(m -> new Reason(m, type, null))
+                .map(msg -> new Reason(reasonLayer, reasonType, msg))
                 .toList();
     }
 }

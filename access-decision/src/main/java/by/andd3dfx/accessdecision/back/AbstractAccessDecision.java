@@ -1,32 +1,49 @@
 package by.andd3dfx.accessdecision.back;
 
 import by.andd3dfx.accessdecision.front.Reason;
+import by.andd3dfx.accessdecision.front.ReasonLayer;
+import by.andd3dfx.accessdecision.front.ReasonType;
 import lombok.Getter;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 public abstract class AbstractAccessDecision {
 
-    private final boolean isGranted;
+    private final ReasonLayer reasonLayer;
     private final List<Reason> reasons;
+    // Optimization to speed up calculation of isNotGranted(), getExceptionMessage()
+    private final List<String> negativeReasonsMessages;
 
-    protected AbstractAccessDecision(boolean isGranted, List<Reason> reasons) {
-        this.isGranted = isGranted;
-        this.reasons = reasons;
+    protected AbstractAccessDecision(List<Reason> reasons, ReasonLayer reasonLayer) {
+        this.reasons = new ArrayList<>(reasons);
+        this.reasonLayer = reasonLayer;
+        this.negativeReasonsMessages = new ArrayList<>(reasons.stream()
+                .filter(Reason::isNegative)
+                .map(Reason::message).toList());
+    }
+
+    public void addGrant(String message) {
+        reasons.add(new Reason(reasonLayer, ReasonType.POSITIVE, message));
+    }
+
+    public void addDeny(String message) {
+        reasons.add(new Reason(reasonLayer, ReasonType.NEGATIVE, message));
+        negativeReasonsMessages.add(message);
     }
 
     public boolean isNotGranted() {
-        return !isGranted;
+        return !negativeReasonsMessages.isEmpty();
     }
 
     public String getExceptionMessage() {
-        if (reasons == null) {
-            throw new IllegalStateException("No reasons present!");
+        if (CollectionUtils.isEmpty(negativeReasonsMessages)) {
+            throw new IllegalStateException("No negative reasons present!");
         }
-        return reasons.stream()
-                .map(Reason::message)
-                .collect(Collectors.joining(","));
+
+        return StringUtils.join(negativeReasonsMessages, ",");
     }
 }

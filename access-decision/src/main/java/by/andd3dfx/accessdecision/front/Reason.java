@@ -1,14 +1,19 @@
 package by.andd3dfx.accessdecision.front;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-@Schema(description = "Grant or denial reason for an action state")
+@Schema(description = "Action state grant/denial reason")
 public record Reason(
-        @Schema(description = "Human-readable message")
-        String message,
-        @Schema(description = "Reason type (source layer)")
+        @Schema(description = "Reason layer where the grant/denial came from")
+        ReasonLayer layer,
+        @Schema(description = "Reason type (positive or negative)")
         ReasonType type,
-        @Schema(description = "Optional UI tooltip")
-        String uiTooltip
+        @Schema(description = "Human-readable message (can be used directly or as fallback if FE localizes by code)")
+        String message
 ) {
+    @JsonIgnore
+    public boolean isNegative() {
+        return type.isNegative();
+    }
 }
