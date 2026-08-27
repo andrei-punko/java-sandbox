@@ -8,22 +8,9 @@ import java.util.List;
 /**
  * Access Decision based on hide/show policy for current view mode
  */
-public final class ViewModeRightsAccessDecision extends AbstractAccessDecision {
+public final class ViewModeRightsAccessDecision extends AbstractAccessDecision<ViewModeRightsAccessDecision> {
 
     public ViewModeRightsAccessDecision(List<Reason> reasons) {
         super(reasons, ReasonLayer.VIEW_MODE_RIGHTS);
-    }
-
-    public ViewModeRightsAccessDecision addReason(boolean conditionFlag, String universalReasonMessage) {
-        return addReason(conditionFlag, universalReasonMessage, universalReasonMessage);
-    }
-
-    public ViewModeRightsAccessDecision addReason(boolean conditionFlag, String positiveReasonMessage, String negativeReasonMessage) {
-        if (conditionFlag) {
-            addGrant(positiveReasonMessage);
-        } else {
-            addDeny(negativeReasonMessage);
-        }
-        return this;
     }
 }

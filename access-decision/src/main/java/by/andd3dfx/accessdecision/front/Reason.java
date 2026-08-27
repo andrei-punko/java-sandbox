@@ -9,7 +9,7 @@ public record Reason(
         ReasonLayer layer,
         @Schema(description = "Reason type (positive or negative)")
         ReasonType type,
-        @Schema(description = "Human-readable message (can be used directly or as fallback if FE localizes by code)")
+        @Schema(description = "Reason message")
         String message
 ) {
     @JsonIgnore

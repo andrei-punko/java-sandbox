@@ -2,7 +2,6 @@ package by.andd3dfx.accessdecision.back;
 
 import by.andd3dfx.accessdecision.front.ActionVisibilityState;
 import by.andd3dfx.accessdecision.front.Reason;
-import jakarta.validation.constraints.NotNull;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,9 +18,9 @@ import java.util.function.Supplier;
  * @param businessRuleRightsSupplier Supplier of Runtime/Business rule rights (entity state, business rules)
  */
 public record AccessDecisionVerdict(
-        @NotNull Supplier<ViewModeRightsAccessDecision> viewModeRightsSupplier,
-        @NotNull Supplier<PermissionsAccessDecision> permissionsSupplier,
-        @NotNull Supplier<BusinessRuleRightsAccessDecision> businessRuleRightsSupplier
+        Supplier<ViewModeRightsAccessDecision> viewModeRightsSupplier,
+        Supplier<PermissionsAccessDecision> permissionsSupplier,
+        Supplier<BusinessRuleRightsAccessDecision> businessRuleRightsSupplier
 ) {
 
     /**
@@ -54,7 +53,7 @@ public record AccessDecisionVerdict(
         return ActionVisibilityState.enabled(collectReasons(viewModeRights, permissions, businessRuleRights));
     }
 
-    private List<Reason> collectReasons(AbstractAccessDecision... accessDecisions) {
+    private List<Reason> collectReasons(AbstractAccessDecision<?>... accessDecisions) {
         return Arrays.stream(accessDecisions)
                 .map(AbstractAccessDecision::getReasons)
                 .flatMap(Collection::stream)

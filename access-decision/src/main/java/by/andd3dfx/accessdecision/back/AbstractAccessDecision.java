@@ -3,15 +3,13 @@ package by.andd3dfx.accessdecision.back;
 import by.andd3dfx.accessdecision.front.Reason;
 import by.andd3dfx.accessdecision.front.ReasonLayer;
 import by.andd3dfx.accessdecision.front.ReasonType;
-import lombok.Getter;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-public abstract class AbstractAccessDecision {
+public abstract class AbstractAccessDecision<T extends AbstractAccessDecision<T>> {
 
     private final ReasonLayer reasonLayer;
     private final List<Reason> reasons;
@@ -35,6 +33,20 @@ public abstract class AbstractAccessDecision {
         negativeReasonsMessages.add(message);
     }
 
+    public T addReason(boolean conditionFlag, String universalReasonMessage) {
+        return addReason(conditionFlag, universalReasonMessage, universalReasonMessage);
+    }
+
+    @SuppressWarnings("unchecked")
+    public T addReason(boolean conditionFlag, String positiveReasonMessage, String negativeReasonMessage) {
+        if (conditionFlag) {
+            addGrant(positiveReasonMessage);
+        } else {
+            addDeny(negativeReasonMessage);
+        }
+        return (T) this;
+    }
+
     public boolean isNotGranted() {
         return !negativeReasonsMessages.isEmpty();
     }
@@ -44,6 +56,10 @@ public abstract class AbstractAccessDecision {
             throw new IllegalStateException("No negative reasons present!");
         }
 
-        return StringUtils.join(negativeReasonsMessages, ",");
+        return StringUtils.join(negativeReasonsMessages, ", ");
+    }
+
+    public List<Reason> getReasons() {
+        return List.copyOf(reasons);
     }
 }

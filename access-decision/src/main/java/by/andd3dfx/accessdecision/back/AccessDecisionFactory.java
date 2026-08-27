@@ -34,7 +34,7 @@ public final class AccessDecisionFactory<T extends AbstractAccessDecision> {
     }
 
     private List<Reason> messagesToReasons(ReasonType reasonType, String... messages) {
-        return Arrays.stream(messages).toList().stream()
+        return Arrays.stream(messages)
                 .filter(Objects::nonNull)
                 .map(msg -> new Reason(reasonLayer, reasonType, msg))
                 .toList();

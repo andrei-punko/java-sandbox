@@ -8,22 +8,9 @@ import java.util.List;
 /**
  * Access Decision based on permissions (in their classic sense)
  */
-public final class PermissionsAccessDecision extends AbstractAccessDecision {
+public final class PermissionsAccessDecision extends AbstractAccessDecision<PermissionsAccessDecision> {
 
     public PermissionsAccessDecision(List<Reason> reasons) {
         super(reasons, ReasonLayer.PERMISSIONS);
-    }
-
-    public PermissionsAccessDecision addReason(boolean flag, String universalReasonMessage) {
-        return addReason(flag, universalReasonMessage, universalReasonMessage);
-    }
-
-    public PermissionsAccessDecision addReason(boolean flag, String positiveReasonMessage, String negativeReasonMessage) {
-        if (flag) {
-            addGrant(positiveReasonMessage);
-        } else {
-            addDeny(negativeReasonMessage);
-        }
-        return this;
     }
 }
