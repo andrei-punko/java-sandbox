@@ -16,7 +16,7 @@ import java.util.function.Function;
  * Factory for creating access decisions. Used to create type-safe Access Decisions for each layer
  */
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
-public final class AccessDecisionFactory<T extends AbstractAccessDecision> {
+public final class AccessDecisionFactory<T extends AbstractAccessDecision<T>> {
 
     private final ReasonLayer reasonLayer;
     private final Function<List<Reason>, T> accessDecisionConstructor;

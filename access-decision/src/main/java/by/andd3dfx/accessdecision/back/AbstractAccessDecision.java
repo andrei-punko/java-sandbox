@@ -3,26 +3,17 @@ package by.andd3dfx.accessdecision.back;
 import by.andd3dfx.accessdecision.front.Reason;
 import by.andd3dfx.accessdecision.front.ReasonLayer;
 import by.andd3dfx.accessdecision.front.ReasonType;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@RequiredArgsConstructor
 public abstract class AbstractAccessDecision<T extends AbstractAccessDecision<T>> {
 
-    private final ReasonLayer reasonLayer;
     private final List<Reason> reasons;
-    // Optimization to speed up calculation of isNotGranted(), getExceptionMessage()
-    private final List<String> negativeReasonsMessages;
-
-    protected AbstractAccessDecision(List<Reason> reasons, ReasonLayer reasonLayer) {
-        this.reasons = new ArrayList<>(reasons);
-        this.reasonLayer = reasonLayer;
-        this.negativeReasonsMessages = new ArrayList<>(reasons.stream()
-                .filter(Reason::isNegative)
-                .map(Reason::message).toList());
-    }
+    private final ReasonLayer reasonLayer;
 
     public void addGrant(String message) {
         reasons.add(new Reason(reasonLayer, ReasonType.POSITIVE, message));
@@ -30,7 +21,6 @@ public abstract class AbstractAccessDecision<T extends AbstractAccessDecision<T>
 
     public void addDeny(String message) {
         reasons.add(new Reason(reasonLayer, ReasonType.NEGATIVE, message));
-        negativeReasonsMessages.add(message);
     }
 
     public T addReason(boolean conditionFlag, String universalReasonMessage) {
@@ -48,10 +38,11 @@ public abstract class AbstractAccessDecision<T extends AbstractAccessDecision<T>
     }
 
     public boolean isNotGranted() {
-        return !negativeReasonsMessages.isEmpty();
+        return reasons.stream().anyMatch(Reason::isNegative);
     }
 
     public String getExceptionMessage() {
+        var negativeReasonsMessages = getNegativeReasonsMessages();
         if (CollectionUtils.isEmpty(negativeReasonsMessages)) {
             throw new IllegalStateException("No negative reasons present!");
         }
@@ -61,5 +52,12 @@ public abstract class AbstractAccessDecision<T extends AbstractAccessDecision<T>
 
     public List<Reason> getReasons() {
         return List.copyOf(reasons);
+    }
+
+    private List<String> getNegativeReasonsMessages() {
+        return reasons.stream()
+                .filter(Reason::isNegative)
+                .map(Reason::message)
+                .toList();
     }
 }
