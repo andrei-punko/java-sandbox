@@ -3,50 +3,57 @@
 skinparam classAttributeIconSize 0
 
 package "by.andd3dfx.accessdecision.back" {
-  abstract class AbstractAccessDecision {
-    +isGranted(): boolean
-    +getReasons(): List~Reason~
+  abstract class AbstractAccessDecision<T> {
+    +addGrant(message: String): void
+    +addDeny(message: String): void
+    +addReason(conditionFlag: boolean, universalReasonMessage: String): T
+    +addReason(conditionFlag: boolean, positiveReasonMessage: String, negativeReasonMessage: String): T
     +isNotGranted(): boolean
     +getExceptionMessage(): String
+    +getReasons(): List~Reason~
   }
 
-  class ViewRightAccessDecision
-  class PermissionAccessDecision
-  class ActionRightAccessDecision
+  class ViewModeRightsAccessDecision
+  class PermissionsAccessDecision
+  class BusinessRuleRightsAccessDecision
 
-  AbstractAccessDecision <|-- ViewRightAccessDecision
-  AbstractAccessDecision <|-- PermissionAccessDecision
-  AbstractAccessDecision <|-- ActionRightAccessDecision
+  AbstractAccessDecision <|-- ViewModeRightsAccessDecision
+  AbstractAccessDecision <|-- PermissionsAccessDecision
+  AbstractAccessDecision <|-- BusinessRuleRightsAccessDecision
 
   class AccessDecisionFactory<T> {
-    +granted(): T
-    +granted(message: String): T
-    +granted(messages: List~String~): T
-    +denied(): T
-    +denied(message: String): T
-    +denied(messages: List~String~): T
-    {static} +messagesToReasons(...): List~Reason~
+    +create(): T
+    +granted(messages: String...): T
+    +denied(messages: String...): T
   }
 
   class AccessDecisions <<utility>> {
-    {static} +VIEW_RIGHT: AccessDecisionFactory~ViewRightAccessDecision~
-    {static} +PERMISSION: AccessDecisionFactory~PermissionAccessDecision~
-    {static} +ACTION_RIGHT: AccessDecisionFactory~ActionRightAccessDecision~
+    {static} +VIEW_MODE_RIGHTS: AccessDecisionFactory~ViewModeRightsAccessDecision~
+    {static} +PERMISSIONS: AccessDecisionFactory~PermissionsAccessDecision~
+    {static} +BUSINESS_RULE_RIGHTS: AccessDecisionFactory~BusinessRuleRightsAccessDecision~
   }
 
   AccessDecisions ..> AccessDecisionFactory : holds
 
-  record AccessDecisionAggregate {
-    +viewRight(): ViewRightAccessDecision
-    +permission(): PermissionAccessDecision
-    +actionRight(): ActionRightAccessDecision
+  record AccessDecisionVerdict {
+    +viewModeRightsSupplier(): Supplier~ViewModeRightsAccessDecision~
+    +permissionsSupplier(): Supplier~PermissionsAccessDecision~
+    +businessRuleRightsSupplier(): Supplier~BusinessRuleRightsAccessDecision~
     +toActionState(): ActionVisibilityState
-    +isGranted(): boolean
   }
 
-  AccessDecisionAggregate *-- ViewRightAccessDecision
-  AccessDecisionAggregate *-- PermissionAccessDecision
-  AccessDecisionAggregate *-- ActionRightAccessDecision
+  AccessDecisionVerdict *-- ViewModeRightsAccessDecision
+  AccessDecisionVerdict *-- PermissionsAccessDecision
+  AccessDecisionVerdict *-- BusinessRuleRightsAccessDecision
+
+  abstract class AbstractJudge {
+    +makeJudgement(verdict: AccessDecisionVerdict): void
+    {abstract} #viewModeRightsViolated(exceptionMessage: String): void
+    {abstract} #permissionsViolated(exceptionMessage: String): void
+    {abstract} #businessRuleRightsViolated(exceptionMessage: String): void
+  }
+
+  AbstractJudge ..> AccessDecisionVerdict : makeJudgement()
 }
 
 package "by.andd3dfx.accessdecision.front" {
@@ -56,24 +63,30 @@ package "by.andd3dfx.accessdecision.front" {
     INVISIBLE
   }
 
+  enum ReasonLayer {
+    VIEW_MODE_RIGHTS
+    PERMISSIONS
+    BUSINESS_RULE_RIGHTS
+  }
+
   enum ReasonType {
-    VIEW_RIGHT
-    PERMISSION
-    ACTION_RIGHT
+    POSITIVE
+    NEGATIVE
   }
 
   record Reason {
-    +message(): String
+    +layer(): ReasonLayer
     +type(): ReasonType
-    +uiTooltip(): String
+    +message(): String
+    +isNegative(): boolean
   }
 
+  Reason --> ReasonLayer
   Reason --> ReasonType
 
   record ActionVisibilityState {
     +state(): VisibilityState
     +reasons(): List~Reason~
-    {static} +enabled(): ActionVisibilityState
     {static} +enabled(reasons: List~Reason~): ActionVisibilityState
     {static} +disabled(reasons: List~Reason~): ActionVisibilityState
     {static} +invisible(reasons: List~Reason~): ActionVisibilityState
@@ -83,11 +96,11 @@ package "by.andd3dfx.accessdecision.front" {
   ActionVisibilityState --> Reason
 }
 
-AccessDecisionAggregate ..> ActionVisibilityState : toActionState()
+AccessDecisionVerdict ..> ActionVisibilityState : toActionState()
 
-note bottom of AccessDecisionAggregate
-  No judge() in the library:
-  applications map denials to their own exceptions.
+note bottom of AbstractJudge
+  Applications map denials to their own exceptions
+  in the three *Violated hooks.
 end note
 
 @enduml

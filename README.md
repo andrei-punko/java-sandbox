@@ -13,7 +13,7 @@
 
 ### access-decision
 
-[Layered access-decision model](access-decision/README.md) for UI and services (view, permission, action; `ActionVisibilityState` / `Reason`).
+[Layered access-decision model](access-decision/README.md) for UI and services (view mode, permissions, business rules; `ActionVisibilityState` / `Reason`).
 
 ### akka-project
 

@@ -1,33 +1,34 @@
 # access-decision
 
-A small Java library for **layered access decisions** (view / permissions / business rules) with a clear mapping to UI
-action state.
+A small Java library for **layered access decisions** (view mode / permissions / business rules) with a clear mapping to UI action state.
 
 - **Coordinates:** `by.andd3dfx:access-decision`
 - **Java:** 21
 - **Packages:**
-  - `by.andd3dfx.accessdecision.back` (core and factories),
+  - `by.andd3dfx.accessdecision.back` (core, factories, judge),
   - `by.andd3dfx.accessdecision.front` (DTOs and enums for API/UI)
 
 ## Purpose
 
-Three decision layers are combined in `AccessDecisionAggregate`:
+Three decision layers are combined in `AccessDecisionVerdict`. Each layer is a `Supplier`, so later layers are not evaluated once a denial is already known:
 
-| Layer      | Type                        | Role                                        |
-|------------|-----------------------------|---------------------------------------------|
-| View       | `ViewRightAccessDecision`   | Visibility in the current presentation mode |
-| Permission | `PermissionAccessDecision`  | Classic grants and roles                    |
-| Action     | `ActionRightAccessDecision` | Entity state and business rules             |
+| Layer          | Type                               | Factory                                  | Role                                       |
+|----------------|------------------------------------|------------------------------------------|--------------------------------------------|
+| View mode      | `ViewModeRightsAccessDecision`     | `AccessDecisions.VIEW_MODE_RIGHTS`       | Hide/show policy for the current view mode |
+| Permissions    | `PermissionsAccessDecision`        | `AccessDecisions.PERMISSIONS`            | Classic grants and roles                   |
+| Business rules | `BusinessRuleRightsAccessDecision` | `AccessDecisions.BUSINESS_RULE_RIGHTS`   | Entity state and runtime/business rules    |
 
-Factories are exposed via `AccessDecisions` (`VIEW_RIGHT`, `PERMISSION`, `ACTION_RIGHT`). The aggregate supports:
+Build a layer with `granted(...)`, `denied(...)`, or `create()` plus `addGrant` / `addDeny` / `addReason`. A layer is denied when `isNotGranted()` is true (any negative reason).
 
-- **`toActionState()`** — map the outcome to `ActionVisibilityState` (`ENABLED` / `DISABLED` / `INVISIBLE`) with a list
-  of `Reason` values.
-- **`isGranted()`** — quick check that everything is allowed.
+The verdict supports **`toActionState()`** — map the outcome to `ActionVisibilityState` (`ENABLED` / `DISABLED` / `INVISIBLE`) with a list of `Reason` values:
 
-There is **no `judge()`** in the library: how you signal denial (exceptions, problem details, etc.) is
-application-specific. The example test shows a typical `judgeExample(...)` pattern with neutral runtime exceptions; in
-real code, replace that with your own exception types and mapping from `Reason` / aggregate state.
+- view mode denied → `INVISIBLE`
+- permissions or business rules denied → `DISABLED`
+- all granted → `ENABLED`
+
+For service-side checks, extend **`AbstractJudge`** and implement the three `*Violated` hooks. `makeJudgement(verdict)` walks the same layers in order and calls the matching hook on the first denial. The library does not throw domain exceptions itself: map denials to your own types (see `CustomJudge` in the example test).
+
+A `Reason` carries `layer` (`ReasonLayer`), `type` (`ReasonType.POSITIVE` / `NEGATIVE`), and `message`.
 
 ## Build and install to local Maven
 
@@ -46,7 +47,6 @@ mvn -f access-decision/pom.xml clean install
 After `install`, depend on the artifact:
 
 ```xml
-
 <dependency>
   <groupId>by.andd3dfx</groupId>
   <artifactId>access-decision</artifactId>
@@ -60,17 +60,18 @@ version as the library’s own unless you add a `<parent>` later.
 ## Library dependencies
 
 - Lombok (provided)
-- Jakarta Validation API (`@NotNull` on record components)
-- Jakarta Annotation API (`@Nullable`)
+- Apache Commons Lang3 / Collections4
+- Jackson Annotations (`@JsonIgnore` on `Reason.isNegative()`)
 - Swagger Annotations Jakarta (`@Schema` on DTOs / OpenAPI)
 - SpotBugs annotations (provided, for suppressions on record DTOs)
+- Jakarta Validation API and Jakarta Annotation API (on the compile classpath)
 
 ## Docs and examples
 
-| Resource                                                                                                                 | Description                                                          |
-|--------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
-| [`doc/access-decision-class-model.puml`](doc/access-decision-class-model.puml)                                           | PlantUML class diagram                                               |
-| [`AccessDecisionUsageExampleTest`](src/test/java/by/andd3dfx/accessdecision/example/AccessDecisionUsageExampleTest.java) | Examples: `toActionState()`, `judge`-style flow with demo exceptions |
+| Resource                                                                                                                 | Description                                                                  |
+|--------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| [`doc/access-decision-class-model.puml`](doc/access-decision-class-model.puml)                                           | PlantUML class diagram                                                       |
+| [`AccessDecisionUsageExampleTest`](src/test/java/by/andd3dfx/accessdecision/example/AccessDecisionUsageExampleTest.java) | Examples: `toActionState()`, `AbstractJudge` / `CustomJudge`                 |
 
 Run tests for this module only:
 
