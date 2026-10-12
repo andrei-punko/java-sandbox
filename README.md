@@ -8,6 +8,7 @@
 
 - Maven 3
 - JDK 21
+- Docker
 
 ## Modules
 
