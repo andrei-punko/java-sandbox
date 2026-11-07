@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 public class PostgreSqlContainerLiveTest {
 
     @Rule
-    public PostgreSQLContainer postgresContainer = new PostgreSQLContainer("postgres:16-alpine");
+    public PostgreSQLContainer postgresContainer = new PostgreSQLContainer("postgres:16-bookworm");
 
     @Test
     public void whenSelectQueryExecuted_thenResultsReturned() throws Exception {
