@@ -24,6 +24,12 @@
         <version>${docker-maven-plugin.version}</version>
         <configuration>
           <showLogs>true</showLogs>
+
+          <!-- Fixed container name (instead of the default elasticsearch-1, elasticsearch-2, ... which is
+               bumped each run when the previous one still exists) so that the `stop-leftovers` execution
+               below always finds the container and ports 9200/9300 are never left allocated -->
+          <containerNamePattern>java-sandbox-elasticsearch</containerNamePattern>
+
           <images>
             <image>
               <name>elasticsearch:${elasticsearch.version}</name>
@@ -47,6 +53,16 @@
         <!-- Connect start/stop to pre- and post- integration-test phase respectively
         if you want to start your docker containers during integration tests -->
         <executions>
+          <!-- Removes a container left behind by an interrupted/failed build (Ctrl+C, killed IDE run),
+               otherwise `start` fails with "Bind for 0.0.0.0:9200 failed: port is already allocated" -->
+          <execution>
+            <id>stop-leftovers</id>
+            <phase>initialize</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+
           <execution>
             <id>start</id>
             <phase>pre-integration-test</phase>
